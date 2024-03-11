@@ -162,7 +162,7 @@ ans =
 
 \subsection{Gráfica del tiempo y de rendimiento}
 
-Para este apartado, se pide emplear la función proporcionada por la práctica \verb|script_graficas()|. Como el código solo renderiza una sola gráfica por valor de N, se ha modificado levemente para que N sea un vector con tres valores (En este caso, 10,14, y 18) y se usará un bucle con estos tres valores para añadir al "plot" de cada figura.
+Para este apartado, se pide emplear la función proporcionada por la práctica \verb|script_graficas()|. Como el código solo renderiza una sola gráfica por valor de N, se ha modificado levemente para que N sea un vector con tres valores (En este caso, hemos puesto N = [10,14,18]) y se usará un bucle con estos tres valores para añadir al "plot" de cada figura, de este modo, salen las tres líneas en la misma gráfica.
 
 \begin{figure}[h]
 	\centering
@@ -193,29 +193,43 @@ Implementar la función \(P = \verb|matriz_transicion(N, L)|\) que calcule la ma
 
 \quad
 
-Para ello, se recorrerá con dos bucles cada posición de fila y columna en nuestra matriz deseada llamando a la función proporcionada por la práctica  \(\verb|p_recepcion(k, n, L)|\)
+Para ello, se recorrerá con dos bucles cada posición de fila y columna en nuestra matriz deseada, que será \textbf{p} en nuestra función. Llamaremos en cada iteración  a la función proporcionada por la práctica  \(\verb|p_recepcion(k, n, L)|\), sabiendo que:
+\begin{itemize}
+    \item \textbf{k} es el número de paquetes sin colisionar. Es decir, si hay 2 usuarios, pueden existir 0,1 o 2 paquetes sin colisionar que a su vez indica a qué fila nos desplazamos (si no ha colisionado ningún paquete quiere decir que pasamos de tener 2 usuarios a 0 en el siguiente estado)
+    \item \textbf{n} es el número de usuarios activos actualmente. Esto coincidirá con las filas de nuestra matriz de transición.
+    \item \textbf{L} es el número de ranuras que tenemos, se introduce como parámetro de entrada en la función.
+\end{itemize}
+
+Por lo que, sabiendo la teoría de cada parámetro, dependerá de si el número de saltos es mayor que el número de usuarios, algo que físicamente no podría pasar.
+
+\quad
+
+El código en MATLAB será:
+
+\newpage
 
 \begin{verbatim}
 function p = matriz_transicion(N,L)
-    load matrices;
-    matrix=matrices{N,L}
-    %se crean variables necesarias para el desarrollo del cálculo
-    [filas, columnas] = size(matrix);
 
-    %se crea la matriz P de tamaño matrix
-    P=zeros(filas)
+    % Se crea la matriz P de tamaño N+1
+    p=zeros(N+1);
 
-    % como hay que rellenar la matriz con las probabilidades de p_rx, hay que
-    % recorrer dicha matriz en ambos ejes, i j con doble bucle llamando a p_rx
-    % por cada iteración.
-    for i=0:(filas-1)
-       for j=0:(columnas-1)
+    % Como hay que rellenar la matriz con las probabilidades de p_rx, hay que
+    % recorrer dicha matriz en ambos ejes, i j con doble bucle llamando a p_recepcion()
+    % por cada iteración, siendo que, dependiendo de si el número de saltos es
+    % mayor o menor que el número de usuarios, el valor de k como entrada de p_recepción
+    % será lo llamado k o la iteración j
 
-          % Llamamos a la función p_recepción.m
-          p_rx=p_recepcion(i,j,columnas)
-          
-          % Los indices empiezan en 1, y no en 0
-           P(i+1,j+1)=p_rx;
+    for i=0:(N)
+       for j=0:(L-1)
+           k=i-j;
+           if (k<0)
+               p_rx=p_recepcion(j,i,L);
+           else
+               p_rx=p_recepcion(k,i,L);
+           end
+         
+           p(i+1,j+1)=p_rx;
        end % Fin del primer bucle
     end % Fin del segundo bucle
     p
