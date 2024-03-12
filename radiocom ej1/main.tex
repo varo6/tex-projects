@@ -55,26 +55,30 @@ $$P_{RX}' (dBm) = P_{RX}(dBm) - N \cdot 6 dB \geq -72dBm$$
 
 Por lo que existirá un número N máximo de paredes que se pueda atravesar respecto a la distancia introducida en la fórmula anteriormente. Para despejarlo, valdrá con igualarlo como una ecuación común y, al ser las paredes un número entero, redondearlo a la baja.
 
+
+
 \subsection{Cálculos en excel y procesamiento de la gráfica}
 
 Una vez resuelto teóricamente el problema, en el excel presentado, se usarán las filas y columnas necesarias para los valores de entrada, en este caso la columna $C$ contendrá los valores necesarios para la resolución de la fórmula.
 
 \begin{figure}[h]
       \centering
-      \includegraphics[width=0.35\linewidth]{EXCEL3O6fvT3iZ7.png}
+      \includegraphics[width=0.35\linewidth]{exceldatos.png}
       \caption{\label{fig:excele} Parámetros de entrada en el excel.}
 \end{figure}
 
 Como la distancia estará en la gráfica, se necesitarán varios valores. (ver archivo xlsx).
-Para cada valor, se calculará la $P_{RX}$ con la fórmula despejada anteriormente, y en otra fila, tendremos la $P_{RX}$ en dBm.
+Para cada valor, se calculará la $P_{RX}$ con la fórmula despejada anteriormente, y en otra fila, se obtiene la $P_{RX}$ en dBm.
 
-Una vez obtenidas las potencias para las distintas distancias, se puede observar cuál será el valor de N paredes que hacen que la $P_{RX}'$ tenga el valor de la sensibilidad. Finalmente, se redondeará a la baja, y se tomará en el eje de ordenadas. En el eje de abcisas estará la fila con los valores usados en la distancia.
+Una vez obtenidas las potencias para las distintas distancias, se puede observar cuál será el valor de N paredes que hacen que la $P_{RX}'$ tenga el valor de la sensibilidad. Finalmente, se redondeará a la baja, y se tomará en el eje de cordenadas; En el eje de abcisas estará la fila con los valores usados en la distancia.
 
 \begin{figure}[h]
       \centering
       \includegraphics[width=0.6\linewidth]{grafica paredes.png}
       \caption{\label{fig:grafic} Gráfica obtenida.}
 \end{figure}
+
+\newpage
 
 \section{Preguntas sobre la gráfica}
 
@@ -83,24 +87,24 @@ receptor hay 5 paredes?}
 
 
 
-Sí. Viendo la gráfica obtenida en excel, aunque 5 sería el número máximo de paredes que puede haber para la transmisión a la velocidad buscada. 
+No. Viendo la gráfica obtenida en Excel, no se logra una transmisión satisfactoria con este escenario. 
 
 \quad
 
 \textbf{Desde un punto de vista teórico justifique cómo podría realizarse la transmisión anterior.}
 
-Siguiento la fórmula $P_{TX}(dBm)-L_{PATHLOSS}(dBm)- N \cdot L_{pared}(dB)=P_{RX}'(dBm)$, mientras que la potencia recibida sea mayor a la sensibilidad (-72 dBm en nuestro caso) la transmisión se realizaría con éxito teóricamente.
+Siguiento la fórmula $P_{TX}(dBm)-L_{PATHLOSS}(dBm)- N \cdot L_{pared}(dB)=P_{RX}'(dBm)$, mientras que la potencia recibida sea mayor a la sensibilidad (-72 dBm en nuestro caso) la transmisión se hubiera realizado con éxito teóricamente. Con los datos obtenidos de Excel obtendríamos una potencia recibida de : $P_{RX}(dBm)=-73,46 dBm\leq -72 dBm$ \\ Por lo que la potencia recibida es menor, y no cumple el requisito.
 
 \quad
 
 \textbf{Desde un punto de vista práctico justifique si la transmisión podría realizarse.}
 
-En la práctica basta con ver si un dispositivo receptor recibe la señal a la velocidad (54 Mbps) indicada con la distancia y paredes buscadas. Un dispositivo para detectar la potencia valdría también, comparándolo con la sensibilidad.
+En la práctica basta con ver que un dispositivo no está recibiendo la velocidad solicitada de 54 Mbps sino a otra inferior.
 
 \quad
 
 \textbf{Justifique por qué en el modelo de Path Loss $\alpha$ es inferior a 2.}
 
-El resultado de $\alpha$=1.8 se estima a que es una constante obtenida de interiores. Al existir obstáculos donde la onda pueda rebotar siempre hará que $\alpha$ sea mayor que 1, pero al no ser exterior, donde puede rebotar la señal en edificios, árboles, vehículos, $\alpha$ no llega a 3 o más como suele usarse en ese tipo de áreas urbanas.
+El resultado de $\alpha$=1.8 se estima a que es una constante obtenida de interiores. Al existir obstáculos donde la onda pueda rebotar siempre hará que $\alpha$ sea mayor que 1 y perderá más potencia que en un camino ideal (por ejemplo el vacío), pero al no ser exterior, donde puede rebotar la señal en edificios, árboles, vehículos, $\alpha$ no llega a 3 o más como suele usarse en ese tipo de áreas urbanas.
 
 \end{document}
