@@ -1,0 +1,65 @@
+\documentclass{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[spanish]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with`a4paper' for UK/EU standard size
+\usepackage[a4paper,top=1cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{listings}
+
+\title{Ejercicio 2 Bloque III: Técnicas de Acceso Múltiple}
+\author{André Yermak y Álvaro Hernández}
+
+\begin{document}
+\maketitle
+
+
+\section{Introducción y planteamiento (??)}
+
+
+\section{Resolución del problema}
+
+Sabemos que:
+
+$$S_j = P_j \cdot P[\text{tx bien}]$$
+
+Por lo que podemos escribir:
+
+$$S_j = G_j \cdot \prod_{i=1}^{\substack{M}} 1 - G_i$$
+
+Se modela la tx por Bernoulli:
+
+$$t(x) = P^x \cdot (1-p)^{1-x} \text{ , } x \in \left\{0, 1\right\}$$
+
+
+para cada tx que i no intente tx:
+
+$$P[\text{estación "i" no intenta tx}] = 1 - G_{i}$$
+
+$$P[ \varPhi \text{ LLegadas en P } ] = \prod_{i=1}^{\substack{M}} 1 - G_i $$
+
+\subsection{Caudal medio en j}
+
+
+\subsection{Caudal medio en S}
+
+Sustituiremos $G_{i}$ en la expresión calculada en el apartado anterior
+
+$$S = G \cdot \prod_{i=1}^{\substack{M}} 1 - \frac{G}{N} \rightarrow S = G(1 - \frac{G}{M})^{M-1}$$
+
+
+\subsection{Caudal medio cuando las estaciones tienden a infinito}
+
+$$S = G \cdot \lim_{M \to \infty}(1 - \frac{G}{M})^{M-1} = Ge^{-G}$$
+
+\subsection{Expresión para los apartados b) y c) }
+
+\subsection{Valor de aproximación para población infinita}
+\end{document}
