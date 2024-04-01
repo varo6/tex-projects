@@ -13,6 +13,7 @@
 \usepackage{graphicx}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage{listings}
+\usepackage{amssymb}
 
 \title{Ejercicio 2 Bloque III: Técnicas de Acceso Múltiple}
 \author{André Yermak y Álvaro Hernández}
@@ -25,7 +26,7 @@
 
 
 \section{Resolución del problema}
-
+\subsection{Caudal medio en j}
 Sabemos que:
 
 $$S_j = P_j \cdot P[\text{tx bien}]$$
@@ -45,7 +46,7 @@ $$P[\text{estación "i" no intenta tx}] = 1 - G_{i}$$
 
 $$P[ \varPhi \text{ LLegadas en P } ] = \prod_{i=1}^{\substack{M}} 1 - G_i $$
 
-\subsection{Caudal medio en j}
+
 
 
 \subsection{Caudal medio en S}
@@ -60,6 +61,26 @@ $$S = G \cdot \prod_{i=1}^{\substack{M}} 1 - \frac{G}{N} \rightarrow S = G(1 - \
 $$S = G \cdot \lim_{M \to \infty}(1 - \frac{G}{M})^{M-1} = Ge^{-G}$$
 
 \subsection{Expresión para los apartados b) y c) }
+
+$$\left| \frac{S_{\infty} - S_M}{S_{\infty}} \right| < 0.01 \rightarrow \left| S_{\infty} - S_M \right| < 0.01 \cdot \left| S_{\infty}\right|$$
+
+Sabemos que 
+
+$$ S_{\infty} = Ge^{-G} \quad \text{ , } \quad S_M = \frac{G}{M}e^{\frac{-G}{M}} $$
+
+Sustituimos en la expresión planteada
+
+$$\left| Ge^{-G} - \frac{G}{M}e^{\frac{-G}{M}} \right| < 0.01 \cdot \left| Ge^{-G}\right|$$
+
+Ahora, sacaremos factor común de la G y se nos va operando. La que está en los exponentes, la sustituiremos por 1 ya que no afecta a los cálculos
+
+$$\left| e^{-G} - \frac{1}{M}e^{\frac{-G}{M}} \right| < 0.01 \cdot \left| e^{-G}\right| \quad \rightarrow \quad \left| e^{-1} - \frac{1}{M}e^{\frac{-1}{M}} \right| < 0.01 \cdot \left| e^{-1}\right| $$
+
+Y como M tiende a infinito, tomaremos $e^{\frac{-1}{M}} = 1$
+
+$$\left| e^{-1} - \frac{1}{M} \right| < 0.01 \cdot \left| e^{-1}\right| \rightarrow M > 2.69$$
+
+Como $M \in \mathbb{Z}$, tiene que ser 3.
 
 \subsection{Valor de aproximación para población infinita}
 \end{document}
