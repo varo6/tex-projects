@@ -17,13 +17,15 @@
 
 \title{Ejercicio 2 Bloque III: Técnicas de Acceso Múltiple}
 \author{André Yermak y Álvaro Hernández}
+\date{01 de abril de 2024}
 
 \begin{document}
 \maketitle
 
 
-\section{Introducción y planteamiento (??)}
+\section{Introducción y planteamiento}
 
+Para este ejercicio calcularemos distintas expresiones del caudal medio dependiendo de las condiciones planteadas.Usaremos una red con M estaciones independientes que utilizan ALOHA ranurado. No tendremos en cuenta el backoff.
 
 \section{Resolución del problema}
 \subsection{Caudal medio en j}
@@ -76,11 +78,11 @@ Ahora, sacaremos factor común de la G y se nos va operando. La que está en los
 
 $$\left| e^{-G} - \frac{1}{M}e^{\frac{-G}{M}} \right| < 0.01 \cdot \left| e^{-G}\right| \quad \rightarrow \quad \left| e^{-1} - \frac{1}{M}e^{\frac{-1}{M}} \right| < 0.01 \cdot \left| e^{-1}\right| $$
 
-Y como M tiende a infinito, tomaremos $e^{\frac{-1}{M}} = 1$
+Y como M tiende a infinito, tomaremos $e^{\frac{-1}{M}} = 1$, también como es el valor absoluto, estará comprendido entre el negativo y positivo
 
-$$\left| e^{-1} - \frac{1}{M} \right| < 0.01 \cdot \left| e^{-1}\right| \rightarrow M > 2.69$$
+$$-0.01 \cdot  e^{-1} <\left| e^{-1} - \frac{1}{M} \right| < 0.01  e^{-1} \rightarrow  M > 2.69$$
 
 Como $M \in \mathbb{Z}$, tiene que ser 3.
 
-\subsection{Valor de aproximación para población infinita}
+
 \end{document}
