@@ -1,0 +1,107 @@
+\documentclass{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[spanish]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with `a4paper' for UK/EU standard size
+\usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{fancybox}
+
+\title{Apuntes y ejercicios random de matemáticas}
+\author{}
+\date{04 de Febrero de 2024}
+
+\begin{document}
+\maketitle
+
+
+\begin{abstract}
+
+Ejercicios o fórmulas que he pasado a LaTeX para dar clases particulares. Ayudas/Fórmulas, no está ordenado ni tiene por qué estar correctamente. Como un borrador.
+
+\end{abstract}
+
+
+\section{Ejercicios}
+
+
+\boxed{1} Dados dos planos:
+\begin{gather*}
+    \pi_1 :  4x + 6y - 12z + 1 = 0 \quad  \quad \pi_2 : -2x - 3y + 6z - 5 = 0
+\end{gather*}
+
+\begin{enumerate}
+    \setcounter{enumi}{0} % Establece el contador de la lista en 0
+    \item[a)] Halla el volumen que formaría un paralelepípedo que tiene como dos de sus caras $\pi_1$ y $\pi_2$.
+    \item[b)] ¿Y si en vez de un paralelepípedo fuera un cubo?
+\end{enumerate}
+
+\quad
+\quad
+\quad
+
+\boxed{2} Considere la recta y los planos:
+\begin{gather*}
+    r :  \frac{x-2}{-1} = \frac{y-2}{3} = \frac{z-1}{1}\quad  \quad \pi_1 : x = 0 \quad  \quad \pi_2 : y = 0
+\end{gather*}
+\begin{enumerate}
+    \setcounter{enumi}{0} % Establece el contador de la lista en 0
+    \item[a)] Halla los puntos de la recta r que equidistan de los planos $\pi_1$ y $\pi_2$.
+    \item[b)] Determina la posición relativa de la recta r y la recta intersección de los planos $\pi_1$ y $\pi_2$.
+\end{enumerate}
+
+
+\section{4 ESO ayuda}
+
+\subsection{Algunas identidades trigonométricas}
+
+\begin{align*}
+    \sec x &= \frac{1}{\cos x} & \csc x &= \frac{1}{\sin x} \\
+    \quad \\
+    \cot x &= \frac{\cos x}{\sin x} & \tan x &= \frac{\sin x}{\cos x} \\
+    \quad \\
+    \sin^2 x + \cos^2 x &= 1 & \tan^2 x + 1 &= \frac{1}{\cos^2  x}
+\end{align*}
+
+\subsection{Fórmulas del triángulo}
+
+\begin{align*}
+    \sin x &= \frac{\text{Cateto Opuesto}}{\text{Hipotenusa}} & \csc{x } &= \frac{\text{Hipotenusa}}{\text{Cateto Opuesto}} \\
+    \quad \\
+    \cos x &= \frac{\text{Cateto Contiguo}}{\text{Hipotenusa}} & \sec x &= \frac{\text{Hipotenusa}}{\text{Cateto Contiguo}} \\
+    \quad \\
+    \tan x &= \frac{\text{Cateto Opuesto}}{\text{Cateto Contiguo}} & \cot x &= \frac{\text{Cateto Contiguo}}{\text{Cateto Opuesto}} \\
+\end{align*}
+
+
+\noindent $$\text{RECORDATORIO DE PITÁGORAS: Hipotenusa}^2 = \text{Contiguo} ^2 + \text{Opuesto}^2$$
+
+
+
+\subsection{Razones Trigonométricas}
+\begin{table}[h]
+    \centering
+    \large
+    \renewcommand{\arraystretch}{2} % Ajusta el espaciado vertical
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        & $30^\circ$ & $45^\circ$ & $60^\circ$ \\
+        \hline
+        $\sin$ & $\frac{1}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{\sqrt{3}}{2}$ \\
+        \hline
+        $\cos$ & $\frac{\sqrt{3}}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{1}{2}$ \\
+        \hline
+        $\tan$ & $\frac{1}{\sqrt{3}}$ & $1$ & $\sqrt{3}$ \\
+        \hline
+    \end{tabular}
+    \caption{Razones trigonométricas para ángulos comunes}
+    \label{tab:trig_ratios}
+\end{table}
+\end{document}
