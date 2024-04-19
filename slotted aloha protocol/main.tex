@@ -63,7 +63,7 @@ Como se ha dicho previamente, usaremos Telelogic Tau para la simulación del pro
 
 \section{Edición}
 
-Como se nos ha comentado en clase, antes de ir a la simulación y validación, tendremos que emepzar con la edición, ya que la base proporcionada no está completa. Teniendo en cuenta la captura anterior, y usando el programa para ver qué hay hecho, vemos que los estados \textbf{Emisor, Usuario, y Canal} están sin terminar, por lo que empezaremos diseñando estos estados.
+Como se nos ha comentado en clase, antes de ir a la simulación y validación, tendremos que emepzar con la edición, ya que la base proporcionada no está completa. Teniendo en cuenta la captura anterior, y usando el programa para ver qué hay hecho, vemos que los procesos \textbf{Emisor, Usuario, y Canal} están sin terminar, por lo que empezaremos diseñando estos estados.
 Es importante reconocer qué significa cada símbolo:
 
 \begin{figure}[h]
@@ -76,6 +76,36 @@ Es importante reconocer qué significa cada símbolo:
 
 \subsection{Emisor}
 
+Para el bloque \textbf{emisor}, crea su correspondiente instancia de proceso usuario, entonces le damos a user el valor de \verb|Offspring|,  que es una variable del sistema que nos permitirá asignar una ID a cada usuario. Una vez esto, el usuario puede que tenga un mensaje que transmitir o no. Dependiendo irá por una rama o por otra. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{src/Estado emisor.png}
+    \caption{\label{fig:emisorbl} Diagrama del estado/proceso emisor.}
+\end{figure}
+
+Vemos que al iniciar el emisor, en el momento que llega a \verb|Emisor vacío|, espera 2 tipos de inputs: mensaje o tic. En caso de que haya un mensaje que transmitir, va a la izquierda, donde asignamos una k y reseteamos los intentos para transmisión y el tráfico parcial. Iríamos al estado \verb|Envía TX|. En cambio, si no hay un mensaje que transmitir, recibiríamos un tic, donde se envía la intención de que efectivamente no queremos transmitir a quien lo creó y, en caso de que haya un mensaje para transmitir se guardaría para el siguiente tic y si no, iríamos de vuelta al estado \verb|Emisor vacío|. 
+
+\subsubsection{Estado Envia TX}
+
+El estado empieza esperando a recibir el input del próximo tic, al pasar, aumentaremos en 1 las variables de TOemisor y TSparcial. En este caso, en vez de enviar la intención de que \textbf{no} queremos envíar, envíamos que \textbf{sí} querríamos, con un true. Al entrar al estado \verb|ficticio|, comprobamos con el input de estado, si existe colisión o no, por lo que si no hubiera, el proceso \verb|Emisor| crearía un \verb|Usuario| (envía true a usuario). en caso contrario, se aplicaría el algoritmo backoff un número máximo de reintentos como mucho, siendo que si no lo conseguimos finalmente, no se enviaría el resultado true a \verb|Usuario|.
+Vemos el diagrama de \verb|Envía TX|:
+
+\quad
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{src/Estado enviatx.png}
+    \caption{\label{fig:enviatxbl} Diagrama del estado Envia TX.}
+\end{figure}
+
+
+
+\subsubsection{Algoritmo Backoff}
+
+Como hemos visto antes, es posible que en el estado haya una colisión al intentar transmitir el mensaje, es por eso que si el estado de colisión nos devuelve \textbf{false}, y no nos hemos pasado el límite de intentos, iremos al algoritmo \verb|backoff|.
+
+En este estado, simplemente generaremos un número aleatorio \textbf{k} de ranuras, y las iremos reduciendo en cada tic hasta llegar a 0, donde llegaría el turno de enviar otra vez, e intentaríamos de nuevo enviar volviendo al estado \verb|Envía TX|.
 \subsection{Usuario}
 
 \subsection{canal}
