@@ -105,10 +105,86 @@ Vemos el diagrama de \verb|Envía TX|:
 
 Como hemos visto antes, es posible que en el estado haya una colisión al intentar transmitir el mensaje, es por eso que si el estado de colisión nos devuelve \textbf{false}, y no nos hemos pasado el límite de intentos, iremos al algoritmo \verb|backoff|.
 
-En este estado, simplemente generaremos un número aleatorio \textbf{k} de ranuras, y las iremos reduciendo en cada tic hasta llegar a 0, donde llegaría el turno de enviar otra vez, e intentaríamos de nuevo enviar volviendo al estado \verb|Envía TX|.
+En este estado, simplemente generaremos un número aleatorio \textbf{k} de ranuras, y las iremos reduciendo en cada tic hasta llegar a 0, donde llegaría el turno de enviar otra vez, e intentaríamos de nuevo enviar volviendo al estado \verb|Envía TX|, podría ser que se envíe tras el estado, o que vuelva a haber colisión, se generaría un bucle hasta que no haya colisión o no supere el máximo de intentos.
+\newpage
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.85\linewidth]{src/backoff state.png}
+    \caption{\label{fig:backoffstate} Diagrama del Algoritmo Backoff.}
+\end{figure}
+
+\quad
+
 \subsection{Usuario}
 
-\subsection{canal}
+El proceso usuario nos indicará si existe una intención de transmitir o no. Será el encargado de enviárselo al emisor. Consistirá en una probabilidad Pg donde puede \textbf{enviarse o no. (true o false)}
+
+\quad
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{src/captura usuario.png}
+    \caption{\label{fig:usuariodiagr} Diagrama del proceso Usuario.}
+\end{figure}
+
+\quad
+
+Cabe destacar que, tal como nos indicaba el manual sobre ALOHA, debíamos insertar la función set, teniendo como parámetro de "\(\)Expr " \textbf{RANURAS}, y de "TimerName" \textbf{T}. \textbf{PREGUNTAR NO PUEDO EDITAR}
+
+\subsection{Canal}
+
+El canal se encarga de mantener la estabilidad y organización del sistema, esto es, debido a que lleva el conteo de tics (Como si fuera el clk) y a la vez con los procedimientos \verb|Leer intención| y \verb|Emitir colisión| comprobaremos si existe colisión y se lo comunicaremos a los demás procesos.
+
+\quad
+
+Entonces, finalmente en la captura veremos que este proceso termina en un "bucle" donde generamos un tic, y según las intenciones emitiremos una colisión o no:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{src/proceso canal.png}
+    \caption{\label{fig:canalproceso} Diagrama del proceso del canal.}
+\end{figure}
+
+
+En el proceso de canal, tendremos tres procedimientos: \textbf{emitir tics}, \textbf{leer intención}, y \textbf{emitir colisión}:
+
+\subsubsection{Emitir Tics}
+
+Éste procedimiento, únicamente lo que hará será tener un contador que será  incrementado cada vez que se le llama, y a la vez se lo enviará como Output al \verb|Emisor| , como vemos en \textbf{tic to Emisor id i}
+
+\begin{figure}[hbt]
+    \centering
+    \includegraphics[width=0.3\linewidth]{src/proc emitir tics.png}
+    \caption{\label{fig:emitirtics} Procedimiento emitir tics.}
+\end{figure}
+
+\subsubsection{Leer Intención}
+
+El procedimiento leer intención, recibirá el input de intención, y dependiendo de si hay intención o no, (true o false), se incrementará la variable numi o i.
+
+\quad
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{src/leer intencion.png}
+    \caption{\label{fig:leerintencion} Procedimiento leer intencion.}
+\end{figure}
+
+\subsubsection{Emitir colisión}
+
+En el procedimiento de leer intención hemos visto, que si hay intención de transmitir, incrementaremos 1 en la variable numi. En este caso, en emitir colisión, usaremos esta variable para confirmar si existe o no una colisión, y emitirla en caso afirmativo. Ésto pasaría, cuando la variable numi es mayor que uno (Más de una intención de transmitir en el canal), en este caso pondríamos colisión en \textbf{True.}
+
+\quad
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{src/proc emitir col.png}
+    \caption{\label{fig:emitircol} Procedimiento emitir colisión.}
+\end{figure}
+\newpage
+
+\section{Validación}
 
 
 \end{document}
