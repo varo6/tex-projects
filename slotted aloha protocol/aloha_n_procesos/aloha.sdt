@@ -1,0 +1,57 @@
+SDT-SYSTEM-4.3
+[DRIVES]
+[SOURCE-TARGET-DIRECTORY]
+[DIAGRAMS]
+0 23 Requerimientos %unconnected% 0 0 0 ""
+0 33 Aloha Aloha.txt 0 1015254018 "" ""
+0 23 "SDL System Structure" %unconnected% 0 0 0 ""
+0 1 Aloha aloha.ssy 0 1361529400 Aloha ""
+1 2 Aloha Sistema_aloha.sbk 0 1361527262 Sistema_aloha ""
+2 5 Emisor Emisor.spr 8 1713545550 Nodo ""
+2 5 Usuario Usuario.spr 0 1365758672 Usuario ""
+2 5 Canal Canal.spr 0 1361529063 Canal ""
+3 6 Emitir_TICs Emitir_TICs.spd 0 1361529099 Emitir_TICs ""
+3 6 Leer_Intencion Leer_Intencion.spd 0 1361529119 Leer_Intencion ""
+3 6 Emitir_Colision Emitir_Colision.spd 0 1361529150 Emitir_Colision ""
+[VIEWOPTIONS]
+ShowDirectories=True
+ShowLongMenus=True
+[ANALYSEROPTIONS]
+ASN1KeywordFile=False
+ASN1Parameter=False
+CoderBufferInSDL=Octet-String
+Filter=False
+InstanceFile=False
+[H2SDLOPTIONS]
+AllWarnings=False
+Preprocessor=""
+PreprocessorOptions=""
+TranslateEnum=True
+UseFullPath=True
+UsePreprocessorOptions=False
+[STATEMATRIXOPTIONS]
+[INDEXOPTIONS]
+ShowSelectedTypes=True
+ShowSelectedUses=True
+ShowSelectedDiagrams=True
+FilterTypes=
+FilterUses=
+FilterDiagrams=
+NameFirst=True
+IndexAppearance=Detailed
+[PACKAGEGENERATOROPTIONS]
+DuplicateFile=
+[MAKEOPTIONS]
+CCompilerDriver=False
+Kernel=SCTAMVALIDATOR
+[PRINTOPTIONS]
+DestinationFormat=PSFile
+FirstPageNo=1
+MarginLeft=100
+MarginLower=250
+MarginRight=100
+MarginUpper=420
+PrinterFile=""
+PrintFrom=0
+PrintTo=0
+PrintToFile=False

@@ -1,0 +1,9 @@
+SDT-TIME-STAMP-1.0
+1361527254 Z:\IngenieriaProtocolosGrado\practicas\FBM_Aloha_n_procesos\versionAlumnos\aloha.ssy
+1361527254 Z:\IngenieriaProtocolosGrado\practicas\FBM_Aloha_n_procesos\versionAlumnos\Sistema_aloha.sbk
+1361527254 Z:\IngenieriaProtocolosGrado\practicas\FBM_Aloha_n_procesos\versionAlumnos\Emisor.spr
+1361527254 Z:\IngenieriaProtocolosGrado\practicas\FBM_Aloha_n_procesos\versionAlumnos\Usuario.spr
+1361527254 Z:\IngenieriaProtocolosGrado\practicas\FBM_Aloha_n_procesos\versionAlumnos\Canal.spr
+1361527254 Z:\IngenieriaProtocolosGrado\practicas\FBM_Aloha_n_procesos\versionAlumnos\Emitir_TICs.spd
+1361527254 Z:\IngenieriaProtocolosGrado\practicas\FBM_Aloha_n_procesos\versionAlumnos\Leer_Intencion.spd
+1361527254 Z:\IngenieriaProtocolosGrado\practicas\FBM_Aloha_n_procesos\versionAlumnos\Emitir_Colision.spd

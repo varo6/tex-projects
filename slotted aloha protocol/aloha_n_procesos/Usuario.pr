@@ -1,0 +1,115 @@
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\aloha.ssy,4)*/
+system aloha;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\aloha.ssy,1)*/
+/*#include 'random.pr'*/
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\aloha.ssy(1),323(20,40))*/
+SIGNAL
+tic,
+intencion(Boolean),
+colision(Boolean),
+mensaje,
+respuesta(Boolean);
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\aloha.ssy(1),545(20,70))*/
+SYNONYM 
+N_nodos Integer = 10,
+MAXRTX Integer = 15,
+PG Real = 0.5,
+RANURA Duration = 1,
+Seq RandomControl=DefineSeed(3),
+Rc RandomControl=DefineSeed(3);
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\aloha.ssy(1),542(75,105))*/
+block Sistema_aloha referenced;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\aloha.ssy,4)*/
+endsystem aloha;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Sistema_aloha.sbk,4)*/
+block Sistema_aloha;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Sistema_aloha.sbk(1),122(85,85))*/
+signalroute /*#E*/ 
+clk from Canal to Emisor with 
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Sistema_aloha.sbk(1),123(85,95))*/
+tic;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Sistema_aloha.sbk(1),146(112,85))*/
+signalroute /*#E*/ 
+cln from Canal to Emisor with 
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Sistema_aloha.sbk(1),147(110,95))*/
+colision;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Sistema_aloha.sbk(1),131(97,95))*/
+signalroute /*#E*/ 
+tx from Emisor to Canal with 
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Sistema_aloha.sbk(1),132(95,87))*/
+intencion;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Sistema_aloha.sbk(1),206(102,119))*/
+signalroute /*#E*/ 
+ack from Emisor to Usuario with 
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Sistema_aloha.sbk(1),207(102,130))*/
+respuesta;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Sistema_aloha.sbk(1),194(84,119))*/
+signalroute /*#E*/ 
+msg from Usuario to Emisor with 
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Sistema_aloha.sbk(1),195(85,130))*/
+mensaje;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Sistema_aloha.sbk(1),116(75,65))*/
+process Canal(1,1) referenced;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Sistema_aloha.sbk(1),119(75,100))*/
+process Emisor(0,N_nodos) referenced;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Sistema_aloha.sbk(1),191(75,135))*/
+process Usuario referenced;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Sistema_aloha.sbk,4)*/
+endblock Sistema_aloha;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr,4)*/
+process Usuario;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr(1),173(110,10))*/
+Timer T;
+
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr(1),176(135,10))*/
+DCL
+prob Boolean;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr(1),143(45,20))*/
+start /*#E*/ 
+;
+grst1:
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr(1),140(40,65))*/
+decision /*#E*/ 
+Draw(PG,Seq);
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr(1),149(57,80))*/
+(false):
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr(1),137(35,85))*/
+/*#E*/ 
+set(now+ RANURA,T);
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr(1),134(45,100))*/
+nextstate /*#E*/ 
+Genera;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr(1),155(107,80))*/
+(true):
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr(1),131(90,85))*/
+output /*#E*/ 
+mensaje;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr(1),128(95,100))*/
+nextstate /*#E*/ 
+Confirm;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr(1),140(40,65))*/
+enddecision;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr(1),125(75,30))*/
+state /*#E*/ 
+Genera;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr(1),122(75,45))*/
+input /*#E*/ 
+T;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr(1),140(40,65))*/
+join /*#E*/ 
+grst1;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr(1),125(75,30))*/
+endstate;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr(1),119(105,30))*/
+state /*#E*/ 
+Confirm;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr(1),116(105,45))*/
+input /*#E*/ 
+respuesta(prob);
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr(1),140(40,65))*/
+join /*#E*/ 
+grst1;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr(1),119(105,30))*/
+endstate;
+/*#SDTREF(SDL,C:\Telelogic\SDL_TTCN_Suite4.3\bin\wini386\Aloha\Usuario.spr,4)*/
+endprocess Usuario;

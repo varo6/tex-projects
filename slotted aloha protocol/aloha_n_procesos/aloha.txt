@@ -1,0 +1,455 @@
+
+
+Aloha ranurado
+
+Indice
+
+1 Introducción
+    1.1 Protocolos ALOHA y ALOHA-ranurado
+        1.1.1 Aloha
+        1.1.2 Aloha ranurado
+2 Objetivos de la Práctica
+3 Diseño funcional del modelo ALOHA-ranurado
+    3.1 Diseño funcional del módulo canal
+    3.2 Diseño funcional del módulo nodo y los submódulos usuario y emisor
+4 Funciones y constantes predefinidas
+5 Evaluación del ALOHA-ranurado
+6 Módulos a realizar. Memoria
+
+
+
+
+
+1 Introducción
+
+Los medios de transmisión que utilizan las redes de comunicación
+pueden ser clasificados en dos categorías: los constituidos
+por enlaces punto a punto y aquellos que utilizan un canal
+broadcast al que se conectan físicamente todos los nodos
+de la red (p.ej. la conexión mediante un cable coaxial de
+todos los nodos). La denominación broadcast se debe a que
+cada nodo en la red puede escuchar todas las transmisiones,
+aunque en la práctica sólo recibirá aquellas tramas de datos
+que vayan dirigidas a él (lo cual es posible añadiendo unos
+cuantos bits de dirección en cada trama). La característica
+más interesante de estos canales broadcast es cómo se asigna
+de forma eficiente el derecho a transmitir a los nodos que
+desean hacerlo (algoritmo o protocolo de Control de Acceso
+al Medio). Si la red es de datos, no suele ser eficiente
+el asignar de forma permanente canales frecuenciales (FDM)
+o temporales (TDM) a cada uno de los nodos. Ello se debe
+a que el tráfico de datos es normalmente muy racheado: un
+nodo suele permanecer en "silencio" durante casi todo el
+tiempo y sólo emite ráfagas de información en períodos relativamente
+breves.
+
+De ahí que la mayoría de métodos empleados para controlar
+el acceso en redes broadcast usen técnicas denominadas "de
+acceso aleatorio" o "por contienda" o también "de asignación
+dinámica del canal". Son de asignación dinámica del canal
+porque se decide "sobre la marcha" qué nodo transmitirá
+a continuación en función de cuáles desean hacerlo.
+
+Son de acceso aleatorio en el sentido de que no es predecible,
+o no está planificado a priori, el instante en que un nodo
+podrá transmitir.
+
+Son también de contienda porque en un momento dado podemos
+tener varios nodos compitiendo por el control del medio
+y por tanto será necesario resolver estas contiendas cuando
+se produzcan. Hay que tener en cuenta que en los mecanismos
+de control de acceso por contienda no hay ninguna estación
+central que decida quién transmite a continuación, sino
+que el control está distribuido de forma uniforme entre
+los nodos de la red.
+
+El propósito de esta práctica es estudiar el comportamiento
+del método de control de acceso al medio por contienda conocido
+por "ALOHA-ranurado".
+
+1.1 Protocolos ALOHA y ALOHA-ranurado
+
+ALOHA fue la primera técnica de control de acceso por contienda
+desarrollada en los albores de las redes locales (LAN).
+Aunque se desarrolló en principio para redes de paquetes
+con transmisión sobre radio-broadcast (a través de satélite),
+es utilizable para cualquier medio de tipo broadcast. Las
+sucesivas mejoras a que fue sometido llevaron al método
+de acceso CSMA-CD (Carrier Sense Multiple Access with Collision
+Detection) utilizado en la redes Ethernet que constituyen
+actualmente más de la mitad del parque mundial de LANs. 
+
+Desde un punto de vista académico el estudio de las redes
+ALOHA es muy interesante ya que pese a su relativa sencillez
+permite extraer conclusiones sobre las prestaciones de protocolos
+más complejos. No obstante, aquí nos limitaremos a dar una
+descripción mínima([footnote] Por ejemplo, despreciaremos el tiempo que tarda
+la señal eléctrica en propagarse sobre el medio, aunque
+este parámetro puede influir notablemente en el comportamiento
+de la red si el tiempo de propagación de extremo a extremo
+es de orden de magnitud similar al tiempo que cuesta transmitir
+una trama de datos.)  del método que permita construir un modelo de simulación
+sencillo, sin entrar en un estudio detallado que iría más
+allá del propósito de esta práctica.
+
+1.1.1 Aloha
+
+La idea básica del método es realmente simple: cuando un
+nodo quiere transmitir una trama, la envía sobre el canal
+sin "mirar" si ya había otro nodo transmitiendo. Evidentemente,
+la transmisión de varias tramas se puede solapar en el tiempo
+y se produce entonces lo que se denomina una "colisión",
+no pudiéndose, en este caso, realizar una recepción correcta
+de ninguna de las tramas implicadas.
+
+Afortunadamente, suele ser relativamente simple detectar
+cuándo se ha producido una colisión gracias a que, generalmente,
+la señal eléctrica durante la colisión presenta características
+anómalas que la diferencian de la señal en una transmisión
+"correcta". Así pues, simplemente "escuchando" el canal
+durante la transmisión, el emisor puede saber si la trama
+ha sido transmitida con éxito, o por el contrario si ha
+sido destruida por una colisión (de forma análoga los receptores
+también descartan estas tramas). En caso de colisión, el
+emisor espera un tiempo aleatorio y lo intenta de nuevo.
+Este tiempo de espera debe ser aleatorio ya que en caso
+contrario las mismas tramas volverían a colisionar en los
+nuevos reintentos. No obstante, hay que decir que le método
+ALOHA original no define en principio ningún método para
+elegir el tiempo de espera([footnote] En el ALOHA original ni siquiera se detectan
+las colisiones. Las tramas que no son transmitidas con éxito
+simplemente se pierden, dándose por supuesto que el usuario
+ya detectará de alguna forma esta pérdida y pedirá la retransmisión
+de la trama. Nosotros supondremos sin embargo que el emisor
+sí detecta las colisiones y que retransmite las tramas colisionadas
+utilizando el algoritmo conocido como trucated binary exponential
+back-off (o usualmente back-off) ya que es el más utilizado
+en la práctica en todo tipo de métodos de acceso con colisiones.) .
+
+Si la transmisión de una trama requiere un tiempo t,
+y se empieza a realizar en el instante t_{0},
+sufrirá una colisión si algún otro nodo decide transmitir
+en el intervalo, o "ventana de colisión", [t_{0}-t,t_{0}+t].
+
+1.1.2 Aloha ranurado
+
+Con el propósito de acortar esta ventana de colisión se propuso
+una modificación del algoritmo original, dando como resultado
+lo que se conoce como "ALOHA-ranurado". En este nuevo método
+una estación especial emite periódicamente sobre el canal
+una referencia temporal que marca el inicio de una ranura
+o slot. El período de esta señal es igual al tiempo requerido
+para transmitir una trama sobre el canal (hay que señalar
+que con el propósito de optimizar las prestaciones de la
+red las tramas son todas de igual longitud). En el nuevo
+algoritmo, si un nodo quiere transmitir una trama se espera
+al inicio de la siguiente ranura temporal y la transmite.
+De esta manera se reduce a la mitad la ventana de colisión
+y se mejora el comportamiento del sistema. Efectivamente,
+ahora una trama sólo puede colisionar con las tramas transmitidas
+en la misma ranura, o lo que es equivalente, si algún otro
+nodo decidió transmitir algo durante el período [t_{0}-t,t_{0}],
+por lo que disminuye la probabilidad de error.
+
+El algoritmo de retransmisión de las tramas colisionadas
+que se va a utilizar en esta práctica es conocido como algoritmo
+de back-off<Back off>. Según este algoritmo,
+cuando un nodo transmite una trama y se detecta una colisión,
+elige, con probabilidad uniforme, un número entero en el
+intervalo [0,K-1], espera una cantidad de ranuras
+igual al número escogido (tiempo de espera o back-off) y
+reintenta de nuevo. Si vuelve a producirse otra colisión
+repite el proceso una vez más, utilizando ahora un valor
+de K mayor, y así sucesivamente hasta que consigue transmitir
+la trama con éxito. En la práctica, es usual tomar K=2 para
+el primer reintento, y en cada nuevo reintento que colisione
+se duplica este valor hasta conseguir una transmisión exitosa.
+Para evitar que el tiempo de espera se pueda disparar, la
+duplicación de K se detiene cuando llega a cierto valor
+(el número de nodos en la red, o si este se desconoce, el
+número máximo de nodos que pueden conectarse a la red).
+Además si el número de reintentos no fructíferos llega a
+cierto valor (típicamente 15), se desiste de transmitir
+esta trama y se le notifica al usuario.
+
+Se pueden encontrar estudios más detallados de ALOHA y similares
+(según orden creciente de profundidad) en:
+
+* A. Tanenbaum. Computer Networks. Prentice-Hall International
+  Editions (1989).
+
+* W. Stallings. Local Networks. Macmillan Publishing Company
+  (1990).
+
+* J. Hammond, P. O'Reilly. Performance Analysis of Local
+  Computer Networks. Addison Wesley (1988). 
+
+2 Objetivos de la Práctica
+
+El objetivo de esta práctica es simular una red ALOHA-ranurada
+y medir las prestaciones de la misma con las herramientas
+disponibles.
+
+Para ello, se da un diseño funcional del modelo de la red
+a simular y de cada uno de los subsistemas que la forman.
+A partir de estas especificaciones la práctica tendrá las
+dos partes siguientes:
+
+1. realización completa en SDL de los módulos indicados. Simulación
+  y comprobación de la correcta funcionalidad.
+
+2. medición de las siguientes características de la simulación
+  obtenida en la primera parte: 
+
+  * Curva de eficiencia de la red: caudal, S, versus carga
+    ofrecida G. 
+
+  * Curva del tiempo medio de servicio, T, en función del
+    caudal S. 
+
+  * Curva de pérdidas, L, en función de S.
+
+  Más adelante se describen detalladamente cada una de estas
+  características a evaluar.([fig] ([fig] Diagrama del sistema aloha ranurado) 
+
+3 Diseño funcional del modelo ALOHA-ranurado
+
+El modelo a simular está compuesto por un canal ALOHA ranurado
+y un conjunto de nodos conectados a él. El canal básicamente
+se encarga de señalizar el comienzo de cada slot (ranura)
+a cada uno de los nodos (por las conexiones clk), éstos
+efectuan transmisiones (por las conexiones tx) y finalmente
+el canal repite a los nodos la transmision indicando en
+la trama si hubo colisión o no (por las conexiones rx).
+
+A continuación se especifica la interfície y funcionalidades
+desarrolladas por cada uno de los módulos y submódulos que
+componen el modelo a simular.
+
+3.1 Diseño funcional del módulo canal
+
+Marca a todos los nodos el inicio de cada ranura temporal
+emitiendo un tick por las conexiones de salida (NOTA: un
+tick es simplemente el establecimiento de la conexión sin
+paso de información alguna). En el período correspondiente
+a cada ranura lee todas las conexiones de entrada. Si recibe
+el valor booleano true por la conexión txi, interpreta que
+el nodo i-ésimo transmite en esta ranura, y en caso de recibir
+false interpreta que el nodo queda en "silencio". Una vez
+ha "escuchado" a todos los nodos, si se ha producido una
+colisión emite el valor true a todas las conexiones de salida
+cln, y el valor false en caso contrario. Una vez terminado
+vuelve a repetir el ciclo de nuevo. Este proceso deberá
+consumir en cada ciclo una cantidad de "tiempo virtual"
+igual a la constante RANURA.
+
+3.2 Diseño funcional del módulo nodo y los submódulos usuario
+  y emisor
+
+Un nodo está compuesto por un proceso usuario y un proceso
+emisor. La función del proceso usuario es la de simular
+la generación, o producción, de mensajes a transmitir. 
+
+El proceso emisor tiene la función de simular la transmisión
+de los mensajes a la red según el protocolo ALOHA ranurado.
+El usuario pasa mensajes al emisor emitiendo a través de
+la conexión msg y se queda bloqueado hasta que se le comunica
+por la conexión ack que el mensaje fue servido, pudiendo
+generar nuevos mensajes de nuevo.
+
+nodo: El único propósito de este proceso es encapsular
+  los procesos usuario y emisor, los cuales desarrollan
+  todas las funcionalidades del nodo.
+
+usuario: El proceso usuario simula la generación aleatoria
+  de mensajes emitiendo, en cada ranura, con probabilidad
+  p por la conexión de salida msg. En caso de haber enviado
+  un mensaje espera a que el emisor le comunique por la
+  conexión ack que ya se le ha dado servicio (esta comunicación
+  se recibe durante la misma ranura en que se le da servicio,
+  por tanto se repite inmediatamente el ciclo para posibilitar
+  una nueva transmisión en la siguiente ranura). En caso
+  contrario (no ha generado mensaje), vuelve a decidir si
+  quiere enviar mensaje o no, después de haber esperado
+  una cantidad de tiempo igual a la duración de la ranura.
+  Si recibe el valor true por la conexión ack, usuario interpreta
+  que el mensaje fue transmitido con éxito, y si recibe
+  false interpreta que no se pudo transmitir debido a que
+  se excedió el número máximo de intentos permitido MAXRTX.
+  Una vez recibida esta notificación, usuario continua su
+  actividad.
+
+emisor: Este proceso intenta transmitir tramas sobre el
+  canal utilizando el protocolo ALOHA ranurado con el algoritmo
+  de back-off para retransmisión de colisiones. Los estados
+  principales son: 
+
+* Emisor vacío:
+
+  En este estado el emisor no tiene nada que transmitir,
+  de forma que va "dejando pasar el tiempo" hasta que recibe
+  una petición de transmisión desde usuario (a través de
+  la conexión msg) en cuyo caso pasa al estado de transmisión
+  pendiente.
+
+* transmisión pendiente:
+
+  En este estado el emisor simula un intento de transmisión
+  en la siguiente ranura. Esto es, espera un tick por clk,
+  emite true por tx y recibe un valor booleano por cln.
+  Si no se produce colisión o se produce colisión pero ya
+  se realizaron todos los intentos posibles (constante MAXRTX)
+  entonces vuelve al estado emisor vacío. En caso que se
+  produzca colisión pero todavía no se hayan llevado a cabo
+  todos los reintentos posibles, se pasa al estado de espera
+  ranuras.
+
+* Espera ranuras:
+
+  En este estado el emisor escoge un tiempo de espera aleatoriamente
+  (según el algoritmo de back-off descrito anteriormente
+  en [Back off], página [Back off])
+  y "deja pasar" tantas ranuras como corresponda.
+
+4 Funciones y constantes predefinidas
+
+PG: Constante que indica la probabilidad de que un usuario
+  genere una trama en un tiempo de ranura. El valor de esta
+  constante deberá cambiarse para obtener diferentes valores
+  de caudal S. Para la primera parte puede utilizarse un
+  valor de 0.5.
+
+MAXRTX: Constante que indica el número máximo de reintentos
+  en el emisor. El valor para esta práctica será 5.
+
+RANURA: Duración de una ranura en milisegundos. Para esta
+  práctica el valor será igual a 1.
+
+N_nodos: Numero de nodos del sistema aloha. Para esta
+  práctica el valor tipico será igual a 5.
+
+5 Evaluación del ALOHA-ranurado
+
+La segunda parte de esta práctica consiste en la evaluación
+de las siguientes características:
+
+* Curva de eficiencia de la red: caudal S versus carga ofrecida
+  G. 
+
+* Curva del tiempo medio de servicio T en función del caudal
+  S. Esto es, el tiempo medio que requiere una trama para
+  ser transmitida sobre la red (tiempo total de back-off
+  más tiempo que requiere la transmisión, despreciando el
+  intervalo que va desde el momento de su generación por
+  el usuario hasta el instante inicial de la siguiente ranura
+  en la que se intenta transmitir por primera vez). 
+
+* Curva de pérdidas, L, en función de S. Esto es, el número
+  medio de tramas que se descartan en cada ranura después
+  de haber intentado transmitirlas un número máximo de veces,
+  produciéndose colisión en todos los intentos.
+
+En donde: 
+
+Caudal, S Es el número medio de tramas, por ranura,
+  que se consiguen transmitir con éxito. Evidentemente 0<S<1.
+  Si observamos el canal durante un período de tiempo de
+  M ranuras y resultó que se transmitieron con éxito m tramas,
+  tendremos que S={m}/{M} (cuando M tiende a infinito). 
+  Se puede observar que en régimen permanente
+  estable, el número medio de tramas cursadas es igual al
+  número medio de tramas generadas por los usuario (suponiendo
+  despreciable el número de tramas descartadas).
+
+Carga ofrecida, G Es el número medio
+  de tramas por tiempo de ranura que se le "ofrecen" a la
+  red. En una ranura de tiempo dada, se intentarán transmitir
+  G tramas en media: las S tramas que generaron los nodos
+  en la ranura anterior más las que se tengan que retransmitir
+  de nuevo porque sufrieron colisiones en el pasado.
+
+Una pregunta que se plantea en este punto es cómo fijar a
+priori en una simulación un determinado valor del caudal
+S para así medir un punto de las curvas solicitadas. En
+el modelo ALOHA ranurado como el que se simulará, durante
+una ranura un nodo puede generar uno o cero mensajes (con
+probabilidades conocidas P y 1-P respectivamente). 
+Una vez generado un mensaje, el nodo se
+queda "bloqueado" (no puede generar nuevos mensajes) a la
+espera de que se complete la transmisión. Así pues, si n
+es el número medio de nodos bloqueados en un instante dado,
+P la probabilidad de que cualquier nodo genere una trama
+durante una ranura (suponemos que todos los nodos son idénticos
+y que no cambian su comportamiento a lo largo del tiempo)
+y N el número de nodos en la red, se tiene
+
+S=P(N-n)
+
+donde n depende a su vez también de P, evidentemente.
+
+El interés de esta relación es que nos dice que tomando diferentes
+valores de P conseguimos "simular" diferentes valores del
+caudal S: para medir puntos diferentes de las curvas que
+deseamos obtener bastará con dar diferentes valores a P
+y medir los valores reales de S, G, T y L en cada simulación
+ejecutada. Esto es, antes de cada simulación damos un valor
+distinto a P y a continuación se debe poner en marcha el
+sistema durante "un largo rato" durante el cual registraremos
+los valores medios de las variables de interés. Evidentemente,
+cada simulación nos dará un punto de las curvas solicitadas,
+por tanto habrá que ejecutar tantas simulaciones como puntos
+deseemos obtener.
+
+Así pues, la realización de la segunda parte se organizará
+en los siguientes
+
+pasos: 
+
+* Incorporación al programa de la primera parte de las variables
+  necesarias para medir S, G, T y L. 
+
+* Ejecución de varias simulaciones tomando para cada una
+  un valor de P entre 0 y 1. 
+
+* Recopilación de medidas y construcción de las gráficas.
+
+Opcionalmente, a voluntad del alumno, se puede "jugar" con
+otros parámetros de la simulación, además de la ya mencionada
+P. Los parámetros más interesantes son, tal vez, el número
+de nodos y el número máximo de reintentos. Con respecto
+al número máximo de reintentos, un fenómeno interesante
+de observar es qué pasa cuando, bajo condiciones de carga
+alta (P grande), se toman diferentes valores para este límite
+(p.ej. eliminándolo, o lo que es lo mismo, no descartando
+tramas).
+
+6 Módulos a realizar. Memoria
+
+La realización de la práctica se deberá organizar en capítulos
+dentro del proyecto incompleto proporcionado, aloha.sdt:
+
+La memoria a entregar al professor de prácticas deberá contener
+las siguientes partes: 
+
+* Primera parte:
+
+  * Proyecto entero (formato electrónico).
+
+  * Listados relevantes del proyecto aloha.sdt. 
+
+  * Los comentarios o explicaciones que se crea necesario
+    añadir. 
+
+* Segunda parte:
+
+  * Proyecto entero (formato electrónico).
+
+  * Listados relevantes del proyecto alohaMedidas.sdt modificado. 
+
+  * Obtención de las curvas de eficiencia de la red, tiempo
+    medio de servicio y perdidas.
+
+  * Los comentarios o explicaciones que se crea necesario
+    añadir. 
+
+La fecha límite de entrega es un mes antes de la finalizacion de clases.
