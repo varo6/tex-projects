@@ -10,6 +10,7 @@
 
 % Useful packages
 \usepackage{amsmath}
+\usepackage{parskip}
 \usepackage{graphicx}
 \usepackage[colorlinks=true, allcolors=black]{hyperref}
 \usepackage{fancybox}
@@ -19,6 +20,7 @@
 %    language=Matlab,
 %    extendedchars=true
 %}
+\setlength{\parskip}{0pt}
 
 \title{Comportamiento del protocolo Aloha Ranurado}
 \author{Álvaro Hernández Riquelme}
@@ -130,8 +132,7 @@ El proceso usuario nos indicará si existe una intención de transmitir o no. Se
 
 \quad
 
-Cabe destacar que, tal como nos indicaba el manual sobre ALOHA, debíamos insertar la función set, teniendo como parámetro de "\(\)Expr " \textbf{RANURAS}, y de "TimerName" \textbf{T}. \textbf{PREGUNTAR NO PUEDO EDITAR}
-
+Cabe destacar que, tal como nos indicaba el manual sobre ALOHA, debíamos insertar la función set, teniendo como parámetro de "\(\)Expr " \textbf{RANURAS}, y de "TimerName" \textbf{T}.
 \subsection{Canal}
 
 El canal se encarga de mantener la estabilidad y organización del sistema, esto es, debido a que lleva el conteo de tics (Como si fuera el clk) y a la vez con los procedimientos \verb|Leer intención| y \verb|Emitir colisión| comprobaremos si existe colisión y se lo comunicaremos a los demás procesos.
@@ -186,7 +187,90 @@ En el procedimiento de leer intención hemos visto, que si hay intención de tra
 
 \section{Validación}
 
-La parte de validación consiste en la confirmación del funcionamiento y posible detección de errores del sistema. En este caso, se seguirá los pasos incluidos por el tutorial para la validación de éste, junto a otros usados en el tutorial del Demongame.
+La parte de validación consiste en la confirmación del funcionamiento y posible detección de errores del sistema. Específicamente, validaremos el comportamiento del sistema SDL. En este caso, se seguirán los pasos incluidos por el tutorial para la validación de éste, junto a otros usados en el tutorial del Demongame.
+
+\quad
+
+\subsection{Validación manual}
+
+Iniciaremos el validador mediante las formas usadas en clase y los tutoriales, en las que se asumirá algunas partes ya conocidas, o se explicará con menos detalle al no ser tan relevantes el funcionamiento. Empezaremos yendo a \textbf{generate} $\rightarrow$ \textbf{make} $\rightarrow$ \textbf{fullmake}, habiendo seleccionado el standard kernel \textbf{Microsoft Validation}. De este modo, se nos habrá creado un archivo \textbf{Aloha}\verb|_|\textbf{vlc.exe}, tras abrir el validator UI, tendremos que abrir este archivo .exe, y podremos proceder a la validación.
+
+\quad
+
+% El comando \verb|_| es debido a que no se puede añadir una barra baja en LaTex solamente.
+Una vez abierto, nos preguntará sobre las variables externas PG y N\verb|_|nodos, donde PG lo marcaremos en 0.95 y N\verb|_|nodos será marcado por el valor que nos avisan en el aula virtual este curso, que será de 7.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.80\linewidth]{src/variable 7nodos.png}
+    \caption{\label{fig:simulador7nodos} Selección de los 7 nodos al inicio de la validación.}
+\end{figure}
+
+\subsection{Árbol de comportamiento}
+
+En el árbol de comportamiento exploramos el sistema de estados del sistema navegando manualmente. El Validador se comportará de manera similar al Simulador, pero con alguna diferencia, por ejemplo trabajaremos con el espacio de estados lo más pequeño posible. Una transición entre dos estados se corresponde a una transición completa en el sistema SDL. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.35\linewidth]{src/arbol estados.png}
+    \caption{\label{fig:arbolestados} Transición en el árbol de estados.}
+\end{figure}
+
+
+Abriremos el árbol de comportamiento donde podremos navegar por los estados, y comprobaremos que representa el funcionamiento del aloha que hemos montado anteriormente, podemos observar el inicio de transición de canal, tras eso crea los procesos de emisor, y seguirá en orden si no se encuentra error. 
+
+Si seguimos los estados, llega un momento que encontramos un error en la creación del emisor 4, que nos hará imposible seguir las transiciones, nuestro error tendrá el mensaje:
+
+\quad
+
+\verb|Error in SDL Output of signal intencion. Max input port length exceeded. |
+
+\verb|Sender: Emisor 4. Reciever: Canal 1|
+
+\quad
+
+Este error se produce cuando se ha excedido el número de puertos, ya que el sistema tiene el número máximo de puertos predeterminado a 3, por lo que lo aumentaremos a 7 usando \textbf{define-max-input-port-length 7.} En la captura, en rojo se verá el error, y en verde nuestra solución:
+
+\quad
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\linewidth]{src/error resuelto.png}
+    \caption{\label{fig:errorresuelto} Error de máximo de puertos resuelto.}
+\end{figure}
+
+Se podrá explorar más el árbol y confirmar que no existen nuevos errores. Otra forma de visualización de los estados será usando el \textbf{MSC Tree}, aunque no nos centraremos mucho en ésta:
+
+\quad 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.65\linewidth]{src/MSC tree.png}
+    \caption{\label{fig:msctree} Esquema de nuestro árbol MSC.}
+\end{figure}
+
+\subsection{Algoritmo Bit State}
+
+Aunque anteriormente hayamos podido explorar los estados manualmente, existen algoritmos que nos pueden facilitar la \textbf{validación automática}, en este caso usaremos el \textbf{Algoritmo Bit State.}
+
+El algoritmo de exploración Bit State se puede utilizar para validar sistemas SDL hasta un gran tamaño. Se representan los estados del sistema que se generan durante la exploración. Pulsaremos el botón \textbf{Bit State} en la UI de validación, y se realizará una primera exploración usando el algoritmo.
+
+\quad 
+
+Por defecto, tendremos un error, el cual será el mismo encontrado anteriormente, por lo que no podremos completar toda la cobertura de exploración. Para solucionarlo, lo haremos de la misma forma que antes usando \textbf{define-max-input-port-length 7.}
+
+Hemos seleccionado un \textbf{max-input} de 7 y un \textbf{max-depth} de 1000. Podemos observar los datos del algoritmo:
+ 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.65\linewidth]{src/bit state.png}
+    \caption{\label{fig:bitstate} Estadísticas de la exploración Bit State.}
+\end{figure}
+
+
+\section{Obtención automática de los datos}
+
+
 
 \section{Simulación}
 
