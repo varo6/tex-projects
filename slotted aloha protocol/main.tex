@@ -83,7 +83,7 @@ Para el bloque \textbf{emisor}, crea su correspondiente instancia de proceso usu
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\linewidth]{src/Estado emisor.png}
-    \caption{\label{fig:emisorbl} Diagrama del estado/proceso emisor.}
+    \caption{\label{fig:emisorbl} Diagrama del proceso emisor.}
 \end{figure}
 
 Vemos que al iniciar el emisor, en el momento que llega a \verb|Emisor vacío|, espera 2 tipos de inputs: mensaje o tic. En caso de que haya un mensaje que transmitir, va a la izquierda, donde asignamos una k y reseteamos los intentos para transmisión y el tráfico parcial. Iríamos al estado \verb|Envía TX|. En cambio, si no hay un mensaje que transmitir, recibiríamos un tic, donde se envía la intención de que efectivamente no queremos transmitir a quien lo creó y, en caso de que haya un mensaje para transmitir se guardaría para el siguiente tic y si no, iríamos de vuelta al estado \verb|Emisor vacío|. 
@@ -223,10 +223,12 @@ Si seguimos los estados, llega un momento que encontramos un error en la creaci�
 
 \quad
 
-\verb|Error in SDL Output of signal intencion. Max input port length exceeded. |
-
-\verb|Sender: Emisor 4. Reciever: Canal 1|
-
+\begin{center} 
+    \begin{verbatim}
+    Error in SDL Output of signal intencion. Max input port length exceeded.
+    Emisor 4. Reciever: Canal 1
+    \end{verbatim}
+    \end{center} 
 \quad
 
 Este error se produce cuando se ha excedido el número de puertos, ya que el sistema tiene el número máximo de puertos predeterminado a 3, por lo que lo aumentaremos a 7 usando \textbf{define-max-input-port-length 7.} En la captura, en rojo se verá el error, y en verde nuestra solución:
@@ -259,22 +261,118 @@ El algoritmo de exploración Bit State se puede utilizar para validar sistemas S
 
 Por defecto, tendremos un error, el cual será el mismo encontrado anteriormente, por lo que no podremos completar toda la cobertura de exploración. Para solucionarlo, lo haremos de la misma forma que antes usando \textbf{define-max-input-port-length 7.}
 
-Hemos seleccionado un \textbf{max-input} de 7 y un \textbf{max-depth} de 1000. Podemos observar los datos del algoritmo:
+Hemos seleccionado un \textbf{max-input} de 7 y un \textbf{max-depth} de 1000. Podemos observar los datos obtenidos del algoritmo:
  
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.65\linewidth]{src/bit state.png}
     \caption{\label{fig:bitstate} Estadísticas de la exploración Bit State.}
 \end{figure}
 
-
-\section{Obtención automática de los datos}
-
-
+\newpage
 
 \section{Simulación}
 
 Calculo de la curva S-G. Para ello, tras la validación correcta del sistema, procederemos a simularlo. En todo caso, al ser varios los datos que necesitamos, haremos un comando con la extensión \verb|.bat|
 
+
+\section{Obtención de datos y Análisis de los resultados}
+
+Una vez se comprueba el funcionamiento de tanto la validación como la simulación, procederemos a obtener datos de varias simulaciones usando \textbf{MS-DOS.}
+
+Primero probaremos con una simulación de prueba, donde únicamente se verá la simulación mediante la terminal de windows y no desde nuestra aplicación de Telelogic-tau. Abrimos el archivo generado por el kernel \textbf{Microsoft Simulation} anteriormente:
+
+\quad
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.85\linewidth]{src/cmd.png}
+    \caption{\label{fig:cmdcaptura} Simulación de ALOHA mediante la terminal de windows.}
+\end{figure}
+
+Podemos observar que nos pide un archivo \textbf{synonym}, el cual no rellenaremos por el momento. También debemos de marcar los valores de las variables externas N\verb|_|nodos y PG, que como ya hemos comentado será de 7 y 0.95. El comando será de \textbf{Proceed-Until 10}, ya que de momento no necesitamos una gran simulación. Comprobamos que funcione correctamente. Para analizar los valores de las simulaciones, podremos usar el comando:
+
+
+$$\verb|Command: Examine-Variable( Emisor 1 TOemisor )|$$
+
+Cambiaremos \verb|Emisor 1| por el proceso que queramos observar, y \verb|TOemisor| por la variable cuyo dato queramos obtener.
+
+\subsection{Simulación automática}
+
+Hemos visto anteriormente cómo simular desde la terminal de Windows. Sabiendo esto, podemos aprovechar su funcionamiento para simular el mayor número de instancias con una sola ejecución.
+
+\quad
+
+Para ello, añadiremos nuestras variables y comandos a ejecutar en unos archivo que serán procesados en la simulación. Los llamaremos \textbf{siminit.syn} y \textbf{siminit.com}, y serán asignados como variable de entorno \textbf{SDTEXTSYNFILE}. Es importante utilizar las extensiones correctas, puesto que tienen el mismo nombre pero distinto contenido. En la ventana de comandos, usaremos:
+
+$$\verb|set SDTEXTSYNFILE = siminit.syn|$$
+
+Al archivo \textbf{siminit.syn} le añadiremos las variables externas:
+
+\quad
+
+\begin{center} 
+    \begin{verbatim}
+        N_nodos 7 
+        PG 0.95
+    \end{verbatim}
+    \end{center} 
+\quad
+
+Y al archivo \textbf{siminit.com} le añadimos los comandos usados, sabiendo que tendremos 7 emisores:
+
+\begin{center} 
+    \begin{verbatim}
+
+        set-trace 0
+        Proceed-Until 10000
+        Examine-Variable ( Canal S) 
+        Examine-Variable ( Canal G) 
+        Examine-Variable ( Emisor 1 TOemisor )
+        Examine-Variable ( Emisor 2 TOemisor )
+        Examine-Variable ( Emisor 3 TOemisor )
+        Examine-Variable ( Emisor 4 TOemisor )
+        Examine-Variable ( Emisor 5 TOemisor )
+        Examine-Variable ( Emisor 6 TOemisor )
+        Examine-Variable ( Emisor 7 TOemisor )
+        Examine-Variable ( Emisor 1 TCemisor )
+        Examine-Variable ( Emisor 2 TCemisor )
+        Examine-Variable ( Emisor 3 TCemisor )
+        Examine-Variable ( Emisor 4 TCemisor )
+        Examine-Variable ( Emisor 5 TCemisor )
+        Examine-Variable ( Emisor 6 TCemisor )
+        Examine-Variable ( Emisor 7 TCemisor )
+        Exit
+
+    \end{verbatim}
+    \end{center} 
+\quad
+
+Hemos preparado los archivos para la simulación automática, aunque haremos primero una prueba de una única simulación (con \textbf{Proceed-Until 10} para que no se alargue mucho) y lo guardaremos en un archivo para comprobar que funcionan éstos comandos, usaremos ahora en la ventana de comandos:
+
+$$\verb|aloha_smc.exe > misresultados.txt|$$
+
+Este archivo \textbf{ misresultados.txt} está guardado en la carpeta del trabajo. Comprobaremos ahora los datos con varias simulaciones. Se ejecutará un script batch en windows que contendrá un bucle recorriendo los datos que queremos obtener para distintos casos. Esto quiere decir que, haremos una simulación con \textbf{Proceed-Until-10000} para cada valor de PG que añadimos en el for. Serán distintos valores de PG desde 0 hasta 0.95, que se guardarán en la carpeta \textbf{resultados}. Nuestro archivo \textbf{simular.bat} tendrá de contenido:
+\begin{center} 
+    \begin{verbatim}
+
+        @echo off
+        set SDTEXTSYNFILE=siminit.syn
+        for %%i in (0 01 025 05 075 1 125 150 175 2 25 3
+        35 4 45 5 6 7 8 9 95) do 
+        (
+        echo PG=0.%%i en fichero: resultado_0_%%i.txt
+        echo N_nodos 7 > siminit.syn
+        echo PG 0.%%i >> siminit.syn
+        aloha_smc.exe > resultados\resultado_0_%%i.txt
+        )
+
+    \end{verbatim}
+    \end{center} 
+\quad
+
+Tras un rato de simulación, tendremos los 21 archivos de texto en la carpeta \textbf{resultados}, ya podremos pasar a la parte final, que es el análisis de los mismos.
+
+\subsection{Análisis de los resultados}
 
 \end{document}
