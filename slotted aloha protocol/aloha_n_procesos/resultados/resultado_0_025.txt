@@ -1,0 +1,104 @@
+No connection with the Postmaster. Running stand-alone.
+Using external synonym file "siminit.syn" according to environment variable "SDTEXTSYNFILE".
+
+Welcome to the SDL SIMULATOR. Simulating system Aloha.
+
+Command : set-trace 0
+Default trace set to 0
+
+Command : 
+
+Command : Proceed-Until 10000
+
+Command : Examine-Variable ( Canal S) 
+S (integer) = 1747
+
+Command : Examine-Variable ( Canal G) 
+G (integer) = 2123
+
+Command : Examine-Variable ( Emisor 1 TOemisor )
+TOemisor (integer) = 290
+
+Command : Examine-Variable ( Emisor 2 TOemisor )
+TOemisor (integer) = 302
+
+Command : Examine-Variable ( Emisor 3 TOemisor )
+TOemisor (integer) = 301
+
+Command : Examine-Variable ( Emisor 4 TOemisor )
+TOemisor (integer) = 311
+
+Command : Examine-Variable ( Emisor 5 TOemisor )
+TOemisor (integer) = 315
+
+Command : Examine-Variable ( Emisor 6 TOemisor )
+TOemisor (integer) = 315
+
+Command : Examine-Variable ( Emisor 7 TOemisor )
+TOemisor (integer) = 289
+
+Command : Examine-Variable ( Emisor 1 TCemisor )
+TCemisor (integer) = 250
+
+Command : Examine-Variable ( Emisor 2 TCemisor )
+TCemisor (integer) = 247
+
+Command : Examine-Variable ( Emisor 3 TCemisor )
+TCemisor (integer) = 246
+
+Command : Examine-Variable ( Emisor 4 TCemisor )
+TCemisor (integer) = 260
+
+Command : Examine-Variable ( Emisor 5 TCemisor )
+TCemisor (integer) = 255
+
+Command : Examine-Variable ( Emisor 6 TCemisor )
+TCemisor (integer) = 254
+
+Command : Examine-Variable ( Emisor 7 TCemisor )
+TCemisor (integer) = 235
+
+Command : Examine-Variable ( Emisor 1 TPemisor )
+TPemisor (integer) = 0
+
+Command : Examine-Variable ( Emisor 2 TPemisor )
+TPemisor (integer) = 0
+
+Command : Examine-Variable ( Emisor 3 TPemisor )
+TPemisor (integer) = 0
+
+Command : Examine-Variable ( Emisor 4 TPemisor )
+TPemisor (integer) = 0
+
+Command : Examine-Variable ( Emisor 5 TPemisor )
+TPemisor (integer) = 0
+
+Command : Examine-Variable ( Emisor 6 TPemisor )
+TPemisor (integer) = 0
+
+Command : Examine-Variable ( Emisor 7 TPemisor )
+TPemisor (integer) = 0
+
+Command : Examine-Variable ( Emisor 1 TStotal )
+TStotal (integer) = 360
+
+Command : Examine-Variable ( Emisor 2 TStotal )
+TStotal (integer) = 434
+
+Command : Examine-Variable ( Emisor 3 TStotal )
+TStotal (integer) = 411
+
+Command : Examine-Variable ( Emisor 4 TStotal )
+TStotal (integer) = 409
+
+Command : Examine-Variable ( Emisor 5 TStotal )
+TStotal (integer) = 445
+
+Command : Examine-Variable ( Emisor 6 TStotal )
+TStotal (integer) = 445
+
+Command : Examine-Variable ( Emisor 7 TStotal )
+TStotal (integer) = 413
+
+Command : Exit
+Simulation terminated
