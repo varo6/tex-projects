@@ -273,7 +273,11 @@ Hemos seleccionado un \textbf{max-input} de 7 y un \textbf{max-depth} de 1000. P
 
 \section{Simulación}
 
-Calculo de la curva S-G. Para ello, tras la validación correcta del sistema, procederemos a simularlo. En todo caso, al ser varios los datos que necesitamos, haremos un comando con la extensión \verb|.bat|
+Para la simulación manual desde \textbf{SIMULATOR UI} no haremos tanto inciso, ya que más adelante usaremos el archivo del simulador generado para realizar simulaciones automáticas por lotes. 
+
+\quad
+
+De todas formas, es necesario generar los archivos y comprobar la correcta simulación, por lo que iremos a \textbf{generate} $\rightarrow$ \textbf{make} $\rightarrow$ \textbf{fullmake}, habiendo seleccionado el standard kernel \textbf{Microsoft Simulation}. De este modo, se habrá generado un archivo \textbf{Aloha}\verb|_|\textbf{smc.exe}, el cual abriremos desde la interfaz del simulador. Tras esto, podremos proceder a la simulación desde un SMC Tree, y comprobamos que se pueda hacer de forma funcional.
 
 
 \section{Obtención de datos y Análisis de los resultados}
@@ -352,7 +356,7 @@ Hemos preparado los archivos para la simulación automática, aunque haremos pri
 
 $$\verb|aloha_smc.exe > misresultados.txt|$$
 
-Este archivo \textbf{ misresultados.txt} está guardado en la carpeta del trabajo. Comprobaremos ahora los datos con varias simulaciones. Se ejecutará un script batch en windows que contendrá un bucle recorriendo los datos que queremos obtener para distintos casos. Esto quiere decir que, haremos una simulación con \textbf{Proceed-Until-10000} para cada valor de PG que añadimos en el for. Serán distintos valores de PG desde 0 hasta 0.95, que se guardarán en la carpeta \textbf{resultados}. Nuestro archivo \textbf{simular.bat} tendrá de contenido:
+Este archivo \textbf{ misresultados.txt} está guardado en la carpeta del trabajo. Comprobaremos ahora los datos con varias simulaciones. Se ejecutará un script batch en windows que contendrá un bucle recorriendo los datos que queremos obtener para distintos casos. Esto quiere decir que, haremos una simulación con \textbf{Proceed-Until-10000} para cada valor de PG que añadimos en el bucle for. Serán distintos valores de PG desde 0 hasta 0.95, que se guardarán en la carpeta \textbf{resultados}. Nuestro archivo \textbf{simular.bat} tendrá de contenido:
 \begin{center} 
     \begin{verbatim}
 
@@ -373,6 +377,277 @@ Este archivo \textbf{ misresultados.txt} está guardado en la carpeta del trabaj
 
 Tras un rato de simulación, tendremos los 21 archivos de texto en la carpeta \textbf{resultados}, ya podremos pasar a la parte final, que es el análisis de los mismos.
 
-\subsection{Análisis de los resultados}
+\subsection{Procesado de datos en Python}
+
+Al generarse 21 archivos de texto, los datos se vuelven complicados de manejar, y copiar y pegar cada número del texto a Excel se haría muy repetitivo, por lo que haremos un script en Python que procese nuestros datos y genere las gráficas para los análisis. Primero tendremos que ver de qué forma podemos filtrar estos datos, la información de los archivos será de esta forma:
+
+\begin{center} 
+    \begin{verbatim}
+
+        No connection with the Postmaster. Running stand-alone.
+        Using external synonym file "siminit.syn" according to environment 
+        variable "SDTEXTSYNFILE".
+        
+        Welcome to the SDL SIMULATOR. Simulating system Aloha.
+        
+        Command : set-trace 0
+        Default trace set to 0
+        
+        Command : 
+        
+        Command : Proceed-Until 10000
+        
+        Command : Examine-Variable ( Canal S) 
+        S (integer) = 3082
+        
+        Command : Examine-Variable ( Canal G) 
+        G (integer) = 18245
+        
+        Command : Examine-Variable ( Emisor 1 TOemisor )
+        TOemisor (integer) = 2563
+        
+        Command : Examine-Variable ( Emisor 2 TOemisor )
+        TOemisor (integer) = 2619
+        .                   .                       .
+        . (resto del texto) .                       .
+        .                   .                       .
+        Command : Examine-Variable ( Emisor 7 TStotal )
+        TStotal (integer) = 4189
+        
+        Command : Exit
+        Simulation terminated
+
+    \end{verbatim}
+    \end{center} 
+\quad
+
+Procedemos a crear el archivo \textbf{main.py} que se encontrará en la carpeta \textbf{resultados}, y para inicializar tendremos que hacer un bucle que recorra todos nuestros archivos \verb|resultado_0_X.txt|, lo haremos con un array que contenga los valores de PG y lo sumaremos al nombre (La almohadilla "\verb|#|" se usa para comentarios en python y no modificar el código):
+
+\quad 
+\begin{center} 
+    \begin{verbatim}
+
+    valores = ["0", "01", "025","05", "075", "1", "125", "150", "175",
+    "2", "25", "3", "35", "4", "45", "5", "6", "7", "8", "9", "95"]
+
+    # Iteramos nuestro array de valores, "valor" será cada número de dentro
+    for valor in valores:
+
+        # sumamos resultado_0_ a valor y luego ".txt":
+        archivo = "resultado_0_" + valor + ".txt"
+
+        with open(archivo, 'r') as file: # Abrimos el archivo
+
+    \end{verbatim}
+    \end{center} 
+\quad
+
+Ahora que tenemos un archivo por cada iteración, buscaremos una forma para filtrar el texto innecesario del txt, viendo el contenido del texto de antes, podemos observar que en las líneas que aparecen los números que nos interesan, aparece la palabra \verb|integer|, por lo que nos quedaremos únicamente con esas líneas:
+
+\begin{center} 
+    \begin{verbatim}
+
+    lines = []
+
+    # Iteramos las líneas del archivo una por una
+    for line in file:
+
+        # Si la línea contiene "integer" nos quedamos con ella:
+        if "integer" in line:
+
+            # "rstrip" elimina los espacios de sobra
+            line = line.rstrip()
+
+            # "append" añade la línea en la que estamos al array lines
+            lines.append(line)
+
+    \end{verbatim}
+    \end{center} 
+
+Si ejecutamos el código que llevamos hasta el momento, podremos ver las líneas que han sido filtradas, aunque no sea el resultado que buscamos hemos reducido el texto que sobra:
+
+\quad
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{src/lineas filtradas1.png}
+    \caption{\label{fig:filtradas1} Líneas filtradas en el Script.}
+\end{figure}
+
+Falta guardar esos números en un array correspondiente para cada nombre, pero se añade un nuevo problema, ahora no sabemos para qué emisor es cada línea (Es decir, aparece TOemisor pero no si es el 1,2,3...). Para solucionar esto, contaremos el número de líneas equivalentes al archivo de texto original, de modo que nuestra línea filtrada 1 será la S, la 2 la G, de la 3 a la 9 irán los TO de 1 al 7, de la 10 a la 16 los TC, y así con las demás. Una vez contado eso, declararemos los arrays correspondientes y filtraremos únicamente el número que haya en la línea, de modo que nuestra línea pasaría a ser esto:
+
+$$\verb|TOemisor (integer) = 290| \rightarrow 290$$
+
+E iteramos cada línea filtrada. Según el número de la línea, lo añadiremos al array TOemisor, o a los demás. Cabe destacar que además de añadir estos valores al array, también sumaremos el valor a unas variables que hemos declarado como \textbf{valoresTO, valoresTC, valoresTS y valoresTP}. Nos servirá para luego dividirlas entre 10000, que nos dará la media que también la añadiremos al final de cada array de TOemisor, TCemisor... 
+
+Vemos el código necesario para el filtrado del número concreto y añadirlo a nuestros arrays:
+
+\quad 
+
+\begin{center} 
+    \begin{verbatim}
+
+    # bucle con las líneas ya filtradas
+    for i in range(len(lines)):
+
+        # string será nuestra línea filtrada
+        string = lines[i]
+
+        # Match será un valor booleano que busca un dígito. \d significa int
+        match = re.search(r'\d+', string)
+
+        # Esto es como decir if match == True en python
+        if match:
+
+            # Guardamos el número y lo pasamos a int
+            numero_str = match.group()
+            numero_int = int(numero_str)
+
+            # Añadimos a los arrays según la línea que sea
+            if i==0:
+                S = numero_int
+            elif i==1:
+                G = numero_int
+            elif i>1 and i<=8:
+                TOemisor.append(numero_int)
+                valoresTO = valoresTO + numero_int
+            elif i>8 and i<=15:
+                TCemisor.append(numero_int)
+                valoresTC = valoresTC + numero_int
+            elif i>15 and i<=22:
+                TPemisor.append(numero_int)
+                valoresTP = valoresTP + numero_int
+            else:
+                TStotal.append(numero_int)
+                valoresTS = valoresTS + numero_int
+    \end{verbatim}
+    \end{center} 
+\quad
+
+Con esto tendremos los valores filtrados en un array de cada tipo, podemos ejecutar el Script para ver lo que llevamos hasta ahora:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{src/lineas filtradas2.png}
+    \caption{\label{fig:filtradas2} Datos en los arrays de cada tipo.}
+\end{figure}
+
+Ya tenemos lo importante, y como hemos visto anteriormente, estábamos iterando a su vez para cada archivo, esto sigifica que se guardaría un array de TOemisor, TCemisor, TPemisor, y TStotal para cada valor de PG. Cada array lo guardaremos al final de cada iteración en una posición de las listas que crearemos como \textbf{TOemisores, TCemisores, TPemisores y TStotales}, de modo que tendremos un array de arrays, donde cada posición de éste sería un valor de PG, (o un archivo diferente de \verb|resultado_0_X.txt|). Dicho de otra forma, tendríamos una matriz. Ésto es lo que buscamos para exportarlo a un archivo como \textbf{Excel}.
+
+\quad
+
+Antes de exportar nuestros datos a Excel, declararemos alguna variable y añadiremos al principio de cada fila el valor de PG, y al final el valor de la media (ValoresTO/10000), todo esto se puede ver en el archivo completo: \textbf{main.py} en la carpeta \textbf{resultados}.
+
+Exportamos a Excel:
+
+\begin{center} 
+    \begin{verbatim}
+
+    # DataFrame será como el equivalente a la matriz, le añadimos los títulos 
+    df_TOemisores = pd.DataFrame(TOemisores, columns=["PG", "TOemisor1",
+     "TOemisor2", "TOemisor3", "TOemisor4", "TOemisor5", "TOemisor6",
+      "TOemisor7", "Media TO"])
+
+    # Exportamos a xlsx
+    with pd.ExcelWriter("datos_filtrados.xlsx") as writer:
+
+        # Escribir el DataFrame de TOemisores en la primera hoja
+        df_TOemisores.to_excel(writer, sheet_name='TOemisores', index=False)
+
+    \end{verbatim}
+    \end{center} 
+\quad
+
+Añadiremos las matrices restantes a las diferentes hojas del archivo \verb|datos_filtrados.xlsx|. Con esto se habría terminado de procesar los datos.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\linewidth]{src/TOemisor.png}
+		\caption{Hoja TOemisor}
+		\label{fig:TOemisorcsv}
+	\end{subfigure}%
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\linewidth]{src/TCemisor.png}
+		\caption{Hoja TCemisor}
+		\label{fig:TCemisorcsv}
+	\end{subfigure}
+	\caption{}
+	\label{fig:Ambastablas}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\linewidth]{src/TPemisor.png}
+		\caption{Hoja TPemisor}
+		\label{fig:TPemisorcsv}
+	\end{subfigure}%
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\linewidth]{src/TStotal.png}
+		\caption{Hoja TStotal}
+		\label{fig:TStotalcsv}
+	\end{subfigure}
+	\caption{}
+	\label{fig:Ambastablas2}
+\end{figure}
+
+Una vez tenemos los datos guardados, como ya tenemos los datos en DataFrames, podremos generar las gráficas con las medias de éstos (últimas columnas).
+
+\subsection{Generar gráficas en Python}
+
+Haremos un nuevo Script para generar las gráficas, vamos a aprovechar que los datos están guardados en DataFrames para evitar el uso de Excel. El archivo será \textbf{generarGraficas.py}, donde importará las variables que nos hacen falta del archivo \textbf{main.py}, y usaremos un módulo para generar las gráficas, matplotlib. De esta forma, las gráficas serán:
+\newpage
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{src/TCvsTO.png}
+    \caption{\label{fig:TCvsTO} Datos en los arrays de cada tipo.}
+\end{figure}
+
+En esta primera gráfica, estamos comparando el Tráfico Cursado frente al Tráfico Ofrecido, que nos muestra la curva de eficiencia del canal. Podríamos obtener un valor óptimo cuando el Tráfico Ofrecido se aproxima a 1, despreciando el Tráfico perdido por el momento. Vemos como mayor Tráfico Ofrecido no implica mayor Tráfico Cursado.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{src/TSvsTC.png}
+    \caption{\label{fig:TSvsTC} Datos en los arrays de cada tipo.}
+\end{figure}
+
+En la segunda gráfica, comparamos el Tiempo de servicio frente al Tráfico Cursado, que nos muestra el tiempo medio de Servicio. Se puede observar que a partir de ciertos valores, el tiempo de servicio pasa a ser exponencial.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{src/TPvsTC.png}
+    \caption{\label{fig:TPvsTC} Datos en los arrays de cada tipo.}
+\end{figure}
+
+Aquí compararemos el Tráfico Perdido frente al Tráfico Cursado,que nos muestra el número de paquetes perdidos. De la misma forma que en el tiempo medio de servicio, los paquetes perdidos aumentarían de forma exponencial. 
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\linewidth]{src/TPvsPG.png}
+		\caption{}
+		\label{fig:TPvsPG}
+	\end{subfigure}%
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\linewidth]{src/TCvsPG.png}
+		\caption{}
+		\label{fig:TCvsPG}
+	\end{subfigure}
+	\caption{Valores de TP y TC frente a PG}
+	\label{fig:PGgraficas}
+\end{figure}
+
+Para finalizar, añadiremos dos últimas gráficas ya que al tener un script que nos genere las gráficas, los datos se hacen más manejables. Observamos tanto el Tráfico Perdido y el Tráfico Cursado para los valores distintos de PG, donde PG es la probabilidad de transmisión de un paquete. 
+
+\quad
+
+El Tráfico Perdido aumenta en relación al aumento de PG, algo esperable debido a que aumenta la probabilidad de colisión, aunque hay valores al inicio donde no parece afectar demasiado. Con el Tráfico Cursado pasa parecido, conforme aumenta el PG, disminuye el Tráfico que se cursa, aunque ésto solo pasa a partir de un valor, que es el cuando \textbf{PG = 0.075}, hasta ese valor el Tráfico Cursado tiene tendencia ascendente. 
+
+Es por es que, para el valor de PG 0.075, obtenemos un valor de Tráfico Cursado Óptimo (Entre 0.30 y 0.40), el Tráfico Perdido no es grande, pero según la \hyperref[fig:TSvsTC]{\textbf{Figura 22}}, el tiempo de servicio, en esos valores alcanzan un tiempo de servicio bastante alto.
+
+\quad
+
+En conclusión, \textbf{0.075} puede ser el valor óptimo de nuestro sistema, dependiendo de lo que se busca en función del rendimiento, si se asume una ligera subida del tiempo de servicio, todo esto para 7 nodos.
 
 \end{document}
