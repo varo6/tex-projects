@@ -39,7 +39,7 @@
 
 \section{Introducción al trabajo}
 
-Para este trabajo, se estudiará el comportamiento de un protocolo de Aloha Ranurado usando un sistema SDL, donde se completará la edición, simulación y validación total del protocolo. Tras esto, se hará un estudio de éste.
+Para este trabajo, se estudiará el comportamiento de un protocolo de Aloha Ranurado usando un sistema SDL, donde se completará la edición, simulación y validación total del protocolo. Tras esto, se hará un análisis de los resultados.
 
 \quad
 
@@ -61,11 +61,13 @@ Como se ha dicho previamente, usaremos Telelogic Tau para la simulación del pro
     \caption{\label{fig:tltau} Inicio de Telelogic Tau con el proyecto de ALOHA Ranurado.}
 \end{figure}
 
+Se tendrá en cuenta las indicaciones del profesor para este año: \textbf{N}\verb|_|\textbf{Nodos}, \textbf{Kmax}, y \textbf{MAXRTX} serán de valor 7. La variable MAXRTX está creada en la plantilla de ALOHA que se proporciona, por lo que la igualamos a 7 directamente. Los demás valores se pondrán conforme haya que añadir sus respectivas variables.
+
 \newpage
 
 \section{Edición}
 
-Como se nos ha comentado en clase, antes de ir a la simulación y validación, tendremos que emepzar con la edición, ya que la base proporcionada no está completa. Teniendo en cuenta la captura anterior, y usando el programa para ver qué hay hecho, vemos que los procesos \textbf{Emisor, Usuario, y Canal} están sin terminar, por lo que empezaremos diseñando estos estados.
+Como se nos ha comentado en clase, antes de ir a la simulación y validación, tendremos que empezar con la edición, ya que la base proporcionada no está completa. Teniendo en cuenta la captura anterior, y usando el programa para ver qué hay hecho, vemos que los procesos \textbf{Emisor, Usuario, y Canal} están sin terminar, por lo que empezaremos diseñando estos estados.
 Es importante reconocer qué significa cada símbolo:
 
 \begin{figure}[h]
@@ -132,10 +134,10 @@ El proceso usuario nos indicará si existe una intención de transmitir o no. Se
 
 \quad
 
-Cabe destacar que, tal como nos indicaba el manual sobre ALOHA, debíamos insertar la función set, teniendo como parámetro de "\(\)Expr " \textbf{RANURAS}, y de "TimerName" \textbf{T}.
+Cabe destacar que, tal como nos indicaba el manual sobre ALOHA, debíamos insertar la función set, modificando donde era Expr a RANURAS y donde era TimerName a T.
 \subsection{Canal}
 
-El canal se encarga de mantener la estabilidad y organización del sistema, esto es, debido a que lleva el conteo de tics (Como si fuera el clk) y a la vez con los procedimientos \verb|Leer intención| y \verb|Emitir colisión| comprobaremos si existe colisión y se lo comunicaremos a los demás procesos.
+El canal se encarga de mantener la estabilidad y organización del sistema, esto es, debido a que lleva el conteo de tics (Como si fuera un clk) y a la vez con los procedimientos \verb|Leer intención| y \verb|Emitir colisión| comprobaremos si existe colisión y se lo comunicaremos a los demás procesos.
 
 \quad
 
@@ -156,7 +158,7 @@ En el proceso de canal, tendremos tres procedimientos: \textbf{emitir tics}, \te
 
 \begin{figure}[hbt]
     \centering
-    \includegraphics[width=0.3\linewidth]{src/proc emitir tics.png}
+    \includegraphics[width=0.4\linewidth]{src/proc emitir tics.png}
     \caption{\label{fig:emitirtics} Procedimiento emitir tics.}
 \end{figure}
 
@@ -176,14 +178,12 @@ El procedimiento leer intención, recibirá el input de intención, y dependiend
 
 En el procedimiento de leer intención hemos visto, que si hay intención de transmitir, incrementaremos 1 en la variable num intenciones. En este caso, en emitir colisión, usaremos esta variable para confirmar si existe o no una colisión, y emitirla en caso afirmativo. Ésto pasaría, cuando la variable num intenciones es mayor que uno (Más de una intención de transmitir en el canal), en este caso pondríamos colisión en \textbf{True.}
 
-\quad
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\linewidth]{src/proc emitir col.png}
+    \includegraphics[width=0.6\linewidth]{src/proc emitir col.png}
     \caption{\label{fig:emitircol} Procedimiento emitir colisión.}
 \end{figure}
-\newpage
 
 \section{Validación}
 
@@ -293,7 +293,7 @@ Primero probaremos con una simulación de prueba, donde únicamente se verá la 
 
 \quad
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.85\linewidth]{src/cmd.png}
     \caption{\label{fig:cmdcaptura} Simulación de ALOHA mediante la terminal de windows.}
@@ -312,7 +312,7 @@ Hemos visto anteriormente cómo simular desde la terminal de Windows. Sabiendo e
 
 \quad
 
-Para ello, añadiremos nuestras variables y comandos a ejecutar en unos archivo que serán procesados en la simulación. Los llamaremos \textbf{siminit.syn} y \textbf{siminit.com}, y serán asignados como variable de entorno \textbf{SDTEXTSYNFILE}. Es importante utilizar las extensiones correctas, puesto que tienen el mismo nombre pero distinto contenido. En la ventana de comandos, usaremos:
+Para ello, añadiremos nuestras variables y comandos a ejecutar en unos archivos que serán procesados en la simulación. Los llamaremos \textbf{siminit.syn} y \textbf{siminit.com}, y serán asignados como variable de entorno \textbf{SDTEXTSYNFILE}. Es importante utilizar las extensiones correctas, puesto que tienen el mismo nombre pero distinto contenido. En la ventana de comandos, usaremos:
 
 $$\verb|set SDTEXTSYNFILE = siminit.syn|$$
 
@@ -332,26 +332,40 @@ Y al archivo \textbf{siminit.com} le añadimos los comandos usados, sabiendo que
 
 \begin{center} 
     \begin{verbatim}
+    set-trace 0
 
-        set-trace 0
-        Proceed-Until 10000
-        Examine-Variable ( Canal S) 
-        Examine-Variable ( Canal G) 
-        Examine-Variable ( Emisor 1 TOemisor )
-        Examine-Variable ( Emisor 2 TOemisor )
-        Examine-Variable ( Emisor 3 TOemisor )
-        Examine-Variable ( Emisor 4 TOemisor )
-        Examine-Variable ( Emisor 5 TOemisor )
-        Examine-Variable ( Emisor 6 TOemisor )
-        Examine-Variable ( Emisor 7 TOemisor )
-        Examine-Variable ( Emisor 1 TCemisor )
-        Examine-Variable ( Emisor 2 TCemisor )
-        Examine-Variable ( Emisor 3 TCemisor )
-        Examine-Variable ( Emisor 4 TCemisor )
-        Examine-Variable ( Emisor 5 TCemisor )
-        Examine-Variable ( Emisor 6 TCemisor )
-        Examine-Variable ( Emisor 7 TCemisor )
-        Exit
+    Proceed-Until 10000
+    Examine-Variable ( Canal S) 
+    Examine-Variable ( Canal G) 
+    Examine-Variable ( Emisor 1 TOemisor )
+    Examine-Variable ( Emisor 2 TOemisor )
+    Examine-Variable ( Emisor 3 TOemisor )
+    Examine-Variable ( Emisor 4 TOemisor )
+    Examine-Variable ( Emisor 5 TOemisor )
+    Examine-Variable ( Emisor 6 TOemisor )
+    Examine-Variable ( Emisor 7 TOemisor )
+    Examine-Variable ( Emisor 1 TCemisor )
+    Examine-Variable ( Emisor 2 TCemisor )
+    Examine-Variable ( Emisor 3 TCemisor )
+    Examine-Variable ( Emisor 4 TCemisor )
+    Examine-Variable ( Emisor 5 TCemisor )
+    Examine-Variable ( Emisor 6 TCemisor )
+    Examine-Variable ( Emisor 7 TCemisor )
+    Examine-Variable ( Emisor 1 TPemisor )
+    Examine-Variable ( Emisor 2 TPemisor )
+    Examine-Variable ( Emisor 3 TPemisor )
+    Examine-Variable ( Emisor 4 TPemisor )
+    Examine-Variable ( Emisor 5 TPemisor )
+    Examine-Variable ( Emisor 6 TPemisor )
+    Examine-Variable ( Emisor 7 TPemisor )
+    Examine-Variable ( Emisor 1 TStotal )
+    Examine-Variable ( Emisor 2 TStotal )
+    Examine-Variable ( Emisor 3 TStotal )
+    Examine-Variable ( Emisor 4 TStotal )
+    Examine-Variable ( Emisor 5 TStotal )
+    Examine-Variable ( Emisor 6 TStotal )
+    Examine-Variable ( Emisor 7 TStotal )
+    Exit
 
     \end{verbatim}
     \end{center} 
@@ -361,7 +375,7 @@ Hemos preparado los archivos para la simulación automática, aunque haremos pri
 
 $$\verb|aloha_smc.exe > misresultados.txt|$$
 
-Este archivo \textbf{ misresultados.txt} está guardado en la carpeta del trabajo. Comprobaremos ahora los datos con varias simulaciones. Se ejecutará un script batch en windows que contendrá un bucle recorriendo los datos que queremos obtener para distintos casos. Esto quiere decir que, haremos una simulación con \textbf{Proceed-Until-10000} para cada valor de PG que añadimos en el bucle for. Serán distintos valores de PG desde 0 hasta 0.95, que se guardarán en la carpeta \textbf{resultados}. Nuestro archivo \textbf{simular.bat} tendrá de contenido:
+Este archivo \textbf{ misresultados.txt} está guardado en la carpeta del trabajo. Comprobaremos ahora los datos con varias simulaciones, puesto que un solo valor de PG no es suficiente para un análisis de la respuesta del sistema. Lo haremos para 21 valores de PG. Se ejecutará un script batch en windows que contendrá un bucle recorriendo los datos que queremos obtener para distintos casos. Esto quiere decir que, haremos una simulación con \textbf{Proceed-Until-10000} para cada valor de PG que añadimos en el bucle for. Serán distintos valores de PG desde 0 hasta 0.95, que se guardarán en la carpeta \textbf{resultados}. Nuestro archivo \textbf{simular.bat} tendrá de contenido:
 \begin{center} 
     \begin{verbatim}
 
@@ -380,11 +394,17 @@ Este archivo \textbf{ misresultados.txt} está guardado en la carpeta del trabaj
     \end{center} 
 \quad
 
-Tras un rato de simulación, tendremos los 21 archivos de texto en la carpeta \textbf{resultados}, ya podremos pasar a la parte final, que es el análisis de los mismos.
+Tras las simulaciones, tendremos los 21 archivos de texto en la carpeta \textbf{resultados}, ya podremos pasar a la parte final, que es el análisis de los mismos. 
+
+\quad
+
+Se ha elegido filtrar los resultados en Python en vez de pasarlos manualmente a un excel debido al tiempo que costaría y la facilidad del lenguaje para ejecutar tareas repetitivas. El siguiente apartado no aporta, en ningún caso, alguna diferencia respecto al funcionamiento de nuestro sistema ALOHA, únicamente será para reducir el tiempo de trabajo.
+
+\newpage
 
 \subsection{Procesado de datos en Python}
 
-Al generarse 21 archivos de texto, los datos se vuelven complicados de manejar, y copiar y pegar cada número del texto a Excel se haría muy repetitivo, por lo que haremos un script en Python que procese nuestros datos y genere las gráficas para los análisis. Primero tendremos que ver de qué forma podemos filtrar estos datos, la información de los archivos será de esta forma:
+Al generarse 21 archivos de texto, los datos se vuelven complicados de manejar, por lo que haremos un script en Python que procese nuestros datos y genere las gráficas para los análisis. Primero tendremos que ver de qué manera podemos filtrar estos datos, la información de los archivos será de esta forma:
 
 \begin{center} 
     \begin{verbatim}
@@ -481,7 +501,7 @@ Si ejecutamos el código que llevamos hasta el momento, podremos ver las líneas
 
 Falta guardar esos números en un array correspondiente para cada nombre, pero se añade un nuevo problema, ahora no sabemos para qué emisor es cada línea (Es decir, aparece TOemisor pero no si es el 1,2,3...). Para solucionar esto, contaremos el número de líneas equivalentes al archivo de texto original, de modo que nuestra línea filtrada 1 será la S, la 2 la G, de la 3 a la 9 irán los TO de 1 al 7, de la 10 a la 16 los TC, y así con las demás. Una vez contado eso, declararemos los arrays correspondientes y filtraremos únicamente el número que haya en la línea, de modo que nuestra línea pasaría a ser esto:
 
-$$\verb|TOemisor (integer) = 290| \rightarrow 290$$
+$$\verb|TOemisor (integer) = 290| \quad \rightarrow \quad 290$$
 
 E iteramos cada línea filtrada. Según el número de la línea, lo añadiremos al array TOemisor, o a los demás. Cabe destacar que además de añadir estos valores al array, también sumaremos el valor a unas variables que hemos declarado como \textbf{valoresTO, valoresTC, valoresTS y valoresTP}. Nos servirá para luego dividirlas entre 10000, que nos dará la media que también la añadiremos al final de cada array de TOemisor, TCemisor... 
 
@@ -601,12 +621,28 @@ Una vez tenemos los datos guardados, como ya tenemos los datos en DataFrames, po
 
 \subsection{Generar gráficas en Python}
 
-Haremos un nuevo Script para generar las gráficas, vamos a aprovechar que los datos están guardados en DataFrames para evitar el uso de Excel. El archivo será \textbf{generarGraficas.py}, donde importará las variables que nos hacen falta del archivo \textbf{main.py}, y usaremos un módulo para generar las gráficas, matplotlib. De esta forma, las gráficas serán:
-\newpage
+Haremos un nuevo Script para generar las gráficas, vamos a aprovechar que los datos están guardados en DataFrames para evitar el uso de Excel. El archivo será \textbf{generarGraficas.py}, donde importará las variables que nos hacen falta del archivo \textbf{main.py}, y usaremos un módulo para generar las gráficas, matplotlib. El código siguiente se repetirá cambiando cada variable por la correspondiente para generar la gráfica:
+
+\quad 
+\begin{center} 
+    \begin{verbatim}
+        dfto = main.df_TOemisores[["Media TO"]]
+        dftc = main.df_TCemisores[["Media TC"]]
+        plt.plot(dfto, dftc)
+        plt.scatter(dfto, dftc, color= "midnightblue")
+        plt.xlabel("Tráfico Ofrecido")
+        plt.ylabel("Tráfico Cursado")
+        plt.title("Tráfico cursado frente al Tráfico Ofrecido")
+        plt.show()
+
+    \end{verbatim}
+    \end{center} 
+\quad
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\linewidth]{src/TCvsTO.png}
-    \caption{\label{fig:TCvsTO} Datos en los arrays de cada tipo.}
+    \caption{\label{fig:TCvsTO} Curva de eficiencia del canal.}
 \end{figure}
 
 En esta primera gráfica, estamos comparando el Tráfico Cursado frente al Tráfico Ofrecido, que nos muestra la curva de eficiencia del canal. Podríamos obtener un valor óptimo cuando el Tráfico Ofrecido se aproxima a 1, despreciando el Tráfico perdido por el momento. Vemos como mayor Tráfico Ofrecido no implica mayor Tráfico Cursado.
@@ -614,18 +650,20 @@ En esta primera gráfica, estamos comparando el Tráfico Cursado frente al Tráf
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\linewidth]{src/TSvsTC.png}
-    \caption{\label{fig:TSvsTC} Datos en los arrays de cada tipo.}
+    \caption{\label{fig:TSvsTC} Tiempo medio de servicio.}
 \end{figure}
 
 En la segunda gráfica, comparamos el Tiempo de servicio frente al Tráfico Cursado, que nos muestra el tiempo medio de Servicio. Se puede observar que a partir de ciertos valores, el tiempo de servicio pasa a ser exponencial.
 
+\newpage
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\linewidth]{src/TPvsTC.png}
-    \caption{\label{fig:TPvsTC} Datos en los arrays de cada tipo.}
+    \caption{\label{fig:TPvsTC} Paquetes perdidos.}
 \end{figure}
 
-Aquí compararemos el Tráfico Perdido frente al Tráfico Cursado,que nos muestra el número de paquetes perdidos. De la misma forma que en el tiempo medio de servicio, los paquetes perdidos aumentarían de forma exponencial. 
+Aquí compararemos el Tráfico Perdido frente al Tráfico Cursado, que nos muestra el número de paquetes perdidos. De la misma forma que en el tiempo medio de servicio, los paquetes perdidos aumentarían de forma exponencial. 
 
 \begin{figure}[h]
 	\centering
@@ -649,7 +687,7 @@ Para finalizar, añadiremos dos últimas gráficas ya que al tener un script que
 
 El Tráfico Perdido aumenta en relación al aumento de PG, algo esperable debido a que aumenta la probabilidad de colisión, aunque hay valores al inicio donde no parece afectar demasiado. Con el Tráfico Cursado pasa parecido, conforme aumenta el PG, disminuye el Tráfico que se cursa, aunque ésto solo pasa a partir de un valor, que es el cuando \textbf{PG = 0.075}, hasta ese valor el Tráfico Cursado tiene tendencia ascendente. 
 
-Es por es que, para el valor de PG 0.075, obtenemos un valor de Tráfico Cursado Óptimo (Entre 0.30 y 0.40), el Tráfico Perdido no es grande, pero según la \hyperref[fig:TSvsTC]{\textbf{Figura 22}}, el tiempo de servicio, en esos valores alcanzan un tiempo de servicio bastante alto.
+Es por es que, para el valor de PG 0.075, obtenemos un valor de Tráfico Cursado Óptimo (Entre 0.30 y 0.40), el Tráfico Perdido no es grande, pero según la \hyperref[fig:TSvsTC]{\textbf{Figura 23}}, el tiempo de servicio, en esos valores alcanzan un tiempo de servicio bastante alto.
 
 \quad
 

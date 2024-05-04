@@ -1,0 +1,327 @@
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\aloha.ssy,4)*/
+system Aloha;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\aloha.ssy,1)*/
+/*#include 'random.pr'*/
+
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\aloha.ssy(1),323(25,40))*/
+SIGNAL
+tic,
+intencion(Boolean),
+colision(Boolean),
+mensaje,
+respuesta(Boolean);
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\aloha.ssy(1),545(25,65))*/
+SYNONYM 
+MAXRTX Integer = 5,
+RANURA Duration = 1,
+SEMILLA RandomControl = DefineSeed(5);
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\aloha.ssy(1),548(25,85))*/
+SYNONYM
+N_nodos integer = external,
+PG Real = external;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\aloha.ssy(1),542(75,145))*/
+block Aloha referenced 
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\aloha.ssy(1),557(25,100))*/
+/* Definimos sinonimos (constantes) externamente ( =external).
+Estos sinonimos seran leidos, bien desde teclado, bien desde
+un fichero de sinonimos (.syn). 
+
+Las definiciones externas permitiran cambiar los parametros PG y N_nodos
+sin tener que compilar en cada simulacion. */
+;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\aloha.ssy,4)*/
+endsystem Aloha;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Sistema_aloha.sbk,4)*/
+block Aloha;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Sistema_aloha.sbk(1),122(67,119))*/
+signalroute /*#E*/ 
+clk from Canal to Emisor with 
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Sistema_aloha.sbk(1),123(77,117))*/
+tic;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Sistema_aloha.sbk(1),146(105,119))*/
+signalroute /*#E*/ 
+cln from Canal to Emisor with 
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Sistema_aloha.sbk(1),147(115,117))*/
+colision;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Sistema_aloha.sbk(1),131(84,94))*/
+signalroute /*#E*/ 
+tx from Emisor to Canal with 
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Sistema_aloha.sbk(1),132(95,95))*/
+intencion;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Sistema_aloha.sbk(1),206(107,155))*/
+signalroute /*#E*/ 
+ack from Emisor to Usuario with 
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Sistema_aloha.sbk(1),207(107,162))*/
+respuesta;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Sistema_aloha.sbk(1),194(87,155))*/
+signalroute /*#E*/ 
+msg from Usuario to Emisor with 
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Sistema_aloha.sbk(1),195(87,162))*/
+mensaje;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Sistema_aloha.sbk(1),116(45,75))*/
+process Canal referenced 
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Sistema_aloha.sbk(1),413(70,25))*/
+/* Al comenzar existe un solo proceso Canal.
+El proceso Canal creara N_nodos procesos emisores (entre 0 y 100).
+Cada proceso emisor creara su correspondiente proceso usuario.
+
+El par (n,m) al lado de cada proceso representan 
+el numero minino y maximo de instancias de cada proceso.
+Si se omite se crea una unica instancia de ese proceso. */
+;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Sistema_aloha.sbk(1),119(65,125))*/
+process Emisor(0,100) referenced;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Sistema_aloha.sbk(1),191(65,170))*/
+process Usuario(0,100) referenced;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Sistema_aloha.sbk,4)*/
+endblock Aloha;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr,4)*/
+process Canal;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),185(35,5))*/
+NEWTYPE PidArray Array (Integer, Pid)
+ENDNEWTYPE;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),146(35,20))*/
+DCL
+Emisor_ID PidArray,
+i integer := 1,
+num_intenciones integer,
+intencion Boolean,
+colision Boolean;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),212(120,50))*/
+TIMER T;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),500(20,125))*/
+DCL
+tx_sim Integer := 0,
+G Integer := 0,
+S Integer := 0;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),179(10,155))*/
+procedure Emitir_TICs referenced;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),194(10,170))*/
+procedure Leer_Intencion referenced;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),209(10,185))*/
+procedure Emitir_Colision referenced;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),347(75,15))*/
+start /*#E*/ 
+ 
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),425(105,10))*/
+/* Instanciamos la señal T, 
+del tipo TIMER, para que ocurra 
+dentro de un tiempo (now+Ranura).    
+Now es una variable de sistema 
+que recoge el valor del tiempo 
+actual en nuestro sistema.
+ */
+
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),419(10,50))*/
+/* Creacion de instancias de proceso emisor.
+El proceso Canal crea  'N_nodos' instancias   
+del proceso Emisor y guarda el PID de 
+cada proceso Emisoren Emisor_ID, 
+que es un array de PID.
+
+Cuando el proceso Canal emita una señal, 
+debe indicar a que proceso va dirigida. 
+La sintaxis es  "señal TO PID".
+En nuestro caso sera "señal TO Emisor_ID(i)"
+ */
+
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),422(20,95))*/
+/* offspring es una variable de 
+sistema y contiene el valor 
+del ultimo PID creado. 
+El array Emisor_ID recoge
+ese valor, para que no se pierda  
+ */
+;
+grst0:
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),455(75,40))*/
+decision /*#E*/ 
+i > N_nodos;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),464(90,47))*/
+(false):
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),452(80,60))*/
+create /*#E*/ 
+emisor;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),449(75,75))*/
+task /*#E*/ 
+Emisor_ID(i) := Offspring;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),446(80,90))*/
+task /*#E*/ 
+i := i + 1;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),455(75,40))*/
+join /*#E*/ 
+grst0;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),476(67,52))*/
+(true):
+grst1:
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),443(75,120))*/
+call /*#E*/ 
+Emitir_TICs;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),440(75,135))*/
+call /*#E*/ 
+Leer_intencion;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),437(75,150))*/
+call /*#E*/ 
+Emitir_Colision;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),434(70,165))*/
+/*#E*/ 
+Set(now+RANURA,T);
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),431(75,180))*/
+nextstate /*#E*/ 
+MAC_completada;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),455(75,40))*/
+enddecision;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),431(75,180))*/
+state /*#E*/ 
+MAC_completada;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),428(75,195))*/
+input /*#E*/ 
+T;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),443(75,120))*/
+join /*#E*/ 
+grst1;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr(1),431(75,180))*/
+endstate;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Canal.spr,4)*/
+endprocess Canal;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_TICs.spd,4)*/
+procedure Emitir_TICs;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_TICs.spd(1),116(45,10))*/
+start /*#E*/ 
+;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_TICs.spd(1),230(45,35))*/
+task /*#E*/ 
+i := 1;
+grst2:
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_TICs.spd(1),227(45,55))*/
+decision /*#E*/ 
+i > N_nodos;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_TICs.spd(1),242(42,55))*/
+(true):
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_TICs.spd(1),224(25,75))*/
+return /*#E*/ 
+;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_TICs.spd(1),245(57,67))*/
+(false):
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_TICs.spd(1),221(45,75))*/
+output /*#E*/ 
+tic to Emisor_ID(i);
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_TICs.spd(1),218(45,95))*/
+task /*#E*/ 
+i := i + 1;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_TICs.spd(1),227(45,55))*/
+enddecision;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_TICs.spd(1),227(45,55))*/
+join /*#E*/ 
+grst2;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_TICs.spd,4)*/
+endprocedure Emitir_TICs;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd,4)*/
+procedure Leer_Intencion;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd(1),116(40,15))*/
+start /*#E*/ 
+;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd(1),302(40,35))*/
+task {/*#E*/ 
+i := 1;
+num_intenciones := 0;};
+grst3:
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd(1),299(40,60))*/
+decision /*#E*/ 
+i > N_nodos;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd(1),314(40,60))*/
+(true):
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd(1),296(20,75))*/
+return /*#E*/ 
+;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd(1),317(52,72))*/
+(false):
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd(1),293(40,80))*/
+nextstate /*#E*/ 
+Leer_intencion;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd(1),299(40,60))*/
+enddecision;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd(1),293(40,80))*/
+state /*#E*/ 
+Leer_intencion;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd(1),290(35,95))*/
+input /*#E*/ 
+intencion(intencion);
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd(1),287(40,110))*/
+decision /*#E*/ 
+intencion;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd(1),326(77,117))*/
+(true):
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd(1),284(55,125))*/
+task /*#E*/ 
+num_intenciones :=num_intenciones + 1;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd(1),335(45,122))*/
+(false):
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd(1),287(40,110))*/
+enddecision;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd(1),281(65,145))*/
+task /*#E*/ 
+i := i + 1;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd(1),299(40,60))*/
+join /*#E*/ 
+grst3;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd(1),293(40,80))*/
+endstate;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Leer_Intencion.spd,4)*/
+endprocedure Leer_Intencion;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd,4)*/
+procedure Emitir_Colision;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd(1),284(65,5))*/
+start /*#E*/ 
+;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd(1),374(60,30))*/
+decision /*#E*/ 
+num_intenciones> 1;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd(1),377(50,32))*/
+(true):
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd(1),371(40,55))*/
+task /*#E*/ 
+colision := true;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd(1),404(95,32))*/
+(false):
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd(1),347(90,55))*/
+task /*#E*/ 
+colision := false;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd(1),416(85,70))*/
+task /*#E*/ 
+S := S +num_intenciones;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd(1),374(60,30))*/
+enddecision;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd(1),425(60,90))*/
+task /*#E*/ 
+G := G + num_intenciones;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd(1),365(65,105))*/
+task /*#E*/ 
+i := 1;
+grst4:
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd(1),362(65,125))*/
+decision /*#E*/ 
+i > N_nodos;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd(1),389(27,132))*/
+(true):
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd(1),434(10,145))*/
+task /*#E*/ 
+tx_sim := tx_sim + num_intenciones;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd(1),356(25,180))*/
+return /*#E*/ 
+;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd(1),395(77,137))*/
+(false):
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd(1),353(55,145))*/
+output /*#E*/ 
+colision(colision) to Emisor_ID(i);
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd(1),350(65,165))*/
+task /*#E*/ 
+i := i + 1;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd(1),362(65,125))*/
+enddecision;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd(1),362(65,125))*/
+join /*#E*/ 
+grst4;
+/*#SDTREF(SDL,C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emitir_Colision.spd,4)*/
+endprocedure Emitir_Colision;

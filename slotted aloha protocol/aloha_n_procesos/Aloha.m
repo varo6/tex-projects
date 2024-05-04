@@ -1,26 +1,26 @@
-# makefile for System: aloha
+# makefile for System: Aloha
 
 sctAUTOCFGDEP =
 sctCOMPFLAGS = -DXUSE_GENERIC_FUNC
 
 !include $(SCTDIR)\make.opt
 
-default: aloha$(sctEXTENSION)
+default: Aloha$(sctEXTENSION)
 
-aloha$(sctEXTENSION): \
-  aloha$(sctOEXTENSION) \
+Aloha$(sctEXTENSION): \
+  Aloha$(sctOEXTENSION) \
   $(sctLINKKERNELDEP)
 	$(sctLD) @<<
 	$(sctLDFLAGS)
-	 aloha$(sctOEXTENSION) $(sctLINKKERNEL)
-	/OUT:aloha$(sctEXTENSION)
+	 Aloha$(sctOEXTENSION) $(sctLINKKERNEL)
+	/OUT:Aloha$(sctEXTENSION)
 <<
 
-aloha$(sctOEXTENSION): \
-  aloha.c
+Aloha$(sctOEXTENSION): \
+  Aloha.c
 	$(sctCC) @<<
 	$(sctCPPFLAGS) $(sctCCFLAGS)
 	$(sctIFDEF)
-	/Foaloha$(sctOEXTENSION)
-	aloha.c
+	/FoAloha$(sctOEXTENSION)
+	Aloha.c
 <<

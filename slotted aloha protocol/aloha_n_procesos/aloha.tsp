@@ -1,9 +1,9 @@
 SDT-TIME-STAMP-1.0
-1361527254 Z:\IngenieriaProtocolosGrado\practicas\FBM_Aloha_n_procesos\versionAlumnos\aloha.ssy
-1361527254 Z:\IngenieriaProtocolosGrado\practicas\FBM_Aloha_n_procesos\versionAlumnos\Sistema_aloha.sbk
-1361527254 Z:\IngenieriaProtocolosGrado\practicas\FBM_Aloha_n_procesos\versionAlumnos\Emisor.spr
-1361527254 Z:\IngenieriaProtocolosGrado\practicas\FBM_Aloha_n_procesos\versionAlumnos\Usuario.spr
-1361527254 Z:\IngenieriaProtocolosGrado\practicas\FBM_Aloha_n_procesos\versionAlumnos\Canal.spr
-1361527254 Z:\IngenieriaProtocolosGrado\practicas\FBM_Aloha_n_procesos\versionAlumnos\Emitir_TICs.spd
-1361527254 Z:\IngenieriaProtocolosGrado\practicas\FBM_Aloha_n_procesos\versionAlumnos\Leer_Intencion.spd
-1361527254 Z:\IngenieriaProtocolosGrado\practicas\FBM_Aloha_n_procesos\versionAlumnos\Emitir_Colision.spd
+1714651533 C:\Documents and Settings\Firma\Escritorio\aloha_n_procesos\aloha.ssy
+1714651533 C:\Documents and Settings\Firma\Escritorio\aloha_n_procesos\Sistema_aloha.sbk
+1714651533 C:\Documents and Settings\Firma\Escritorio\aloha_n_procesos\Emisor.spr
+1714651533 C:\Documents and Settings\Firma\Escritorio\aloha_n_procesos\Usuario.spr
+1714651533 C:\Documents and Settings\Firma\Escritorio\aloha_n_procesos\Canal.spr
+1714651533 C:\Documents and Settings\Firma\Escritorio\aloha_n_procesos\Emitir_TICs.spd
+1714651533 C:\Documents and Settings\Firma\Escritorio\aloha_n_procesos\Leer_Intencion.spd
+1714651533 C:\Documents and Settings\Firma\Escritorio\aloha_n_procesos\Emitir_Colision.spd

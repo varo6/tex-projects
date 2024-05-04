@@ -1,4 +1,3 @@
-OrgMainWindow 44 10 600 370 C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\aloha.sdt
-SDLEWindow 352 29 1329 669 1 C:\IngProtocolos\practicas\aloha_n_procesos\aloha_n_procesos\Emisor.spr
+OrgMainWindow 44 10 600 370 C:\Documents and Settings\Firma\Escritorio\aloha_n_procesos\aloha.sdt
+SDLEWindow 88 65 1440 889 1 C:\Documents and Settings\Firma\Escritorio\aloha_n_procesos\Emitir_Colision.spd
 TextEWindow 66 31 1440 889 "" 
-MSCEWindow 138 138 768 474 1 

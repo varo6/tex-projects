@@ -1,0 +1,4710 @@
+Connected with the Postmaster.
+Using external synonym file "siminit.syn" according to environment variable "SDTEXTSYNFILE".
+
+Welcome to the SDL SIMULATOR. Simulating system Aloha.
+
+Command : Proceed-Until 10 
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      State  : start state 
+*      Now    : 0.0000
+*   DECISION  Value: false
+*   CREATE Emisor:1
+*   ASSIGN  Emisor_ID... := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   CREATE Emisor:2
+*   ASSIGN  Emisor_ID... := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   CREATE Emisor:3
+*   ASSIGN  Emisor_ID... := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   CREATE Emisor:4
+*   ASSIGN  Emisor_ID... := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   CREATE Emisor:5
+*   ASSIGN  Emisor_ID... := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   CREATE Emisor:6
+*   ASSIGN  Emisor_ID... := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   CREATE Emisor:7
+*   ASSIGN  Emisor_ID... := 
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE START Emitir_TICs
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Emitir_TICs
+*   PROCEDURE START Leer_Intencion
+*   ASSIGN  i := 
+*   ASSIGN  num_intenciones := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : start state 
+*      Now    : 0.0000
+*   CREATE Usuario:1
+*   ASSIGN  user := 
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : start state 
+*      Now    : 0.0000
+*   CREATE Usuario:2
+*   ASSIGN  user := 
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : start state 
+*      Now    : 0.0000
+*   CREATE Usuario:3
+*   ASSIGN  user := 
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : start state 
+*      Now    : 0.0000
+*   CREATE Usuario:4
+*   ASSIGN  user := 
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : start state 
+*      Now    : 0.0000
+*   CREATE Usuario:5
+*   ASSIGN  user := 
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : start state 
+*      Now    : 0.0000
+*   CREATE Usuario:6
+*   ASSIGN  user := 
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : start state 
+*      Now    : 0.0000
+*   CREATE Usuario:7
+*   ASSIGN  user := 
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Usuario:1
+*      State  : start state 
+*      Now    : 0.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:1
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : Emisor_vacio 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 0.0000
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  mitad_vacio
+
+*** TRANSITION START
+*      PId    : Usuario:2
+*      State  : start state 
+*      Now    : 0.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:2
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : Emisor_vacio 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 0.0000
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  mitad_vacio
+
+*** TRANSITION START
+*      PId    : Usuario:3
+*      State  : start state 
+*      Now    : 0.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:3
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : Emisor_vacio 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 0.0000
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  mitad_vacio
+
+*** TRANSITION START
+*      PId    : Usuario:4
+*      State  : start state 
+*      Now    : 0.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:4
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : Emisor_vacio 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 0.0000
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  mitad_vacio
+
+*** TRANSITION START
+*      PId    : Usuario:5
+*      State  : start state 
+*      Now    : 0.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:5
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : Emisor_vacio 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 0.0000
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  mitad_vacio
+
+*** TRANSITION START
+*      PId    : Usuario:6
+*      State  : start state 
+*      Now    : 0.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:6
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : Emisor_vacio 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 0.0000
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  mitad_vacio
+
+*** TRANSITION START
+*      PId    : Usuario:7
+*      State  : start state 
+*      Now    : 0.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:7
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : Emisor_vacio 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 0.0000
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  mitad_vacio
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : start state*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:1
+*      Now    : 0.0000
+*   DECISION  Value: false
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : start state*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:2
+*      Now    : 0.0000
+*   DECISION  Value: false
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : start state*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:3
+*      Now    : 0.0000
+*   DECISION  Value: false
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : start state*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:4
+*      Now    : 0.0000
+*   DECISION  Value: false
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : start state*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:5
+*      Now    : 0.0000
+*   DECISION  Value: false
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : start state*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:6
+*      Now    : 0.0000
+*   DECISION  Value: false
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : start state*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:7
+*      Now    : 0.0000
+*   DECISION  Value: false
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Leer_Intencion
+*   PROCEDURE START Emitir_Colision
+*   DECISION  Value: false
+*   ASSIGN  colision := 
+*   ASSIGN  S := 
+*   ASSIGN  G := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   ASSIGN  tx_sim := 
+*   PROCEDURE RETURN Emitir_Colision
+*   SET on timer T at 1.0000
+*** NEXTSTATE  MAC_completada
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : mitad_vacio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 0.0000
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : mitad_vacio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 0.0000
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : mitad_vacio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 0.0000
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : mitad_vacio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 0.0000
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : mitad_vacio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 0.0000
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : mitad_vacio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 0.0000
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : mitad_vacio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 0.0000
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:1
+*      Now    : 0.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:2
+*      Now    : 0.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:3
+*      Now    : 0.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:4
+*      Now    : 0.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:5
+*      Now    : 0.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:6
+*      Now    : 0.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:7
+*      Now    : 0.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TIMER signal was sent
+*   Timer    : T
+*   Receiver : Canal:1
+*** Now      : 1.0000
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      State  : MAC_completada 
+*      Input  : T
+*      Sender : Canal:1
+*      Now    : 1.0000
+*   PROCEDURE START Emitir_TICs
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Emitir_TICs
+*   PROCEDURE START Leer_Intencion
+*   ASSIGN  i := 
+*   ASSIGN  num_intenciones := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 1.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 1.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 1.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 1.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 1.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 1.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 1.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:1
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:2
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:3
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:4
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:5
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:6
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:7
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Leer_Intencion
+*   PROCEDURE START Emitir_Colision
+*   DECISION  Value: true
+*   ASSIGN  colision := 
+*   ASSIGN  G := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   ASSIGN  tx_sim := 
+*   PROCEDURE RETURN Emitir_Colision
+*   SET on timer T at 2.0000
+*** NEXTSTATE  MAC_completada
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:1
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:2
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:3
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:4
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:5
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:6
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:7
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Usuario:1
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:1
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:1
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:2
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:2
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:2
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:3
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:3
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:3
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:4
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:4
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:4
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:5
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:5
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:5
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:6
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:6
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:6
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:7
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:7
+*      Now    : 1.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:7
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:1
+*      Now    : 1.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:2
+*      Now    : 1.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:3
+*      Now    : 1.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:4
+*      Now    : 1.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:5
+*      Now    : 1.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:6
+*      Now    : 1.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:7
+*      Now    : 1.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TIMER signal was sent
+*   Timer    : T
+*   Receiver : Canal:1
+*** Now      : 2.0000
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      State  : MAC_completada 
+*      Input  : T
+*      Sender : Canal:1
+*      Now    : 2.0000
+*   PROCEDURE START Emitir_TICs
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Emitir_TICs
+*   PROCEDURE START Leer_Intencion
+*   ASSIGN  i := 
+*   ASSIGN  num_intenciones := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 2.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 2.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 2.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 2.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 2.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 2.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 2.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:1
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:2
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:3
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:4
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:5
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:6
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:7
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Leer_Intencion
+*   PROCEDURE START Emitir_Colision
+*   DECISION  Value: true
+*   ASSIGN  colision := 
+*   ASSIGN  G := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   ASSIGN  tx_sim := 
+*   PROCEDURE RETURN Emitir_Colision
+*   SET on timer T at 3.0000
+*** NEXTSTATE  MAC_completada
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:1
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:2
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:3
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:4
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:5
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:6
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:7
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Usuario:1
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:1
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:1
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:2
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:2
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:2
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:3
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:3
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:3
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:4
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:4
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:4
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:5
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:5
+*      Now    : 2.0000
+*   DECISION  Value: false
+*   SET on timer T at 3.0000
+*** NEXTSTATE  espera_timer
+
+*** TRANSITION START
+*      PId    : Usuario:6
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:6
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:6
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:7
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:7
+*      Now    : 2.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:7
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:1
+*      Now    : 2.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:2
+*      Now    : 2.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:3
+*      Now    : 2.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:4
+*      Now    : 2.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:6
+*      Now    : 2.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:7
+*      Now    : 2.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TIMER signal was sent
+*   Timer    : T
+*   Receiver : Canal:1
+*** Now      : 3.0000
+
+*** TIMER signal was sent
+*   Timer    : T
+*   Receiver : Usuario:5
+*** Now      : 3.0000
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      State  : MAC_completada 
+*      Input  : T
+*      Sender : Canal:1
+*      Now    : 3.0000
+*   PROCEDURE START Emitir_TICs
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Emitir_TICs
+*   PROCEDURE START Leer_Intencion
+*   ASSIGN  i := 
+*   ASSIGN  num_intenciones := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Usuario:5
+*      State  : espera_timer 
+*      Input  : T
+*      Sender : Usuario:5
+*      Now    : 3.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:5
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 3.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 3.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 3.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 3.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : Emisor_vacio 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 3.0000
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  mitad_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 3.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 3.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:1
+*      Now    : 3.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:2
+*      Now    : 3.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:3
+*      Now    : 3.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:4
+*      Now    : 3.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:5
+*      Now    : 3.0000
+*   DECISION  Value: false
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:6
+*      Now    : 3.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:7
+*      Now    : 3.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Leer_Intencion
+*   PROCEDURE START Emitir_Colision
+*   DECISION  Value: true
+*   ASSIGN  colision := 
+*   ASSIGN  G := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   ASSIGN  tx_sim := 
+*   PROCEDURE RETURN Emitir_Colision
+*   SET on timer T at 4.0000
+*** NEXTSTATE  MAC_completada
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 3.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:1
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 3.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:2
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 3.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:3
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 3.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:4
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : mitad_vacio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 3.0000
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 3.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:6
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 3.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:7
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Usuario:1
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:1
+*      Now    : 3.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:1
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:2
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:2
+*      Now    : 3.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:2
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:3
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:3
+*      Now    : 3.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:3
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:4
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:4
+*      Now    : 3.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:4
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:5
+*      Now    : 3.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Usuario:6
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:6
+*      Now    : 3.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:6
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:7
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:7
+*      Now    : 3.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:7
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:1
+*      Now    : 3.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:2
+*      Now    : 3.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:3
+*      Now    : 3.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:4
+*      Now    : 3.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:6
+*      Now    : 3.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:7
+*      Now    : 3.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TIMER signal was sent
+*   Timer    : T
+*   Receiver : Canal:1
+*** Now      : 4.0000
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      State  : MAC_completada 
+*      Input  : T
+*      Sender : Canal:1
+*      Now    : 4.0000
+*   PROCEDURE START Emitir_TICs
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Emitir_TICs
+*   PROCEDURE START Leer_Intencion
+*   ASSIGN  i := 
+*   ASSIGN  num_intenciones := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 4.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 4.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 4.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 4.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 4.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 4.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 4.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:1
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:2
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:3
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:4
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:5
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:6
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:7
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Leer_Intencion
+*   PROCEDURE START Emitir_Colision
+*   DECISION  Value: true
+*   ASSIGN  colision := 
+*   ASSIGN  G := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   ASSIGN  tx_sim := 
+*   PROCEDURE RETURN Emitir_Colision
+*   SET on timer T at 5.0000
+*** NEXTSTATE  MAC_completada
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:1
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:2
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:3
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:4
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:5
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:6
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:7
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Usuario:1
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:1
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:1
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:2
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:2
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:2
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:3
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:3
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:3
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:4
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:4
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:4
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:5
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:5
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:5
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:6
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:6
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:6
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:7
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:7
+*      Now    : 4.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:7
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:1
+*      Now    : 4.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:2
+*      Now    : 4.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:3
+*      Now    : 4.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:4
+*      Now    : 4.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:5
+*      Now    : 4.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:6
+*      Now    : 4.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:7
+*      Now    : 4.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TIMER signal was sent
+*   Timer    : T
+*   Receiver : Canal:1
+*** Now      : 5.0000
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      State  : MAC_completada 
+*      Input  : T
+*      Sender : Canal:1
+*      Now    : 5.0000
+*   PROCEDURE START Emitir_TICs
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Emitir_TICs
+*   PROCEDURE START Leer_Intencion
+*   ASSIGN  i := 
+*   ASSIGN  num_intenciones := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 5.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 5.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 5.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 5.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 5.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 5.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 5.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:1
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:2
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:3
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:4
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:5
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:6
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:7
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Leer_Intencion
+*   PROCEDURE START Emitir_Colision
+*   DECISION  Value: true
+*   ASSIGN  colision := 
+*   ASSIGN  G := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   ASSIGN  tx_sim := 
+*   PROCEDURE RETURN Emitir_Colision
+*   SET on timer T at 6.0000
+*** NEXTSTATE  MAC_completada
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:1
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:2
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:3
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:4
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:5
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:6
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:7
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Usuario:1
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:1
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:1
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:2
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:2
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:2
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:3
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:3
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:3
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:4
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:4
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:4
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:5
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:5
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:5
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:6
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:6
+*      Now    : 5.0000
+*   DECISION  Value: false
+*   SET on timer T at 6.0000
+*** NEXTSTATE  espera_timer
+
+*** TRANSITION START
+*      PId    : Usuario:7
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:7
+*      Now    : 5.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:7
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:1
+*      Now    : 5.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:2
+*      Now    : 5.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:3
+*      Now    : 5.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:4
+*      Now    : 5.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:5
+*      Now    : 5.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:7
+*      Now    : 5.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TIMER signal was sent
+*   Timer    : T
+*   Receiver : Canal:1
+*** Now      : 6.0000
+
+*** TIMER signal was sent
+*   Timer    : T
+*   Receiver : Usuario:6
+*** Now      : 6.0000
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      State  : MAC_completada 
+*      Input  : T
+*      Sender : Canal:1
+*      Now    : 6.0000
+*   PROCEDURE START Emitir_TICs
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Emitir_TICs
+*   PROCEDURE START Leer_Intencion
+*   ASSIGN  i := 
+*   ASSIGN  num_intenciones := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Usuario:6
+*      State  : espera_timer 
+*      Input  : T
+*      Sender : Usuario:6
+*      Now    : 6.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:6
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 6.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 6.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 6.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 6.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 6.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : Emisor_vacio 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 6.0000
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  mitad_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 6.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:1
+*      Now    : 6.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:2
+*      Now    : 6.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:3
+*      Now    : 6.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:4
+*      Now    : 6.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:5
+*      Now    : 6.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:6
+*      Now    : 6.0000
+*   DECISION  Value: false
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:7
+*      Now    : 6.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Leer_Intencion
+*   PROCEDURE START Emitir_Colision
+*   DECISION  Value: true
+*   ASSIGN  colision := 
+*   ASSIGN  G := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   ASSIGN  tx_sim := 
+*   PROCEDURE RETURN Emitir_Colision
+*   SET on timer T at 7.0000
+*** NEXTSTATE  MAC_completada
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 6.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:1
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 6.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:2
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 6.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:3
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 6.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:4
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 6.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:5
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : mitad_vacio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 6.0000
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 6.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:7
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Usuario:1
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:1
+*      Now    : 6.0000
+*   DECISION  Value: false
+*   SET on timer T at 7.0000
+*** NEXTSTATE  espera_timer
+
+*** TRANSITION START
+*      PId    : Usuario:2
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:2
+*      Now    : 6.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:2
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:3
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:3
+*      Now    : 6.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:3
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:4
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:4
+*      Now    : 6.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:4
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:5
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:5
+*      Now    : 6.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:5
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:6
+*      Now    : 6.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Usuario:7
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:7
+*      Now    : 6.0000
+*   DECISION  Value: false
+*   SET on timer T at 7.0000
+*** NEXTSTATE  espera_timer
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:2
+*      Now    : 6.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:3
+*      Now    : 6.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:4
+*      Now    : 6.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:5
+*      Now    : 6.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TIMER signal was sent
+*   Timer    : T
+*   Receiver : Canal:1
+*** Now      : 7.0000
+
+*** TIMER signal was sent
+*   Timer    : T
+*   Receiver : Usuario:1
+*** Now      : 7.0000
+
+*** TIMER signal was sent
+*   Timer    : T
+*   Receiver : Usuario:7
+*** Now      : 7.0000
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      State  : MAC_completada 
+*      Input  : T
+*      Sender : Canal:1
+*      Now    : 7.0000
+*   PROCEDURE START Emitir_TICs
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Emitir_TICs
+*   PROCEDURE START Leer_Intencion
+*   ASSIGN  i := 
+*   ASSIGN  num_intenciones := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Usuario:1
+*      State  : espera_timer 
+*      Input  : T
+*      Sender : Usuario:1
+*      Now    : 7.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:1
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:7
+*      State  : espera_timer 
+*      Input  : T
+*      Sender : Usuario:7
+*      Now    : 7.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:7
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : Emisor_vacio 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 7.0000
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  mitad_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 7.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 7.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 7.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 7.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 7.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : Emisor_vacio 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 7.0000
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  mitad_vacio
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:1
+*      Now    : 7.0000
+*   DECISION  Value: false
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:2
+*      Now    : 7.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:3
+*      Now    : 7.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:4
+*      Now    : 7.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:5
+*      Now    : 7.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:6
+*      Now    : 7.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:7
+*      Now    : 7.0000
+*   DECISION  Value: false
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Leer_Intencion
+*   PROCEDURE START Emitir_Colision
+*   DECISION  Value: true
+*   ASSIGN  colision := 
+*   ASSIGN  G := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   ASSIGN  tx_sim := 
+*   PROCEDURE RETURN Emitir_Colision
+*   SET on timer T at 8.0000
+*** NEXTSTATE  MAC_completada
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : mitad_vacio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 7.0000
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 7.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:2
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 7.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:3
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 7.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:4
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 7.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:5
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 7.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:6
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : mitad_vacio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 7.0000
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:1
+*      Now    : 7.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Usuario:2
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:2
+*      Now    : 7.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:2
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:3
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:3
+*      Now    : 7.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:3
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:4
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:4
+*      Now    : 7.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:4
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:5
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:5
+*      Now    : 7.0000
+*   DECISION  Value: false
+*   SET on timer T at 8.0000
+*** NEXTSTATE  espera_timer
+
+*** TRANSITION START
+*      PId    : Usuario:6
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:6
+*      Now    : 7.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:6
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:7
+*      Now    : 7.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:2
+*      Now    : 7.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:3
+*      Now    : 7.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:4
+*      Now    : 7.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:6
+*      Now    : 7.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TIMER signal was sent
+*   Timer    : T
+*   Receiver : Canal:1
+*** Now      : 8.0000
+
+*** TIMER signal was sent
+*   Timer    : T
+*   Receiver : Usuario:5
+*** Now      : 8.0000
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      State  : MAC_completada 
+*      Input  : T
+*      Sender : Canal:1
+*      Now    : 8.0000
+*   PROCEDURE START Emitir_TICs
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Emitir_TICs
+*   PROCEDURE START Leer_Intencion
+*   ASSIGN  i := 
+*   ASSIGN  num_intenciones := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Usuario:5
+*      State  : espera_timer 
+*      Input  : T
+*      Sender : Usuario:5
+*      Now    : 8.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:5
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 8.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 8.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 8.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 8.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : Emisor_vacio 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 8.0000
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  mitad_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 8.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 8.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:1
+*      Now    : 8.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:2
+*      Now    : 8.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:3
+*      Now    : 8.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:4
+*      Now    : 8.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:5
+*      Now    : 8.0000
+*   DECISION  Value: false
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:6
+*      Now    : 8.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:7
+*      Now    : 8.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Leer_Intencion
+*   PROCEDURE START Emitir_Colision
+*   DECISION  Value: true
+*   ASSIGN  colision := 
+*   ASSIGN  G := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   ASSIGN  tx_sim := 
+*   PROCEDURE RETURN Emitir_Colision
+*   SET on timer T at 9.0000
+*** NEXTSTATE  MAC_completada
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 8.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:1
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 8.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:2
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 8.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:3
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 8.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:4
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : mitad_vacio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 8.0000
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 8.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:6
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 8.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:7
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Usuario:1
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:1
+*      Now    : 8.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:1
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:2
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:2
+*      Now    : 8.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:2
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:3
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:3
+*      Now    : 8.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:3
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:4
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:4
+*      Now    : 8.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:4
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:5
+*      Now    : 8.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Usuario:6
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:6
+*      Now    : 8.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:6
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:7
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:7
+*      Now    : 8.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:7
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:1
+*      Now    : 8.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:2
+*      Now    : 8.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:3
+*      Now    : 8.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:4
+*      Now    : 8.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:6
+*      Now    : 8.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:7
+*      Now    : 8.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TIMER signal was sent
+*   Timer    : T
+*   Receiver : Canal:1
+*** Now      : 9.0000
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      State  : MAC_completada 
+*      Input  : T
+*      Sender : Canal:1
+*      Now    : 9.0000
+*   PROCEDURE START Emitir_TICs
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of tic to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Emitir_TICs
+*   PROCEDURE START Leer_Intencion
+*   ASSIGN  i := 
+*   ASSIGN  num_intenciones := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 9.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 9.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 9.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 9.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 9.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 9.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : EnviaTX 
+*      Input  : tic
+*      Sender : Canal:1
+*      Now    : 9.0000
+*   ASSIGN  TOemisor := 
+*   ASSIGN  TSparcial := 
+*   OUTPUT of intencion to Canal:1
+*** NEXTSTATE  ficticio
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:1
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:2
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:3
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:4
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:5
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:6
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*** NEXTSTATE  Leer_intencion
+
+*** TRANSITION START
+*      PId    : Canal:1
+*      Prd    : Leer_Intencion:1
+*      State  : MAC_completada*, Leer_intencion 
+*      Input  : intencion
+*      Sender : Emisor:7
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   ASSIGN  num_intenciones := 
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   PROCEDURE RETURN Leer_Intencion
+*   PROCEDURE START Emitir_Colision
+*   DECISION  Value: true
+*   ASSIGN  colision := 
+*   ASSIGN  G := 
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:1
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:2
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:3
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:4
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:5
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:6
+*   ASSIGN  i := 
+*   DECISION  Value: false
+*   OUTPUT of colision to Emisor:7
+*   ASSIGN  i := 
+*   DECISION  Value: true
+*   ASSIGN  tx_sim := 
+*   PROCEDURE RETURN Emitir_Colision
+*   SET on timer T at 10.0000
+*** NEXTSTATE  MAC_completada
+
+*** TRANSITION START
+*      PId    : Emisor:1
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:1
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:2
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:3
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:4
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:5
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:6
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : ficticio 
+*      Input  : colision
+*      Sender : Canal:1
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   ASSIGN  TCemisor := 
+*   ASSIGN  TStotal := 
+*   OUTPUT of respuesta to Usuario:7
+*** NEXTSTATE  Emisor_vacio
+
+*** TRANSITION START
+*      PId    : Usuario:1
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:1
+*      Now    : 9.0000
+*   DECISION  Value: false
+*   SET on timer T at 10.0000
+*** NEXTSTATE  espera_timer
+
+*** TRANSITION START
+*      PId    : Usuario:2
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:2
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:2
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:3
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:3
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:3
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:4
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:4
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:4
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:5
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:5
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:5
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:6
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:6
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:6
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Usuario:7
+*      State  : espera_respuesta 
+*      Input  : respuesta
+*      Sender : Emisor:7
+*      Now    : 9.0000
+*   DECISION  Value: true
+*   OUTPUT of mensaje to Emisor:7
+*** NEXTSTATE  espera_respuesta
+
+*** TRANSITION START
+*      PId    : Emisor:2
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:2
+*      Now    : 9.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:3
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:3
+*      Now    : 9.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:4
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:4
+*      Now    : 9.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:5
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:5
+*      Now    : 9.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:6
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:6
+*      Now    : 9.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TRANSITION START
+*      PId    : Emisor:7
+*      State  : Emisor_vacio 
+*      Input  : mensaje
+*      Sender : Usuario:7
+*      Now    : 9.0000
+*   ASSIGN  k := 
+*   ASSIGN  intentos := 
+*   ASSIGN  TSparcial := 
+*** NEXTSTATE  EnviaTX
+
+*** TIMER signal was sent
+*   Timer    : T
+*   Receiver : Canal:1
+*** Now      : 10.0000
+
+Command : Examine-Variable ( Canal S) 
+S (integer) = 0
+
+Command : Examine-Variable ( Canal G) 
+G (integer) = 58
+
+Command : Examine-Variable ( Emisor 1 TOemisor )
+TOemisor (integer) = 8
+
+Command : Examine-Variable ( Emisor 2 TOemisor )
+TOemisor (integer) = 9
+
+Command : Examine-Variable ( Emisor 3 TOemisor )
+TOemisor (integer) = 9
+
+Command : Examine-Variable ( Emisor 4 TOemisor )
+TOemisor (integer) = 9
+
+Command : Examine-Variable ( Emisor 5 TOemisor )
+TOemisor (integer) = 7
+
+Command : Examine-Variable ( Emisor 1 TCemisor )
+TCemisor (integer) = 8
+
+Command : Examine-Variable ( Emisor 2 TCemisor )
+TCemisor (integer) = 9
+
+Command : Examine-Variable ( Emisor 3 TCemisor )
+TCemisor (integer) = 9
+
+Command : Examine-Variable ( Emisor 4 TCemisor )
+TCemisor (integer) = 9
+
+Command : Examine-Variable ( Emisor 5 TCemisor )
+TCemisor (integer) = 7
+
+Command : Exit
+Simulation terminated
