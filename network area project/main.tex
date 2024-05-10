@@ -42,19 +42,99 @@ Al ser un servicio propuesto por el ayuntamiento, se usarán bandas de frecuenci
 
 \subsection{Planteamiento de TeleClub}
 
-El teleclub es un centro social que necesita de internet tanto \textbf{indoor} como \textbf{outdoor}. De puertas para dentro estará la biblioteca, lugar donde la conexión es de suma importancia para tareas como descarga de ebooks o registros en su web de usuarios. En el exterior del teleclub, dotaremos de internet básico para el ocio que puedan tener los visitantes y residentes, se tiene en cuenta que el exterior tendrá un mayor número de usuarios.
+El teleclub es un centro social que necesita de internet tanto \textbf{indoor} como \textbf{outdoor}. De puertas para dentro estará la biblioteca, lugar donde la conexión es de suma importancia para tareas como descarga de ebooks o registros en su web de usuarios. En el exterior del teleclub, se dotará de internet básico para el ocio que puedan tener los visitantes y residentes, se tiene en cuenta que el exterior tendrá un mayor número de usuarios.
 
-(ver num de usuarios)
+\quad
+
+Según la población de \textbf{La Costera}, que es de 343 habitantes, (Actualizado febrero 2023), se puede considerar que el tráfico de TeleClub no superará el 20\verb|%| de la población total. Ésto es de aproximadamente 75 usuarios. Se añadirá un margen debido al turismo de 25 usuarios, por lo que el máximo tráfico cursado será de \textbf{100 usuarios}.
+
+\quad
+
+Para calcular el \textbf{throughput} que consumirá nuestra sección del TeleClub, se planteará el concepto de \textbf{usuario típico}, que se multiplicará por la cantidad de éstos. Se denominará a aquél que utiliza el correo, navega por Internet y ocasionalmente transmite/recibe ficheros de gran tamaño. A día de hoy, la mayor velocidad necesitada para este tipo de tareas será de \textbf{1Mbps}
+
+    $$100u \cdot 1Mbps = 100Mbps$$
+
+El throughput para esta zona será de \textbf{100Mbps}.
 
 \subsection{Planteamiento de la Nave}
 
 (30 usuarios con 4 puntos de acceso y los servidorés necesitarán hasta $10Mbps$)
 
+En la Nave habrá un máximo de 30 usuarios, que debido a los servidores web y redes necesitan de 10Mbps como máximo en total, por lo que definirá el throughput de esta sección.
+
 \subsection{Planteamiento de Paneles}
 
 (Se suelen robar paneles por lo que necesitaremos añadir videovigilancia. No hace falta añadir acceso a internet para usuarios)
 
+10 camaras por 1Mbps
+$$10u \cdot 10Mbps$$
+
 \section{Materiales elegidos}
 
+\subsection{Radioenlaces}
+
 Se ha proporcionado en el aula virtual un \href{http://www.microcom.com.ar/fotos/ficha7097LBE-M5-23.compressed.pdf}{Datasheet} donde aprovecharemos para elegir el material que más se adapte a nuestros planteamientos. 
+
+\quad
+
+Se usará de antena transmisora el Ubiquiti LBE-5AC-16-120, ya que al ser omnidireccional permite transmitir en distintas direcciones. Dicha antena se situará en Alhama, específicamente en la senda de la ermita, por tener mayor elevación respecto al resto de la zona para una transmision mejor. Junto a esta antena, se usará una estación base Ubiquiti Rocket R2AC-PRISM al ser la que mejor cumple las necesidades con un coste reducido.
+
+\quad
+
+En las otras tres ubicaciones, situadas en la \textbf{Nave}, \textbf{TeleClub}, y los \textbf{paneles}, se usarán antenas unidireccionales pusto que su única conexión será con la antena transmisora. En el \textbf{Datasheet proporcionado}, la antena que cumple con los requisitos es la Ubiquiti LBE-5AC-23.
+
+\subsection{TeleClub}
+
+En el TeleClub, se recibe la señal principal en la antena LBE-5AC-23, y se repartirá la conexión mediante un switch a dos Access Points: que servirán para \textbf{Indoor} y \textbf{Outdoor}.    
+
+
+\subsection{Nave}
+\subsection{Paneles}
+
+\section{Normativa PIRE}
+
+La banda de frecuencias 2400-2483,5 MHz, designada en el Reglamento de
+Radiocomunicaciones para aplicaciones industriales, científicas y médicas (ICM),
+podrá ser utilizada también para los siguientes usos de radiocomunicaciones bajo la
+consideración de uso común:
+
+\begin{itemize}
+
+    \item Sistemas de transmisión de datos de banda ancha y de acceso inalámbrico
+    a redes de comunicaciones electrónicas incluyendo redes de área local.
+
+\end{itemize}
+
+    Estos dispositivos pueden funcionar con una potencia isotrópica radiada equivalente
+    (p.i.r.e.) máxima de 100 mW conforme a la Decisión de Ejecución (UE) 2017/1483
+    Notas UN CNAF 2017 Página 37
+    de la Comisión por la que se modifica la Decisión 2006/771/CE, sobre la
+    armonización del espectro radioeléctrico para su uso por dispositivos de corto
+    alcance y a la Recomendación CEPT ERC/REC 70-03, anexo 3.
+    Además, la densidad de potencia (p.i.r.e.) será de 100 mW/100 kHz con modulación
+    por salto de frecuencia y de 10 mW/MHz con otros tipos de modulación. En ambos
+    casos, se deberán utilizar técnicas de acceso y mitigación de interferencias con
+    rendimiento al menos equivalente a las técnicas descritas en las normas
+    armonizadas según la Directiva 2014/53/UE.
+    En cuanto a las características técnicas de estos equipos, la norma técnica de
+    referencia es el estándar ETSI EN 300 328 en su versión actualizada.
+
+\begin{itemize}
+    \item Dispositivos genéricos de baja potencia en recintos cerrados y exteriores
+    de corto alcance, incluyendo aplicaciones de video.
+\end{itemize}
+    La potencia isotrópica radiada equivalente máxima será 10 mW, conforme a la
+    Decisión de Ejecución (UE) 2017/1483 de la Comisión por la que se modifica la
+    Decisión 2006/771/CE, sobre la armonización del espectro radioeléctrico para su uso
+    por dispositivos de corto alcance y a la Recomendación CEPT ERC/REC 70-03,
+    Anexo 1, siendo la norma técnica de referencia el estándar ETSI EN 300 440. 
+
+
+\section{Regulación de antena y datos}
+
+mirando mcsindex tendremos que calcular los Mbps de cada sección para multiplicarlos por las personas que lo constituyen y sumar todo para los Mbps total. 
+
+Luego, mirar en zona MIMO (columna 2) , 20MHz canal, la modulación que usemos
+
+
 \end{document}
