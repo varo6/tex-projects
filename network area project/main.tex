@@ -58,9 +58,7 @@ El throughput para esta zona será de \textbf{100Mbps}.
 
 \subsection{Planteamiento de la Nave}
 
-(30 usuarios con 4 puntos de acceso y los servidorés necesitarán hasta $10Mbps$)
-
-En la Nave habrá un máximo de 30 usuarios, que debido a los servidores web y redes necesitan de 10Mbps como máximo en total, por lo que definirá el throughput de esta sección.
+En la Nave habrá un máximo de 30 usuarios, que debido a los servidores web y redes necesitan de 10Mbps como máximo en total, por lo que definirá el throughput de esta sección. (añadir 4 AP)
 
 \subsection{Planteamiento de Paneles}
 
@@ -90,6 +88,23 @@ En el TeleClub, se recibe la señal principal en la antena LBE-5AC-23, y se repa
 
 \subsection{Nave}
 \subsection{Paneles}
+
+\section{Presupuesto}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Columna 1 & Columna 2 & Columna 3 \\
+        \hline
+        Dato 1 & Dato 2 & Dato 3 \\
+        Dato 4 & Dato 5 & Dato 6 \\
+        \hline
+    \end{tabular}
+    \caption{esto ya lo relleno luego}
+    \label{tab:presupuestos}
+\end{table}
+
 
 \section{Normativa PIRE}
 
@@ -130,11 +145,34 @@ consideración de uso común:
     Anexo 1, siendo la norma técnica de referencia el estándar ETSI EN 300 440. 
 
 
-\section{Regulación de antena y datos}
+\section{Radioenlaces}
+
+\subsection{Regulación de las antenas}
 
 mirando mcsindex tendremos que calcular los Mbps de cada sección para multiplicarlos por las personas que lo constituyen y sumar todo para los Mbps total. 
 
-Luego, mirar en zona MIMO (columna 2) , 20MHz canal, la modulación que usemos
+Siendo el throughput total:
+
+$$100Mbps + 10Mbps + 10Mbps = 120Mbps$$
+
+Por lo que para elegir la modulación usada, se tendrá en cuenta que supere el throughput necesario. En este caso, al ser MIMO la antena y trabajar en $2.4Ghz$, la modulación más acertada será:
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8
+    \linewidth]{src/chrome_GUtrJRqsad.png}
+    \caption{\label{fig:mcsindex} Modulación elegida.}
+\end{figure}
+\newpage
+Se elige 64-QAM 3/4. Viendo el \textbf{datasheet}, la antena receptora tendrá una sensibilidad de -77dBm y margen de 2.
+
+\subsection{RadioMobile}
+
+\subsection{Resultados de los radioenlaces}
+
+\section{Diseño de la Red}
+
+\section{Conclusión?}
 
 
 \end{document}
