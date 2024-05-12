@@ -213,6 +213,8 @@ En los \textbf{paneles}, además de los APs y la antena, es necesario elegir las
 
 \section{Presupuesto}
 
+Se sumarán al presupuesto las 3 torretas que se usan para que los radioenlaces tengan una altura correcta, con las antenas ya elegidas, y así evitar obstáculos y atenuación. En este caso, se elegirá una torreta de \textbf{5 metros} en Alhama, y para las demás serán de \textbf{1.65 metros} debido a que el tejado ya está alto y se suma a las torretas. La tabla de presupuestos será:
+
 \begin{table}[ht]
     \centering
     \begin{tabular}{|c|c|c|c|}
@@ -224,15 +226,20 @@ En los \textbf{paneles}, además de los APs y la antena, es necesario elegir las
         Ubiquiti LBE-5AC-16-120  & 1 & $102.58\euro{}$ & $102.58\euro{}$ \\
         Ubiquiti LBE-5AC-23& 2 & $73.89\euro{}$ & $147.78\euro{}$ \\
         E. Base R2AC-PRISM & 1 & $207.50\euro{}$ & $207.50\euro{}$ \\
-        Cámara Anksono & 28 & $29.99\euro{}$ & $839.72\euro{}$ \\
-        Ubiquiti UAP-AC-LR  & 13 & $89.00\euro{}$ & $1157.00\euro{}$ \\
+        
+        Cámaras Anksono& 28 & $29.99\euro{}$ & $839.72\euro{}$ \\
+        Ubiquiti UAP-AC-LR & 13 & $89.00\euro{}$ & $1157.00\euro{}$ \\
+        
+        Torreta de 5 metros& 1 & $336.32\euro{}$ & $336.32\euro{}$ \\
+        Mástiles de 1.65 metros & 3 & $53.32\euro{}$ & $159.96\euro{}$ \\
         \hline
-        Total &  &  & $2638.94\euro{}$ \\
+        Total &  &  & $3134.22\euro{}$ \\
         \hline
     \end{tabular}
-    \caption{Tabla del presupuesto total}
+    \caption{Tabla del presupuesto total }
     \label{tab:presupuestos}
 \end{table}
+
 
 
 \section{Normativa PIRE}
@@ -299,21 +306,29 @@ Se elige 16-QAM 3/4. Viendo el \textbf{datasheet}, la antena receptora tendrá u
 
 \subsection{Configuración y parámetros}
 
+A continuación, se mostrarán capturas del programa RadioMobile, donde se han configurado todos los parámetros necesarios para hacer una conexión correcta entre todos los enlaces planteados. 
+
+\quad
+
+Se han tenido en cuenta todos los parámetros, datos y regulaciones mencionadas anteriormente:
+
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.75\linewidth]{src/estacionbase.png}
+    \includegraphics[width=0.7\linewidth]{src/estacionbase.png}
     \caption{\label{fig:ebaseconfig} Configuración de la estación base.}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.75\linewidth]{src/suscriptor.png}
-    \caption{\label{fig:suscripconfig} Configuración de la estación base.}
+    \includegraphics[width=0.7\linewidth]{src/suscriptor.png}
+    \caption{\label{fig:suscripconfig} Configuración del suscriptor.}
 \end{figure}
 
 \newpage
 
 \subsection{Visualización de radioenlaces}
+
+Los radioenlaces serán:
 
 \begin{figure}[ht]
     \centering
@@ -355,12 +370,119 @@ Se elige 16-QAM 3/4. Viendo el \textbf{datasheet}, la antena receptora tendrá u
     \caption{\label{fig:panelesebase} Paneles a estación base.}
 \end{figure}
 
+Se tendrá en cuenta el direccionamiento de las antenas para la correcta transmisión, en caso contrario, el enlace daría error en el programa. De igual manera que la altura, contando la torreta y el mástil, también es necesaria para marcar, ya que el balance depende de ello y los obstáculos que haya.
+
+\quad
+
+Finalmente, todas las configuraciones de los materiales con los datos previamente establecidos, dará lugar a una correcta conexión entre los tres enlaces:
+\newpage
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\linewidth]{src/mapa radio.png}
+    \caption{\label{fig:maparadio} Mapa del resultado de los radioenlaces.}
+\end{figure}
+
 \section{Diseño de la Red}
+
+
 \begin{figure}[ht]
     \centering
     \includegraphics[width=1\linewidth]{src/diseñored.jpg}
     \caption{\label{fig:diseñored} Diseño de la red.}
 \end{figure}
 
+El diseño del proyecto consta principalmente de 3 radio enlaces formados entre:
+
+\begin{itemize}
+    \item $\text{Alhama} \rightarrow \text{La Nave}$
+    \item $\text{Alhama} \rightarrow \text{Paneles solares}$
+    \item $\text{Alhama} \rightarrow \text{TeleClub}$
+\end{itemize}
+
+En Alhama se situarán todos los sistemas que gestionarán la red, que serán los \textbf{servidores DHCP} que proporcionan la dirección IP a cada zona, el\textbf{ portal cautivo} el cual da acceso a internet a todos los residentes que entren desde Teleclub a Internet, los \textbf{servidores radius}; uno para los empleados de red y trabajadores de la nave que empleará el protocolo WPA2-ENTERPRISE, y otro para las cámaras que podría emplear también WPA2-ENTERPRISE, y un \textbf{router} que de acceso a internet.
+
+\quad
+
+Dicha antena transmisora está configurada según la normativa vista en los apartados anteriores (100 mW max. PIRE): 
+
+$$P_{TX} = 4dBm \quad \text{Sensibilidad}=-84dB \quad G_i=16 dBi$$
+
+Las tres antenas receptoras estarán configuradas por igual para que se pueda aplicar la misma técnica de modulación: 
+
+$$P_{TX} = -3dBm \quad \text{Sensibilidad}=-84dB \quad G_i=23 dBi$$
+
+En cada zona objetivo se verá que hay VAP que diferencia entre usuarios corrientes respecto a los usuarios especiales que son los empleados de red y administraciones públicas (que será igual dicha IP en cada zona: 192.168.0.0 es la red asignada por el DHCP y habrán un total de 5 usuarios por zona)
+
+\quad
+
+En la nave, se conectará un switch que permita enlazar todos los usuarios conectados a los AP (por simplificación se ha mostrado 1 simulando los 4), los trabajadores de la nave tienen asignadas por el DHCP la red 192.168.3.0 (con una suma de 25 trabajadores)
+En la zona de los paneles solares habrán conectadas cámaras a las distintas VAPs repartidas por toda la zona, las IPs asignadas serán 192.168.2.0 (con un total de 28 usuarios=cámaras). Dichas cámaras serán monitorizadas desde Alhama, es por eso que posee una conexión directa desde ahí.
+
+\quad
+
+En TeleClub habrán ahora 2 APs con 2 VAPs, diferenciando indoor y outoor y que tanto como empleados como los residentes (y turistas) tengan acceso a la red en cualquier parte de la zona. La red asignadas para los residentes es 192.168.1.0 (95 usuarios).
+
+\newpage
+
+\section{Enlaces utilizados}
+
+\quad
+
+\quad
+
+\href{https://www.generadordeprecios.info/obra_nueva/Instalaciones/Audiovisuales/Red_de_cables_coaxiales/Mastil_para_fijacion_de_antenas.html#gsc.tab=0}{Calculador de precio mástil}
+
+\quad
+
+\href{https://generadordeprecios.info/obra_nueva/calculaprecio.asp?Valor=0|0_0_0_0|1|IAA032|iaa_032:_0_0_0_0_0_1_0#gsc.tab=0}{Calculador de Precio torreta}
+
+\quad
+
+\href{https://www.amazon.es/TP-Link-TL-SF1016DS-escritorio-puertos-100Mbps/dp/B0054TXRVQ/}{TP-Link TL-SF1016DS}
+
+\quad
+
+\href{https://www.amazon.es/TP-Link-TL-SG108E-configuraci%C3%B3n-administrada-priorizaci%C3%B3n/dp/B00JKB63D8}{TP-Link TL-SG108E}
+
+\quad
+
+\href{https://www.amazon.es/Ubiquiti-UAP-AC-LR-Punto-Acceso-inal%C3%A1mbrico/dp/B016K5A06C?th=1}{Ubiquiti UAP-AC-LR Punto de Acceso}
+
+\quad
+
+\href{https://www.amazon.es/dp/B09K7HVKLT/ref=tsm_1_fb_lk}{Cámara}
+
+\quad
+
+\href{https://mcsindex.com/}{MCS Index}
+
+\quad
+
+\href{https://www.ve2dbe.com/english1.html}{RadioMobile web}
+
+\quad
+
+
+\href{https://earth.google.com/web/}{Google Earth}
+
+\quad
+
+\href{http://labit501.upct.es:8080/}{NetEval}
+
+\quad
+
+\href{https://avancedigital.mineco.gob.es/espectro/CNAF/notas-UN-2017.pdf}{Notas UN del estado}
+
+\quad
+
+\href{https://maker-store.es/home-office/wireless-lan/wireless-lan-antennen/3748/ubiquiti-r2ac-prism-rocket-basestation}{Ubiquiti R2AC Prism Rocket Basestation}
+
+\quad
+
+\href{https://www.pccomponentes.com/ubiquiti-networks-litebeam-ac-gen2-airmax-ac-5ghz?srsltid=AfmBOorsXOMoawlF2P6S67Bx6O224uWPzhzismqEu5VPiAxKXXhdxbW32vw}{Ubiquiti Networks LiteBeam AC Gen2 AirMAX AC 5GHz}
+
+\quad
+
+\href{https://www.amazon.es/UBIQUITI-Networks-LBE-5AC-16-120-Repetidor-5-15-5-875/dp/B019M0KK44}{UBIQUITI Networks LBE-5AC-16-120}
 
 \end{document}
