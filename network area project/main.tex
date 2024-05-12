@@ -49,6 +49,41 @@ Se pretende dotar de acceso a internet a determinadas zonas de La Costera, Murci
 
 Al ser un servicio propuesto por el ayuntamiento, se usarán bandas de frecuencia de la red troncal, es decir, de $5GHz$ y de $2.4GHz$, donde no será necesario cierta cantidad de trámites para usarlas a comparación de otras personalizadas, además de ser gratis el añadido de radioenlaces. Por otro lado, se limitarán ciertos parámetros como la potencia de transmisión.
 
+\quad
+
+Las coordenadas de las distintas secciones serán:
+
+\quad
+
+\textbf{TeleClub}:
+\begin{itemize}
+
+    \item Latitud: 37.8390744
+    \item Longitud: -1.3648323
+
+\end{itemize}
+
+\quad
+
+\textbf{La nave}:
+\begin{itemize}
+
+    \item Latitud: 37.8390744
+    \item Longitud: -1.3648323
+
+\end{itemize}
+
+\quad
+
+\textbf{Paneles}:
+\begin{itemize}
+
+    \item Latitud: 37.8390744
+    \item Longitud: -1.3648323
+
+\end{itemize}
+
+
 \subsection{Planteamiento de TeleClub}
 
 El teleclub es un centro social que necesita de internet tanto \textbf{indoor} como \textbf{outdoor}. De puertas para dentro estará la biblioteca, lugar donde la conexión es de suma importancia para tareas como descarga de ebooks o registros en su web de usuarios. En el exterior del teleclub, se dotará de internet básico para el ocio que puedan tener los visitantes y residentes, se tiene en cuenta que el exterior tendrá un mayor número de usuarios.
@@ -66,29 +101,44 @@ Según la población de \textbf{La Costera}, que es de 343 habitantes, (Actualiz
 
 \quad
 
-Para calcular el \textbf{throughput} que consumirá nuestra sección del TeleClub, se planteará el concepto de \textbf{usuario típico}, que se multiplicará por la cantidad de éstos. Se denominará a aquél que utiliza el correo, navega por Internet y ocasionalmente transmite/recibe ficheros de gran tamaño. A día de hoy, la mayor velocidad necesitada para este tipo de tareas será de \textbf{1Mbps}
+Para calcular el \textbf{throughput} que consumirá nuestra sección del TeleClub, se planteará el concepto de \textbf{usuario típico}, y se multiplicará la velocidad máxima por la cantidad de éstos. Será aquél que utiliza el correo, navega por Internet y ocasionalmente transmite/recibe ficheros de gran tamaño. A día de hoy, es necesario tener una buena latencia y velocidad, por lo que se usará la velocidad máxima limitada que normalmente se permite en conexiones \textbf{red-usuario} típicas, que es de 256kbps.
 
-    $$100u \cdot 1Mbps = 100Mbps$$
+    $$100u \cdot 256kbps = 25600kbps = 25Mbps $$
 
-El throughput para esta zona será de \textbf{100Mbps}.
+El throughput para esta zona será de \textbf{25Mbps}.
 
 \subsection{Planteamiento de la Nave}
 
-En la Nave habrá un máximo de 30 usuarios, que debido a los servidores web y redes necesitan de 10Mbps como máximo en total, por lo que definirá el throughput de esta sección. (añadir 4 AP)
+En la Nave habrá un máximo de 30 usuarios. Según la guía del trabajo, habrá, entre servidores y tráfico de usuarios una tasa de bits de unos \textbf{10Mbps} como máximo, por lo que definirá el throughput de esta sección. 
+
+\quad
+
+Puesto que no se conoce qué zonas serán de mayor importancia o no requieran de acceso a internet, habrá 4 AP repartidos de manera uniforme, donde se usará la infraestructura con \textbf{VAPs} para alejar dos redes inalámbricas distintas: para trabajadores y empleados.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.65\linewidth]{src/lanave.png}
+    \caption{\label{fig:lanave} Reparto de APs en la nave.}
+\end{figure}
+
+\newpage
 
 \subsection{Planteamiento de Paneles}
 
-\textbf{EXPLICAR REPARTO CAMARAS ETC}
+El recinto de paneles, se requerirá una cierta cantidad de cámaras ya que es necesario una vigilancia para mayor seguridad de la zona, debido a posibles robos. En lugar de repartir todas las cámaras por el área, se colocarán cámaras repartidas por todo el perímetro de la zona, de tal modo que no sería necesario vigilar el interior, pues estaría grabada la entrada al recinto de cualquier persona.
+
+\quad
+
+Al ser 30 metros el radio de cada cámara, habrá entre cada una 60 metros de distancia. Se reparten uniformemente por todo el perímetro, según las medidas de \textbf{Google Earth}. También habrán APs repartidos por toda la zona para dotar la conexión necesaria a las cámaras. 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.4\linewidth]{src/camaras.png}
     \caption{\label{fig:camarasnave} Reparto de las cámaras y access points.}
 \end{figure}
 
+Se considerará el tráfico de cada cámara de \textbf{1Mbps}, por lo que, tras el reparto de cámaras por distancias, al haber un total de \textbf{28 unidades}, el throughput de esta sección será: 
 
-
-28 cámaras por 1Mbps
-$$28u \cdot 10Mbps$$
+$$28u \cdot 1Mbps = 28Mbps$$
 
 \section{Materiales elegidos}
 
@@ -100,6 +150,7 @@ Los switches se eligirán unos económicos de una marca confiable, puesto que el
 Para los switches que requieran 8 puertos o menos se usará el \textbf{Switch TL-SG108E Easy Smart de 8 puertos Gigabit}, de la marca TP-link. Se trata de un switch no gestionado y económico, diseñado para pequeñas y medianas empresas que requieren de redes con gestión simple. Para optimizar el tráfico en su red de negocios, el switch ofrece QoS basado en puerto y en etiquetas para mantener el tráfico sensible a la latencia sin problemas y sin fluctuaciones. Además, el gasto energético no será elevado, puesto que el TL-SG108E puede ahorrar hasta un 80\% del consumo de energía, lo cual es una solución ecológica para su red de negocios. 
 
 Para la nave, donde hará falta uno de más puertos, se usará el \textbf{TP-Link TL-SF1016DS de 16 puertos.} Ya que el modelo anterior no tiene opción de más puertos, este sería su equivalente. 
+\newpage
 
 \begin{figure}[h]
 	\centering
@@ -125,12 +176,12 @@ Se usará una estación base Ubiquiti Rocket R2AC-PRISM al ser la que mejor cump
 
 \begin{figure}[ht]
 	\centering
-	\begin{subfigure}{0.4\textwidth}
+	\begin{subfigure}{0.35\textwidth}
 		\includegraphics[width=\linewidth]{src/ap.jpg}
 		\caption{Access Point Ubiquiti}
 		\label{fig:ap}
 	\end{subfigure}%
-	\begin{subfigure}{0.3\textwidth}
+	\begin{subfigure}{0.25\textwidth}
 		\includegraphics[width=\linewidth]{src/estacion base.jpeg}
 		\caption{Estación Base}
 		\label{fig:estacionbase}
@@ -150,36 +201,38 @@ Se usará de antena transmisora el Ubiquiti LBE-5AC-16-120, ya que al ser omnidi
 
 En las otras tres ubicaciones, situadas en la \textbf{Nave}, \textbf{TeleClub}, y los \textbf{paneles}, se usarán antenas unidireccionales pusto que su única conexión será con la antena transmisora. En el \textbf{Datasheet proporcionado}, la antena que cumple con los requisitos es la Ubiquiti LBE-5AC-23.
 
-\subsection{TeleClub}
+En el \textbf{TeleClub}, se recibe la señal principal en la antena LBE-5AC-23, y se repartirá la conexión mediante un switch a dos Access Points: que servirán para \textbf{Indoor} y \textbf{Outdoor}. No hay material adicional.
 
-En el TeleClub, se recibe la señal principal en la antena LBE-5AC-23, y se repartirá la conexión mediante un switch a dos Access Points: que servirán para \textbf{Indoor} y \textbf{Outdoor}.    
+\quad
 
+En la \textbf{nave}, se usarán 4 APs repartidos uniformemente en la zona, además de la antena LBE-5AC-23, tampoco habrá material adicional.
 
-\subsection{Nave}
-\subsection{Paneles}
+\quad
+
+En los \textbf{paneles}, además de los APs y la antena, es necesario elegir las cámaras usadas. Se ha optado por un modelo de \textbf{Anksono}, ya que cumple con el requisito de ser económica por la cantidad que hay que añadir, y el rango de vigilancia es similar a otras de mayor precio.
 
 \section{Presupuesto}
 
-\begin{table}[h]
+\begin{table}[ht]
     \centering
     \begin{tabular}{|c|c|c|c|}
         \hline
-        Material & Cantidad & Precio & Suma\\
+        Material & Cantidad & Precio & Suma \\
         \hline
-        Switch TL-SG108E & 2 & $31.99\euro{}$ & $63.98\euro{}$\\
+        Switch TL-SG108E & 2 & $31.99\euro{}$ & $63.98\euro{}$ \\
         Switch TL-SF1016DS & 1 & $59.69\euro{}$ & $119.38\euro{}$ \\
-        Ubiquiti LBE-5AC-16-120  & 1 & $102.58\euro{}$ & $102.58\euro{}$\\
+        Ubiquiti LBE-5AC-16-120  & 1 & $102.58\euro{}$ & $102.58\euro{}$ \\
         Ubiquiti LBE-5AC-23& 2 & $73.89\euro{}$ & $147.78\euro{}$ \\
         E. Base R2AC-PRISM & 1 & $207.50\euro{}$ & $207.50\euro{}$ \\
+        Cámara Anksono & 28 & $29.99\euro{}$ & $839.72\euro{}$ \\
+        Ubiquiti UAP-AC-LR  & 13 & $89.00\euro{}$ & $1157.00\euro{}$ \\
         \hline
-        Total &  &  & $581.53\euro{}$ \\
-
+        Total &  &  & $2638.94\euro{}$ \\
         \hline
     \end{tabular}
     \caption{Tabla del presupuesto total}
     \label{tab:presupuestos}
 \end{table}
-\newpage
 
 
 \section{Normativa PIRE}
@@ -223,32 +276,91 @@ consideración de uso común:
 
 \section{Radioenlaces}
 
-\subsection{Regulación de las antenas}
+\subsection{Parámetros y modulación de las antenas}
 
-mirando mcsindex tendremos que calcular los Mbps de cada sección para multiplicarlos por las personas que lo constituyen y sumar todo para los Mbps total. 
+Teniendo en cuanta la tabla de mcsindex habrá que calcular los throughput de cada sección para asegurar que el sistema soportará el momento de mayor tráfico, que decidirá la modulación usada. 
 
 Siendo el throughput total:
 
-$$100Mbps + 10Mbps + 10Mbps = 120Mbps$$
+$$25Mbps + 10Mbps + 28Mbps = 63Mbps$$
 
-Por lo que para elegir la modulación usada, se tendrá en cuenta que supere el throughput necesario. En este caso, al ser MIMO la antena y trabajar en $2.4Ghz$, la modulación más acertada será:
+Por lo que para elegir la modulación usada, se tendrá en cuenta que supere el throughput necesario. En este caso, al ser MIMO la antena y trabajar en $2.4Ghz$, la modulación adecuada será:
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.8
-    \linewidth]{src/chrome_GUtrJRqsad.png}
+    \linewidth]{src/mcsindex.png}
     \caption{\label{fig:mcsindex} Modulación elegida.}
 \end{figure}
-\newpage
-Se elige 64-QAM 3/4. Viendo el \textbf{datasheet}, la antena receptora tendrá una sensibilidad de -77dBm y margen de 2. (CAMBIAR)
+
+Se elige 16-QAM 3/4. Viendo el \textbf{datasheet}, la antena receptora tendrá una sensibilidad de -86dBm y margen de 2, por lo que se elige la peor posibilidad, -84dBm.
 
 \subsection{RadioMobile}
 
-\subsection{Resultados de los radioenlaces}
+\subsection{Configuración y parámetros}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{src/estacionbase.png}
+    \caption{\label{fig:ebaseconfig} Configuración de la estación base.}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{src/suscriptor.png}
+    \caption{\label{fig:suscripconfig} Configuración de la estación base.}
+\end{figure}
+
+\newpage
+
+\subsection{Visualización de radioenlaces}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{src/EstacionBase-TeleClub.png}
+    \caption{\label{fig:ebaseteleclub} Estación base a teleclub.}
+\end{figure}
+
+\newpage
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{src/TeleClub-EstacionBase.png}
+    \caption{\label{fig:teleclubebase} Teleclub a estación base.}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{src/EstacionBase-Nave.png}
+    \caption{\label{fig:ebasenave} Estación base a nave.}
+\end{figure}
+\newpage
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{src/Nave-EstacionBase.png}
+    \caption{\label{fig:naveebase} Nave a estación base.}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{src/EstacionBase-Paneles.png}
+    \caption{\label{fig:ebasepaneles} Estación base a paneles.}
+\end{figure}
+
+\newpage
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{src/Paneles-EstacionBase.png}
+    \caption{\label{fig:panelesebase} Paneles a estación base.}
+\end{figure}
 
 \section{Diseño de la Red}
-
-\section{Conclusión?}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\linewidth]{src/diseñored.jpg}
+    \caption{\label{fig:diseñored} Diseño de la red.}
+\end{figure}
 
 
 \end{document}
