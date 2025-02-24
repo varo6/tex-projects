@@ -1,0 +1,101 @@
+% Para trabajos como TFG usar documentclass book
+\documentclass[12pt]{article}
+
+% Language setting
+\usepackage[spanish]{babel}
+
+% Set page size and margins
+\usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, linkcolor=black, urlcolor=blue]{hyperref}
+\usepackage{color}
+
+% Uncomment these packages if you want to use dark mode
+% \usepackage{darkmode}
+% \enabledarkmode
+
+% Title and author
+\title{\LaTeX 101}
+\author{Álvaro Hernández}
+\date{\today}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Sección 1}
+Hola mundo
+
+\subsection{Prueba2}
+Tipografías distintas:
+
+\texttt{emph}: \emph{enfática}
+
+\texttt{textbf}: \textbf{negrita}
+
+\texttt{texttt}: \texttt{máquina}
+
+\texttt{underline}: \underline{subrayado}
+
+\texttt{textnormal}: \textnormal{normal}\ldots
+
+\subsection{Colores}
+
+\textbf{importante: } cargar primero el paquete color con \verb|\usepackage{color}|
+
+Se pueden usar colores como {\color{red}{ rojo}}, {\color{blue}{azul}} o {\color{green}{ verde}}
+
+Las llaves de {rojo} o {verde} pueden sobrar si hemos puesto las llaves del exterior o {verde} pueden sobrar si hemos puesto las llaves del exteriorr
+
+\subsection{Tamaños}
+
+\texttt{tiny}: {\tiny{minusculo}}
+
+\texttt{small}: {\small{pequeño}}
+
+\texttt{normalsize}: {\normalsize{normal}}
+
+\texttt{large}: {\large{grande}}
+
+\texttt{Large}: {\Large{grande}}
+
+\texttt{Huge}: {\Huge{enorme}}
+
+\subsection{Caracteres especiales}
+
+\subsubsection{Guiones}
+
+Tres posibles longitudes de guiones: corto (2024-2025), medio (2024--2025) y largo (2024---2025)
+
+\subsubsection{Comillas}
+
+Para las comillas haremos con la derecha de la p:
+
+``Apertura de comillas y cierre con''
+
+
+\subsubsection{Caracteres reservados}
+
+Caracteres reservados:
+
+Antes de cada caracter de este tipo lo hare primero con la barra invertida pero si quiero poner esa barra invertida en el texto usaré \verb|\textbackslash|
+
+(Usar texttt con las demas...)
+\texttt{\$}
+\&
+\%
+\#
+
+Para poner llaves \{ \}
+
+
+\end{document}
+
+
