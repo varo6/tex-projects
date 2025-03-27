@@ -1,0 +1,65 @@
+---
+- name: Configurar routers
+  hosts: Routers
+  gather_facts: no
+  connection: network_cli
+  tasks:
+   
+    - name: Configurar IP SLA CMP (NE->SE) 
+      when: inventory_hostname == "MU-NE"
+      ios_command:
+        commands:
+          - configure terminal
+          - no ip sla 1
+          - ip sla 1
+          - icmp-echo 172.18.0.201 
+          - frequency 50
+          - exit
+          - ip sla schedule 1 life forever start-time now
+          - exit
+          - wr
+      register: output_mu_ne
+  
+    - name: Configurar IP SLA ICMP (NW->SE)
+      when: inventory_hostname == "MU-NW"
+      ios_command:
+        commands:
+          - configure terminal
+          - no ip sla 1
+          - ip sla 1
+          - icmp-echo 172.18.0.201 
+          - frequency 50
+          - exit
+          - ip sla schedule 1 life forever start-time now
+          - exit
+          - wr
+      register: output_mu_nw
+
+    - name: Configurar el IP SLA TCP (SE->NN) 
+      when: inventory_hostname == "MU-SE"
+      ios_command:
+        commands:
+          - configure terminal
+          - no ip sla 2
+          - ip sla 2 
+          - tcp-connect 172.18.0.220 22
+          - frequency 60
+          - tos 4
+          - ip sla schedule 2 life forever start-time now
+          - exit
+          - wr
+      register: output_mu_se
+
+    - name: Configuración del IP SLA HTTP (NN->NW) 
+      when: inventory_hostname == "MU-NN"
+      ios_command:
+        commands:
+          - configure terminal
+          - no ip sla 3
+          - ip sla 3
+          - http get http://172.18.0.202/
+          - frequency 60
+          - ip sla schedule 3 life forever start-time now
+          - end
+          - wr
+      register: output_mu_nn

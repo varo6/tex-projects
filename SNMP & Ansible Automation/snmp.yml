@@ -1,0 +1,114 @@
+
+- name: Configurar routers
+  hosts: Routers
+  gather_facts: no
+  connection: network_cli
+  tasks:
+   
+    - name: Configurar MU-SW
+      when: inventory_hostname == "MU-SW"
+      ios_command:
+        commands:
+          - configure terminal
+          - snmp-server community AHR RW
+          - snmp-server ifindex persist
+          - snmp-server trap-source Loopback0
+          - snmp-server enable traps snmp linkdown linkup coldstart warmstart
+          - snmp-server enable traps bgp
+          - snmp-server host 172.18.0.1 version 2c AHR 
+          - logging facility local3
+          - logging source-interface Loopback0
+          - logging 172.18.0.5
+          - ip http server
+          - ip http authentication local
+          - exit
+          - wr
+      register: output_mu_sw
+    
+    - name: Configurar MU-SE
+      when: inventory_hostname == "MU-SE"
+      ios_command:
+        commands:
+          - configure terminal
+          - snmp-server community AHR RW
+          - snmp-server ifindex persist
+          - snmp-server trap-source Loopback0
+          - snmp-server enable traps snmp linkdown linkup coldstart warmstart
+          - snmp-server enable traps bgp
+          - snmp-server host 172.18.0.1 version 2c AHR 
+          - logging facility local3
+          - logging source-interface Loopback0
+          - logging 172.18.0.5
+          - ip http server
+          - ip http authentication local
+          - exit
+          - wr
+      register: output_mu_se
+    
+    - name: Configurar MU-NW
+      when: inventory_hostname == "MU-NW"
+      ios_command:
+        commands:
+          - configure terminal
+          - snmp-server community AHR RW
+          - snmp-server ifindex persist
+          - snmp-server trap-source Loopback0
+          - snmp-server enable traps snmp linkdown linkup coldstart warmstart
+          - snmp-server enable traps bgp
+          - snmp-server host 172.18.0.1 version 2c AHR 
+          - logging facility local3
+          - logging source-interface Loopback0
+          - logging 172.18.0.5
+          - ip http server
+          - ip http authentication local
+          - exit
+          - wr
+      register: output_mu_nw
+    
+    - name: Configurar MU-NE
+      when: inventory_hostname == "MU-NE"
+      ios_command:
+        commands:
+          - configure terminal
+          - snmp-server community AHR RW
+          - snmp-server ifindex persist
+          - snmp-server trap-source Loopback0
+          - snmp-server enable traps snmp linkdown linkup coldstart warmstart
+          - snmp-server enable traps bgp
+          - snmp-server host 172.18.0.1 version 2c AHR 
+          - logging facility local3
+          - logging source-interface Loopback0
+          - logging 172.18.0.5
+          - ip http server
+          - ip http authentication local
+          - rmon alarm 1 ifEntry.17.2 30 delta rising-threshold 87 1 falling-threshold 45 2 owner alvaro
+          - rmon event 1 log trap AHR description "muchos paquetes" owner alvaro 
+          - rmon event 2 log trap AHR description "pocos paquetes" owner alvaro
+          - exit
+          - wr
+      register: output_mu_ne
+    
+    - name: Configurar MU-NN
+      when: inventory_hostname == "MU-NN"
+      ios_command:
+        commands:
+          - configure terminal
+          - snmp-server community AHR RW
+          - snmp-server ifindex persist
+          - snmp-server trap-source Loopback0
+          - snmp-server enable traps snmp linkdown linkup coldstart warmstart
+          - snmp-server enable traps bgp
+          - snmp-server host 172.18.0.1 version 2c AHR 
+          - logging facility local3
+          - logging source-interface Loopback0
+          - logging 172.18.0.5
+          - ip http server
+          - ip http authentication local
+          - exit
+          - wr
+      register: output_mu_nn
+
+    - name: Mostrar salida MU-SW
+      debug:
+        var: output_mu_sw
+      when: inventory_hostname == "MU-SW"

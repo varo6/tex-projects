@@ -4,7 +4,7 @@
 \usepackage[spanish]{babel}
 
 % Set page size and margins
-\usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2.7cm,right=2.7cm,marginparwidth=1.75cm]{geometry}
 \setlength
 \parindent{0pt}
 
@@ -112,11 +112,11 @@ Para las \textbf{plays} de Ansible, se ha creado un archivo \texttt{tarea.yml} q
     \begin{lstlisting}[gobble=6]
         --- - name: Configure interface g1/0 on the router 
         hosts: R1
-        gather\_facts: no 
-        connection: network\_cli 
+        gather_facts: no 
+        connection: network_cli 
         tasks:
             - name: Configure router...
-            ios\_command:
+            ios_command:
                 commands:
                     - interface GigabitEthernet1/0
                     - ... 
@@ -125,7 +125,7 @@ Para las \textbf{plays} de Ansible, se ha creado un archivo \texttt{tarea.yml} q
     \end{lstlisting}
 \end{tcolorbox}
 
-Una vez terminado el archivo \texttt{tarea.yml}, donde cada router tendrá la configuración de sus interfaces respectivas, se ejecutará de la siguiente forma para que se realicen las configuraciones:
+Una vez terminado el archivo \texttt{tarea.yml}, cuyo contenido del script se puede comprobar en la entrega del trabajo, cada router tendrá la configuración de sus interfaces respectivas, se ejecutará de la siguiente forma para que se realicen las configuraciones:
 
 \begin{tcolorbox}[
     boxrule=0pt,
@@ -133,7 +133,6 @@ Una vez terminado el archivo \texttt{tarea.yml}, donde cada router tendrá la co
 ]
     \begin{lstlisting}[language=bash, gobble=6]
         #! /bin/bash
-
         workon ansible
         ansible-playbook -i hosts tarea.yml
         #-i para indicar los inputs que seran hosts y tarea.yml
@@ -148,12 +147,228 @@ Si la ejecución es correcta, tendremos el siguiente output de Ansible que nos i
     \caption{Output de Ansible tras la ejecución}
 \end{figure}
 
+
+
 \section{Encaminamiento}
 
+En este ejercicio se pide configurar el encaminamiento de la red. Para ello, se continuará el archivo \texttt{tarea.yml} ya que se se considera igualmente como configuración inicial. Se añade a la tarea de \textbf{Ansible} el protocolo de encaminamiento OSPF, anunciando las redes correspondientes a cada interfaz del router. El formato de la configuración de OSPF será el siguiente (ejemplo para MU-NN)
+
+\begin{tcolorbox}[
+    boxrule=0pt,
+    title=Configuración de OSPF en MU-NN, 
+]
+    \begin{lstlisting}[gobble=6]
+          - router ospf 1
+          - network 172.18.0.0 0.0.0.255 area 0
+          - network 22.10.0.0 0.0.0.3 area 0
+          - network 20.20.20.20 0.0.0.0 area 0
+          - exit
+          - wr
+    \end{lstlisting}
+\end{tcolorbox}
+
+Se puede ver las configuraciones en \texttt{tarea.yml.} Para comprobar, haremos dos peticiones: una desde \texttt{MU-NN} a \texttt{MU-SE} y otra desde \texttt{MU-SE} a \texttt{MU-NN} 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/ping1.png}
+    \caption{Ping de MU-NN a MU-SE }
+\end{figure}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/ping2.png}
+    \caption{Ping de MU-SE a MU-NN }
+\end{figure}
+
+
+Con esto se puede ver que hay conectividad entre los routers, pero no se comprueba la implementación del protocolo OSPF al completo. Para ello, añadiremos una captura del router \texttt{MU-NN} con el comando \texttt{show ip ospf neighbor} para observar los vecinos OSPF.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/neighbors.png}
+    \caption{Ping de MU-SE a MU-NN }
+\end{figure}
+
+Por lo que se habrá configurado OSPF correctamente.
+
 \section{Activación de la gestión SNMP de los routers}
-\section{Configuraciónd de Alarmas}
+
+Para la activación de la gestión SNMP, se seguirá la práctica correspondiente que se dió en clase sobre el protocolo. Se configurarán los routers con valores y comandos similares. Por el momento, para activar SNMP se hará en el archivo \texttt{snmp.yml}:
+
+\begin{tcolorbox}[
+    boxrule=0pt,
+    title=Configuración de OSPF en MU-NN, 
+]
+    \begin{lstlisting}[gobble=6]
+          - snmp-server community AHR RW
+          - snmp-server ifindex persist
+    \end{lstlisting}
+\end{tcolorbox}
+
+Tras esto, se comprobará si está activo mediante SNMPGET desde MIB Browser. En la tabla de resultados se verá el objeto \texttt{sysDescr.O} del primer loopback que se hizo el snmpget, y el del segundo.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/snmpgets.png}
+    \caption{Comprobación de SNMP mediante MIB Browser}
+\end{figure}
+
+Una vez vemos que funciona correctamente, se activan los \texttt{traps}, \texttt{syslogs}, \mbox{\texttt{linkdown}}, \mbox{\texttt{linkup}}, \mbox{\texttt{coldstart}}, y \mbox{\texttt{warmstart}}. También, para el siguiente apartado, añadimos el servidor HTTP. Como todo viene en la misma sección, seguirá estando en el mismo archivo. Finalmente, en \texttt{snmp.yml} el formato de los routers será el siguiente:
+
+\begin{tcolorbox}[
+    boxrule=0pt,
+    title= traps syslog y HTTP en el archivo snmp.yml, 
+]
+    \begin{lstlisting}[gobble=10]
+          - configure terminal
+          - snmp-server community AHR RW
+          - snmp-server ifindex persist
+          - snmp-server trap-source Loopback0
+          - snmp-server enable traps snmp linkdown linkup coldstart warmstart
+          - snmp-server enable traps bgp
+          - snmp-server host 172.18.0.1 version 2c AHR 
+          - logging facility local3
+          - logging source-interface Loopback0
+          - logging 172.18.0.5
+          - ip http server
+          - ip http authentication local
+          - exit
+          - wr
+    \end{lstlisting}
+\end{tcolorbox}
+
+Para acceder al servidor HTTP, desde Firefox se accede a la ip del loopback que se ha configurado.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/http.png}
+    \caption{Acceso al servidor HTTP}
+\end{figure}
+
+
+\section{Configuración de Alarmas}
+
+\subsection{Alarma 1: MU-NE}
+
+Se configura la alarma en el router MU-NE, donde se añadirá el objeto correspondiente a la interfaz de entrada de la red. En la práctica hemos trabajado con el objeto \texttt{ifEntry}, y dentro de éste, el objeto \texttt{ifOutUcastPkts}. Este objeto funcionaría ya que debido a la respuesta, podría analizar el incremento del tráfico, pero en el enunciado se nos pide \textbf{paquetes de entrada}, por lo que, en vez de usar \texttt{ifOutUcastPkts}, se usará \texttt{ifInUcastPkts}. \textbf{La razón de usar} esta alarma es que, cumple con el funcionamiento que se pide, cumple el hecho de ser \textbf{tráfico de entrada}, y además, viene del objeto \texttt{ifEntry}, por lo que sabemos lo configurable que es y los valores con los que debemos trabajar.
+
+El comando de la práctica pasa de \texttt{ifEntry.17.1 \text{a} ifEntry.11.2}. El formato de la configuración será el siguiente:
+
+\begin{tcolorbox}[
+    boxrule=0pt,
+    title=Configuración RMON Alarma 1 en MU-NE,
+]
+    \begin{lstlisting}[gobble=6]
+        - rmon alarm 1 ifEntry.11.2 30 delta rising-threshold 87 1
+        falling-threshold 45 2 owner alvaro
+        - rmon event 1 log trap AHR description
+         "muchos paquetes" owner alvaro
+        - rmon event 2 log trap AHR description
+         "pocos paquetes" owner alvaro
+    \end{lstlisting}
+\end{tcolorbox}
+
+Los valores elegidos son:
+
+\begin{itemize}
+    \item \textbf{30}: Intervalo de tiempo en segundos para comprobar el incremento de paquetes.
+    \item \textbf{87}: Valor de incremento de paquetes para activar la alarma. Esto es debido a que el valor de resta de ifInUcastPkts a los 30 segundos me salió de 30 paquetes, por lo que multiplicado por tres, y poniendo un poco abajo, se ha decidido poner 87.
+    \item \textbf{45}: Valor de decremento de paquetes para desactivar la alarma.
+\end{itemize}
+
+Comprobamos con un ping desde MU-SW a MU-NE para ver si se activa la alarma.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/alarm1.png}
+    \caption{Comprobación de la alarma 1}
+\end{figure}
+
+También observamos los eventLogs y demás desde MIB Browser.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/eventsmibs.png}
+    \caption{Eventos configurados, aparecen en el MIB Browser}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/eventlogsmibs.png}
+    \caption{Logs de eventos, saltan en el MIB Browser}
+\end{figure}
+
+\newpage
+
+\subsection{Alarma 2: MU-SW}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit 
+
 \section{Generación de tráfico Cisco IP SLA}
+
+En este ejercicio se configurarán las IP SLA para, de alguna forma, simular tráfico constante en nuestra red, de esta forma se podrá monitorizar en los apartados siguientes.
+
+Prácticamente sólo hay una forma de hacer este apartado, debido a que los comandos son los que proporciona cisco en su router, por lo que se ha seguido con los comandos de \texttt{ip sla} para los tres apartados. Configuraremos un cada uno con una id distinta, siendo \texttt{ip sla <id>}, y luego la acción, que en nuestro caso se piden tres, que serán:
+
+\begin{tcolorbox}[
+    boxrule=0pt,
+    title=Formato de ip sla dependiendo de la acción ,
+]
+    \begin{lstlisting}[gobble=6]
+        - icmp-echo <ip>
+        - tcp-connect <ip> <port>
+        - http get <url>
+        - frequency, tos...
+        - ip sla schedule <id> life forever start-time now
+    \end{lstlisting}
+\end{tcolorbox}
+
+Las configuraciones al completo, están en el archivo \texttt{ipsla.yml}.
+
+Interceptamos el tráfico con Wireshark para comprobar que se está generando correctamente, en las interfaces correspondientes:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/icmp1.png}
+    \caption{Tráfico en wireshark 1}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/icmp2.png}
+    \caption{Tráfico en wireshark 2}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/http1.png}
+    \caption{Tráfico en wireshark 3}
+\end{figure}
+
+
+Con este tráfico se podrá monitorizar de forma más sencilla en los siguientes apartados.
+
+
+\clearpage
+
 \section{Monitorización con Cacti}
-\section{Monitorización de flujos de tráfico}
+
+Para la monitorización con Cacti, se seguirá la práctica que se dió en clase, y se añadirán todos los routers y dispositivos disponibles para mostrar finalmente las gráficas del tráfico. Lo primero será iniciar Cacti con portainer y \textbf{nginx} para el proxy inverso que nos permite acceder a la interfaz de la webapp.
+
+Tras añadir el site, tree y configuración inicial, el cual no cambia con respecto a la práctica a excepción de los campos de nombres, se añadirán los cinco routers, este es el campo a rellenar:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/adddevices.png}
+    \caption{Añadir dispositivo en Cacti}
+\end{figure}
+
+Una vez se haya añadido todos, importante añadir la comunidad de SNMP, se comprueba que están todos añadidos y en estado \textbf{up}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/devices.png}
+    \caption{Dispositivos añadidos en Cacti}
+\end{figure}
+
 
 \end{document}

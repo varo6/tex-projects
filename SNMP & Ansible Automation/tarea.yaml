@@ -1,0 +1,144 @@
+- name: Configurar routers
+  hosts: Routers
+  gather_facts: no
+  connection: network_cli
+  tasks:
+   
+    - name: Configurar MU-SW
+      when: inventory_hostname == "MU-SW"
+      ios_command:
+        commands:
+          - configure terminal
+          - hostname MU-SW
+          - interface GigabitEthernet1/0
+          - ip address 22.10.0.1 255.255.255.252
+          - no shutdown
+          - interface Loopback0
+          - ip address 10.10.10.10 255.255.255.255
+          - no sh
+          - exit
+          #Configuración automatizada del encaminamiento
+          - router ospf 1
+          - network 172.18.0.0 0.0.0.255 area 0
+          - network 22.10.0.0 0.0.0.3 area 0
+          - network 10.10.10.10 0.0.0.0 area 0
+          - exit
+          - snmp-server community AHR RW
+          - snmp-server ifindex persist
+          - exit
+          - wr
+      register: output_mu_sw
+    
+    - name: Configurar MU-SE
+      when: inventory_hostname == "MU-SE"
+      ios_command:
+        commands:
+          - configure terminal
+          - hostname MU-SE
+          - interface GigabitEthernet1/0
+          - ip address 22.10.0.14 255.255.255.252
+          - no shutdown
+          - interface Loopback0
+          - ip address 11.11.11.11 255.255.255.255
+          - no sh
+          - exit
+          #Configuración automatizada del encaminamiento
+          - router ospf 1
+          - network 172.18.0.0 0.0.0.255 area 0
+          - network 22.10.0.0 0.0.0.3 area 0
+          - network 11.11.11.11 0.0.0.0 area 0
+          - exit
+          - snmp-server community AHR RW
+          - snmp-server ifindex persist
+          - exit
+          - wr
+      register: output_mu_se
+    
+    - name: Configurar MU-NW
+      when: inventory_hostname == "MU-NW"
+      ios_command:
+        commands:
+          - configure terminal
+          - hostname MU-NW
+          - interface GigabitEthernet1/0
+          - ip address 22.10.0.2 255.255.255.252
+          - no shutdown
+          - interface GigabitEthernet2/0
+          - ip address 22.10.0.5 255.255.255.252
+          - no shutdown
+          - interface Loopback0
+          - ip address 12.12.12.12 255.255.255.255
+          - no sh
+          - exit
+          #Configuración automatizada del encaminamiento
+          - router ospf 1
+          - network 172.18.0.0 0.0.0.255 area 0
+          - network 22.10.0.0 0.0.0.3 area 0
+          - network 12.12.12.12 0.0.0.0 area 0
+          - exit
+          - snmp-server community AHR RW
+          - snmp-server ifindex persist
+          - exit
+          - wr
+      register: output_mu_nw
+    
+    - name: Configurar MU-NE
+      when: inventory_hostname == "MU-NE"
+      ios_command:
+        commands:
+          - configure terminal
+          - hostname MU-NE
+          - interface GigabitEthernet1/0
+          - ip address 22.10.0.13 255.255.255.252
+          - no shutdown
+          - interface GigabitEthernet3/0
+          - ip address 22.10.0.10 255.255.255.252
+          - no shutdown
+          - interface Loopback0
+          - ip address 13.13.13.13 255.255.255.255
+          - no sh
+          - exit
+          #Configuración automatizada del encaminamiento
+          - router ospf 1
+          - network 172.18.0.0 0.0.0.255 area 0
+          - network 22.10.0.0 0.0.0.3 area 0
+          - network 13.13.13.13 0.0.0.0 area 0
+          - exit
+          - snmp-server community AHR RW
+          - snmp-server ifindex persist
+          - exit
+          - wr
+      register: output_mu_ne
+    
+    - name: Configurar MU-NN
+      when: inventory_hostname == "MU-NN"
+      ios_command:
+        commands:
+          - configure terminal
+          - hostname MU-NN
+          - interface GigabitEthernet2/0
+          - ip address 22.10.0.6 255.255.255.252
+          - no shutdown
+          - interface GigabitEthernet3/0
+          - ip address 22.10.0.9 255.255.255.252
+          - no shutdown
+          - interface Loopback0
+          - ip address 20.20.20.20 255.255.255.255
+          - no sh
+          - exit
+          #Configuración automatizada del encaminamiento
+          - router ospf 1
+          - network 172.18.0.0 0.0.0.255 area 0
+          - network 22.10.0.0 0.0.0.3 area 0
+          - network 20.20.20.20 0.0.0.0 area 0
+          - exit
+          - snmp-server community AHR RW
+          - snmp-server ifindex persist
+          - exit
+          - wr
+      register: output_mu_nn
+
+    - name: Mostrar salida MU-SW
+      debug:
+        var: output_mu_sw
+      when: inventory_hostname == "MU-SW"
