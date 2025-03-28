@@ -1,0 +1,90 @@
+- name: Configurar routers
+  hosts: Routers
+  gather_facts: no
+  connection: network_cli
+  tasks:
+
+    - name: Configurar MU-SW
+      when: inventory_hostname == "MU-SW"
+      ios_command:
+        commands:
+          - conf term
+          - ip cef
+          - int g0/0
+          - ip flow ingress
+          - ip flow egress
+          - ip flow-export destination 172.18.0.1 2075
+          - ip flow-export destination 172.18.0.1 2055
+          - ip flow-export version 5
+          - end
+          - wr
+      register: output_mu_sw
+
+    - name: Configurar MU-SE
+      when: inventory_hostname == "MU-SE"
+      ios_command:
+        commands:
+          - conf term
+          - ip cef
+          - int g0/0
+          - ip flow ingress
+          - ip flow egress
+          - ip flow-export destination 172.18.0.1 2075
+          - ip flow-export destination 172.18.0.1 2055
+          - ip flow-export version 5
+          - end
+          - wr
+      register: output_mu_se
+
+    - name: Configurar MU-NW
+      when: inventory_hostname == "MU-NW"
+      ios_command:
+        commands:
+          - conf term
+          - ip cef
+          - int g0/0
+          - ip flow ingress
+          - ip flow egress
+          - ip flow-export destination 172.18.0.1 2075
+          - ip flow-export destination 172.18.0.1 2055
+          - ip flow-export version 5
+          - end
+          - wr
+      register: output_mu_nw
+
+    - name: Configurar MU-NE
+      when: inventory_hostname == "MU-NE"
+      ios_command:
+        commands:
+          - conf term
+          - ip cef
+          - int g0/0
+          - ip flow ingress
+          - ip flow egress
+          - ip flow-export destination 172.18.0.1 2075
+          - ip flow-export destination 172.18.0.1 2055
+          - ip flow-export version 5
+          - end
+          - wr
+      register: output_mu_ne
+
+    - name: Configurar MU-NN
+      when: inventory_hostname == "MU-NN"
+      ios_command:
+        commands:
+          - conf term
+          - ip cef
+          - int g0/0
+          - ip flow ingress
+          - ip flow egress
+          - ip flow-export destination 172.18.0.1 2075
+          - ip flow-export destination 172.18.0.1 2055
+          - ip flow-export version 5
+          - end
+          - wr
+      register: output_mu_nn
+
+    - name: Mostrar salida MU-SW
+      debug:
+        var: output_mu_sw
+      when: inventory_hostname == "MU-SW"

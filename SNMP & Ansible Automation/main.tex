@@ -110,7 +110,8 @@ Para las \textbf{plays} de Ansible, se ha creado un archivo \texttt{tarea.yml} q
     title=Formato que seguirá tarea.yml,
 ]
     \begin{lstlisting}[gobble=6]
-        --- - name: Configure interface g1/0 on the router 
+        ---
+        - name: Configure interface g1/0 on the router 
         hosts: R1
         gather_facts: no 
         connection: network_cli 
@@ -302,10 +303,32 @@ También observamos los eventLogs y demás desde MIB Browser.
 
 \newpage
 
-\subsection{Alarma 2: MU-SW}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit 
+\subsection{Alarma 2: MU-NW}
 
-\section{Generación de tráfico Cisco IP SLA}
+Para la segunda alarma, se elegirá analizar cuando se realicen conexiones de SNMP erróneas. De esta forma, en apartados posteriores como el de Cacti, que necesitan de estas conexiones, se podrá monitorizar si se están realizando conexiones erróneas. El objeto que se usará será \texttt{snmpInBadCommunityNames}, que indicará si se ha hecho una petición de SNMP con una comunidad incorrecta, en este caso la úica comunidad configurada es AHR.
+
+Se añade al router \texttt{MU-NW} lo siguiente:
+
+\begin{tcolorbox}[
+    boxrule=0pt,
+    title=Configuración RMON Alarma 2 en MU-SW,
+]
+    \begin{lstlisting}[gobble=6]
+         - rmon alarm 2 snmpInBadCommunityNames.0 60 absolute
+         rising-threshold 1 3 falling-threshold 0 4 owner AHR
+         - rmon event 3 log trap acs description ``Intento SNMP con
+         comunidad incorrecta detectado'' owner AHR
+         - rmon event 4 log trap acs description ``Contador SNMP bad
+         community bajo (<=0)'' owner AHR
+    \end{lstlisting}
+\end{tcolorbox}
+
+
+Se puede comprobar la configuración completa, y en todo caso la alarma se tendrá el "trigger" cuando se intente conectar con una comunidad incorrecta. Por ejemplo, con \texttt{
+[lab@fedora \textasciitilde ]\$ snmpget -v2c -c HOLA 172.18.0.202 sysDescr.0}, nos saltará la alarma porque no existe la comunidad \texttt{HOLA}.
+
+
+\section{\texorpdfstring{Generación de tráfico Cisco IP SLA}{Generacion de trafico Cisco IP SLA} \label{section:Generacion de trafico Cisco IP SLA}}
 
 En este ejercicio se configurarán las IP SLA para, de alguna forma, simular tráfico constante en nuestra red, de esta forma se podrá monitorizar en los apartados siguientes.
 
@@ -368,6 +391,119 @@ Una vez se haya añadido todos, importante añadir la comunidad de SNMP, se comp
     \centering
     \includegraphics[width=\textwidth]{src/devices.png}
     \caption{Dispositivos añadidos en Cacti}
+\end{figure}
+
+tras esto, se crea el \textbf{Arbol} con las etiquetas correspondientes, cuya forma será:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/cactree.png}
+    \caption{Árbol de dispositivos en Cacti}
+\end{figure}
+
+
+Se irá dispositivo por dispositivo añadiendo el \textbf{Graph} necesario. En nuestro caso, se usará el Traffic BW de \textbf{Gi0/0}. Una vez estén todas las gráficas añadidas, lo comprobamos para nuestro árbol creado:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/cactigraphs.png}
+    \caption{Árbol de dispositivos en Cacti}
+\end{figure}
+
+Finalmente, recogemos las gráficas importantes en la misma zona:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/finalgraphs.png}
+    \caption{Gráficas de Cacti}
+\end{figure}
+
+
+
+\section{Monitorización de flujos de tráfico}
+\subsection{Netflow}
+
+Este ejercicio recoge la monitorización planteada con \texttt{Netflow}, en las interfaces que planteamos el \texttt{ip sla} del  \textbf{\hyperref[section:Generacion de trafico Cisco IP SLA]{ejercicio 5}.}
+
+Se empezará por activar netflow en todos los routers, el archivo \texttt{netflow.yml} tendrá esta forma para cada router:
+
+
+\begin{tcolorbox}[
+    boxrule=0pt,
+    title=Formato de configuración netflow.yml,
+]
+    \begin{lstlisting}[gobble=6]
+          - ip cef
+          - int g0/0
+          - ip flow ingress
+          - ip flow egress
+          - ip flow-export destination 172.18.0.1 2075
+          - ip flow-export destination 172.18.0.1 2055
+          - ip flow-export version 5
+    \end{lstlisting}
+\end{tcolorbox}
+
+Se puede ver que está el puerto configurado de 2055 y 2075, por el momento solo nos interesa el 2075, más adelante, para el \texttt{OpenObserve}, usaremos el otro puerto.
+
+Ahora comprobaremos la cache:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/cacheflow.png}
+    \caption{Cache de netflow}
+\end{figure}
+
+
+Para configurar el colector, se seguirá la práctica que se dio en clase, teniendo en cuenta lo que significa cada parte del comando y la ruta a guardar. El comando usado se puede observar en la captura:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/comandoflow.png}
+    \caption{Comando de configuración del colector}
+\end{figure}
+
+Finalmente, como nuestro colector está configurado para guardar cada 7 minutos, veremos un archivo cada 7, y podemos imprimir el flow-print de un archivo para ver lo que ha generad en 7 minutos. En la captura se puede observar tanto el comando con el print, como el nombre y la fecha en la que se crean los archivos de tráfico
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/flowprint.png}
+    \caption{Comando de print de netflow}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/lsflow.png}
+    \caption{Archivos de flujo}
+\end{figure}
+
+\newpage 
+
+\subsection{OpenObserve}
+
+Para esta sección, al tener ya todo configurado y el puerto 2055 también está añadido como destino, se iniciará open OpenObserve mediante \textbf{portainer}, junto a su añadido de goflow. 
+
+Filtraremos en la tabla de flujos para ver el timestamp, protocolo, dirección origen, dirección destino, y siguiente salto, al igual que el histograma que estará en la parte superior de la captura.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/flujos.png}
+    \caption{Tabla de flujos openobserve}
+\end{figure}
+
+Para la parte final, se hará una captura del dashboard \texttt{Network Activity, } el cual se ha añadido mediante \texttt{json} desde el github de \texttt{OpenObserve}. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/openobs1.png}
+    \caption{Gráfico de openobserve con udp}
+\end{figure}
+
+Como se puede ver, hay un pico enorme de UDP, posiblemente de algunas configuracones o peticionies que se hayan hecho a los routers fuera del tráfico SLA que hemos configurado, si filtramos por el tráfico que no es UDP, se puede ver un tráfico más constante:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{src/openobs2.png}
+    \caption{Gráfico de openobserve sin udp}
 \end{figure}
 
 

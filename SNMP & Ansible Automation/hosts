@@ -1,0 +1,15 @@
+[Routers]
+MU-SW ansible_host=172.18.0.200
+MU-SE ansible_host=172.18.0.201
+MU-NW ansible_host=172.18.0.202
+MU-NE ansible_host=172.18.0.203
+MU-NN ansible_host=172.18.0.220
+
+[all:vars]
+ansible_network_os=ios
+ansible_user=ansible
+ansible_password=ansible
+ansible_ssh_pass=ansible
+ansible_become=true
+ansible_become_method=enable
+ansible_become_password=cisco
