@@ -102,7 +102,157 @@ Se desarrollará la fórmula hasta acotar el seno de nuestra función, el cual t
 	\caption{Función de error acotada.}
 \end{figure}
 
-Por lo que finalmente, el error será
+Por lo que finalmente, el error será:
+
+\begin{equation}\label{funcion}
+  \big|f(x) - L(x)\big| < \frac{-5 \pi^3}{81}
+\end{equation}
+
+
+\subsection{Calcular L(x) mediante la matriz de Vandermonde}
+
+Una forma de expresar L(x) es desarrollarlo en base canónica siendo en vez de las derivadas, valores de la función en distintos puntos, en este caso nuestros nodos.
+
+Así, si buscamos los polinomios en la base canónica, usaremos nuestros nodos (\ref{nodos}) para formarlos, de tal forma que:
+
+\begin{equation}
+  L(x_{n}) = f(x_{n})
+\end{equation}
+
+\begin{equation}
+  L(x_{n}) = a_{0} + a_{1}x_{n} + a_{2}x_{n}^{2} + ... + a_{n}x_{n}^{n}
+\end{equation}
+
+Si expresamos nuestros polinomios en una única matriz, cuyos coeficientes serán comunes, formaremos la matriz de Vandermonde:
+
+
+\begin{figure}[ht]
+	\center
+	\includegraphics[width=0.5\textwidth]{src/vandermatriz.jpg}
+	\caption{Matriz planteada}
+\end{figure}
+
+\newpage
+
+Sustituyendo con nuestros nodos y el valor de las funciones:
+
+\begin{figure}[ht]
+	\center
+	\includegraphics[width=0.5\textwidth]{src/matrizdatos.jpg}
+	\caption{Matriz de vandermonde con nuestros datos}
+\end{figure}
+
+
+Si desarrollamos el sistema, podemos determinar inicialmente el valor de $a_{0}$, que será el valor de la función en el primer nodo, y posteriormente desarrollamos el sistema de ecuaciones de segundo grado:
+
+\begin{figure}[ht]
+	\center
+	\includegraphics[width=0.5\textwidth]{src/sistemaplanteado.jpg}
+	\caption{Planteamiento del sistema}
+\end{figure}
+
+Habiendo sacado los coeficientes, tenemos la solución para el problema. Resolvemos mediante Cramer.
+
+\begin{figure}[h]
+	\center
+	\includegraphics[width=0.5\textwidth]{src/cramer.jpg}
+	\caption{Resolución del sistema por cramer}
+\end{figure}
+
+Por lo que nuestro polinomio interpolador finalmente será:
+
+\begin{equation}
+  L(x) = 5 + -\frac{25}{12}x^{2} + -\frac{5}{12}x
+\end{equation}
+
+\newpage
+
+
+\subsection{Calcular L(x) mediante el método de Lagrange}
+
+En el caso anterior, donde usamos la matriz de Vandermonde, pudimos obtener el polinomio sin mucha dificultad. El problema de la forma anterior, es que para grados n mayores, se hace más complicado de resolver. Por ello, intentamos encontrar una fórmula cerrada para L(x).
+
+Por ello, mediante la forma de Lagrange, tenemos una manera un poco más sencilla de calcular el polinomio interpolador, expresándolo como:
+
+\begin{equation}
+  L(x) = \sum_{i=0}^{n} f(x_i) L_i(x) = \sum_{i=0}^{n} f(x_i) \frac{(x - x_0) \dots (x - x_{i-1})(x - x_{i+1}) \dots (x - x_n)}{(x_i - x_0) \dots (x_i - x_{i-1})(x_i - x_{i+1}) \dots (x_i - x_n)}
+\end{equation}
+
+De esta forma, expresamos la fórmula sustituyendo con nuestros valores, empezaremos sacando el valor de las funciones en cada nodo:
+
+\begin{figure}[h]
+  \center
+  \includegraphics[width=0.3\textwidth]{src/lagrangefis.jpg}
+  \caption{Valores de la función en los nodos}
+\end{figure} 
+  
+Ahora, el valor de los polinomios:
+
+\begin{figure}[h]
+  \center
+  \includegraphics[width=0.5\textwidth]{src/lagrangelis.jpg}
+  \caption{Polinomios de Lagrange}
+\end{figure}
+
+Por lo que finalmente, si sumamos los correspondientes productos, tendríamos el polinomio interpolador: (hemos hecho la fórmula anterior pero por separado)
+
+\begin{figure}[h]
+  \center
+  \includegraphics[width=0.5\textwidth]{src/lagrangelx.jpg}
+  \caption{Polinomios interpolador sin base canónica}
+\end{figure}
+
+Sustituimos con nuestros datos obtenidos:
+
+\begin{equation}
+  L(x) = 5 \frac{(x - 1)(x - 3)}{3} + \frac{5}{2} \frac{x(x - 3)}{-2} - 5 \frac{x(x - 1)}{6}
+\end{equation}
+
+\subsection{Calcular L(x) mediante la forma de Newton}
+
+Aunque el método de Lagrange nos facilita en parte el problema de situaciones con grados mayores, aún tiene una desventaja, y es el de la "permanencia".
+
+Si quisiéramos añadir un nodo más al problema, de la forma anterior tendríamos que volver a calcular el polinomio sin oportunidad de reusar los cálculos que se hicieron anteriormente. Con la forma de Newton, podemos evitar este inconveniente gracias a la relación de recurrencia que establecimos en clase. En este caso no tenemos una fórmula cerrada, pero sí una forma de calcular el polinomio a partir de los nodos anteriores sin cambiar todo.
+
+Tendremos la expresión del polinomio en la fórmula de Newton con esta base:
+
+\begin{equation}
+L(x) = \sum_{i=0}^{n} f[x_0, x_1, \dots, x_{i-1}, x_i](x - x_0)(x - x_1) \dots (x - x_{i-1})
+\end{equation}
+
+Y los coeficientes son \textit{diferencias divididas}, que se calculan de la siguiente forma:
+
+\begin{equation}
+f[x_0, x_1, \dots, x_{i-1}, x_i] = \frac{f[x_1, \dots, x_{i-1}, x_i] - f[x_0, x_1, \dots, x_{i-1}]}{x_i - x_0} \quad \text{si } i > 0 
+\end{equation}
+
+Podemos observar mediante el esquema hecho en clase, que los coeficientes que usaremos serán $f[x_0]$, $f[x_0,x_1]$, y $f[x_0, x_1, x_2]$, pero para ello tendremos que sacar los anteriores también. Es decir, para el $f[x_0, x_1]$ necesitaremos las diferencias calculadas en $x_0$ y $x_1$.
+
+\begin{figure}[h]
+  \center
+  \includegraphics[width=0.7\textwidth]{src/fxnewton.jpg}
+  \caption{Diferencias divididas}
+\end{figure}
+
+Y finalmente:
+
+\begin{figure}[h]
+  \center
+  \includegraphics[width=0.7\textwidth]{src/f012newton.jpg}
+  \caption{Última diferencia dividida}
+\end{figure}
+
+Por lo que como tenemos que multiplicar las diferencias mencionadas anteriormente por la base, quedaría finalemnte:
+
+\begin{figure}[h]
+  \center
+  \includegraphics[width=0.7\textwidth]{src/newtonsol1.jpg}
+  \caption{Diferencias divididas}
+\end{figure}
+
+\newpage
+
+\section{Segundos ejercicios}
 
 
 \end{document}
