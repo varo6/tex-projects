@@ -1,25 +1,25 @@
 \documentclass{article}
 
-% Language setting
+% Idioma
 \usepackage[spanish]{babel}
 
-% Set page size and margins
+% márgenes y formato
 \usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
 \usepackage{parskip}
 
-% Useful packages
+% Otros paquetes importantes
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage[colorlinks=true, linkcolor=black, urlcolor=blue]{hyperref}
 
-% Uncomment these packages if you want to use dark mode
+% PARA APUNTES: darkmode
 % \usepackage{darkmode}
 % \enabledarkmode
 
-% Title and author
+% Titulo y autor
 \title{Interpolación de Lagrange}
-\author{Álvaro Hernández}
+\author{Álvaro Hernández Riquelme}
 \date{\today}
 
 \begin{document}
@@ -36,7 +36,7 @@ En este entregable se hará uso del polinomio interpolador de Lagrange para apro
 
 Nuestra función dada es:
 
-\begin{equation}\label{funcion}
+\begin{equation}\label{funcion2}
 	5 \cos \left( \frac{\pi x}{3} \right)
 \end{equation}
 
@@ -86,6 +86,7 @@ Una vez teniendo la tercera derivada, se sustituye en la fórmula anterior con l
 	\caption{Valores sustituidos en la fórmula}
 \end{figure}
 
+%% NOTA: Los newpage se añaden para que estén en orden con las explicaciones de éstas. De normal no los pondría.
 \newpage
 
 Se desarrollará la fórmula hasta acotar el seno de nuestra función, el cual teniendo en cuenta los valores entre los que varía, podemos decir que su valor absoluto será menor o igual que 1.
@@ -119,7 +120,7 @@ Así, si buscamos los polinomios en la base canónica, usaremos nuestros nodos (
   L(x_{n}) = f(x_{n})
 \end{equation}
 
-\begin{equation}
+\begin{equation}\label{ecuacion 7}
   L(x_{n}) = a_{0} + a_{1}x_{n} + a_{2}x_{n}^{2} + ... + a_{n}x_{n}^{n}
 \end{equation}
 
@@ -253,7 +254,7 @@ Por lo que como tenemos que multiplicar las diferencias mencionadas anteriorment
 \newpage
 
 
-\subsection{Reescribir}
+\subsection{Reescribe los 3 polinomios anteriores en la base canónica}
 
 Para esta sección, reescribiremos el polinomio de Lagrange obtenido con los métodos de Lagrange y de Newton, ya que no están en la forma canónica.
 
@@ -294,7 +295,7 @@ Seguiremos los mismos pasos que cuando atneriormente calculamos la matriz de Van
 \begin{figure}[h]
   \center
   \includegraphics[width=0.7\textwidth]{src/vandermonde2_1.jpg}
-  \caption{Lagrange en base canónica}
+  \caption{Forma matriz de Vandermonde}
 \end{figure}
 
 Susitituimos por nuestros valores y formamos la ecuación a resolver, como antes, la solución $a_{0}$ es el valor del primer nodo, 5. 
@@ -302,7 +303,7 @@ Susitituimos por nuestros valores y formamos la ecuación a resolver, como antes
 \begin{figure}[h]
   \center
   \includegraphics[width=0.7\textwidth]{src/vandermonde2_2.jpg}
-  \caption{Lagrange en base canónica}
+  \caption{Planteamiento del sistema }
 \end{figure}
 
 Con los 5 de la izquierda ya despejados, formamos ahora la matriz para resolver el sistema de ecuaciones, como antes, usando Cramer. Resolvemos el determinante ya que nos hará falta después: 
@@ -310,7 +311,7 @@ Con los 5 de la izquierda ya despejados, formamos ahora la matriz para resolver 
 \begin{figure}[h]
   \center
   \includegraphics[width=0.7\textwidth]{src/vandermonde2_3.jpg}
-  \caption{Lagrange en base canónica}
+  \caption{Matriz del sistema y determinante}
 \end{figure}
 
 Ahora ya podemos sustituir la fila de los valores según queramos calcular $a_1$, $a_2$, o $a_3$. Terminamos de resolver el sistema:
@@ -318,13 +319,71 @@ Ahora ya podemos sustituir la fila de los valores según queramos calcular $a_1$
 \begin{figure}[h]
   \center
   \includegraphics[width=0.7\textwidth]{src/vandermonde2_4.jpg}
-  \caption{Lagrange en base canónica}
+  \caption{Resultado de Cramer}
 \end{figure}
 
-Una vez teniendo los valores, como se ha visto en la ecuacion 7, podemos usarlos para formar el polinomio interpolador en la forma canónica:
+\newpage
+
+Una vez teniendo los valores, como se ha visto en la ecuacion (\ref{ecuacion 7}), podemos usarlos para formar el polinomio interpolador en la forma canónica:
+
+\begin{equation}
+  L(x) = 5 - \frac{7}{6}x - \frac{59}{36}x^2 + \frac{11}{36}x^{3}
+\end{equation}
+
+\subsection{Recalcula el nuevo L(x) mediante Lagrange}
+
+Ahora, en vez de usar la matriz de Vandermonde, usaremos la forma de Lagrange. En este caso, formaremos los distintos $L_i(x)$ para cada uno de los nodos, y luego multiplicaremos por el valor de la función en cada nodo. Se puede observar que aunque haya un nuevo $L_3(x)$, los anteriores cambian, ya que al añadir el nuevo nodo su expresión para calcular también cambia.
+
+\begin{figure}[h]
+  \center
+  \includegraphics[width=0.7\textwidth]{src/lagrange2_1.jpg}
+  \caption{Método de lagrange con 3 nodos}
+\end{figure}
+
+Una vez tenemos todos, los multiplicamos por el valor de la función en cada nodo, siendo éste el resultado que buscamos:
+
+\begin{figure}[h]
+  \center
+  \includegraphics[width=0.7\textwidth]{src/lagrange2terminado.jpg}
+  \caption{Resultado final de Lagrange}
+\end{figure}
+
+\subsection{Recalcula el nuevo L(x) mediante Newton}
+
+Finalmente, usaremos el método de Newton para calcular el nuevo polinomio interpolador. En este caso, como ya tenemos los nodos anteriores, solo tenemos que calcular las nuevas diferencias divididas y multiplicar por la base. Como vemos en la siguiente figura, las diferencias que nos quedamos son las que están subrayadas, pero para llegar a la nueva tendremos que calcular todas las que tienen que ver con el nuevo nodo. Las demás, podemos reutilizarlas del ejercicio de Newton anterior.
+
+\begin{figure}[h]
+  \center
+  \includegraphics[width=0.7\textwidth]{src/newtontabla.jpg}
+  \caption{Tabla de diferencias forma de Newton}
+\end{figure}
+
+Por lo que calculamos las diferencias faltantes:
+
+\begin{figure}[h]
+  \center
+  \includegraphics[width=0.7\textwidth]{src/newton2.jpg}
+  \caption{Diferencias divididas}
+\end{figure}
+
+Finalmente, multiplicamos por la base que requiere cada diferencia que subrayamos anteriormente, y nos queda el polinomio interpolador. Las diferencias, recuperando del ejercicio anterior, son:
+
+\begin{equation}
+\begin{cases}
+f[x_0] = 5 \\
+f[x_0, x_1] = -\frac{5}{2} \\
+f[x_0, x_1, x_2] = -\frac{5}{12} \\
+f[x_0, x_1, x_2, x_3] = \frac{11}{36}
+\end{cases}
+\end{equation}
+
+Por lo que, multiplicado por la base como se hizo con 3 nodos, nos queda:
+
+\begin{equation}
+L(x) = 5 - \frac{5}{2}x - \frac{5}{12}x(x - 1) + \frac{11}{36}x(x - 1)(x - 3)
+\end{equation}
 
 
 
 
 \end{document}
-
