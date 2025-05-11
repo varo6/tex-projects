@@ -252,7 +252,78 @@ Por lo que como tenemos que multiplicar las diferencias mencionadas anteriorment
 
 \newpage
 
+
+\subsection{Reescribir}
+
+Para esta sección, reescribiremos el polinomio de Lagrange obtenido con los métodos de Lagrange y de Newton, ya que no están en la forma canónica.
+
+Con el método de Lagrange, vamos multiplicando todo e intentando simplificar y finalmente tenemos:
+
+\begin{figure}[h]
+  \center
+  \includegraphics[width=0.7\textwidth]{src/expresionbase1.jpg}
+  \caption{Lagrange en base canónica}
+\end{figure}
+
+y finalmente, multiplicando esa fracción final, nos queda la base canónica:
+
+\begin{equation}
+  L(x) = 5 + -\frac{25}{12}x^{2} + -\frac{5}{12}x
+\end{equation}
+
+Para la parte de Newton, usamos la expresión obtenida de la figura 14 y si seguimos operando finalmente nos queda:
+
+\begin{figure}[h]
+  \center
+  \includegraphics[width=0.7\textwidth]{src/expresionbase2.jpg}
+  \caption{Lagrange en base canónica}
+\end{figure}
+
+\newpage
+
 \section{Segundos ejercicios}
+
+En estos segundos ejercicios, como ya tenemos la teoría explicada, se hará un desarrollo similar, pero con un nodo más. En este caso, se añadirá el nodo $x_{3} = 6$.
+
+Compararemos finalmente la diferencia para recalcular las soluciones con las distintas formas.
+
+\subsection{Recalcula el nuevo L(x) mediante Vandermonde}
+
+Seguiremos los mismos pasos que cuando atneriormente calculamos la matriz de Vandermonde, solo que ahora tendrá un nodo más:
+
+\begin{figure}[h]
+  \center
+  \includegraphics[width=0.7\textwidth]{src/vandermonde2_1.jpg}
+  \caption{Lagrange en base canónica}
+\end{figure}
+
+Susitituimos por nuestros valores y formamos la ecuación a resolver, como antes, la solución $a_{0}$ es el valor del primer nodo, 5. 
+
+\begin{figure}[h]
+  \center
+  \includegraphics[width=0.7\textwidth]{src/vandermonde2_2.jpg}
+  \caption{Lagrange en base canónica}
+\end{figure}
+
+Con los 5 de la izquierda ya despejados, formamos ahora la matriz para resolver el sistema de ecuaciones, como antes, usando Cramer. Resolvemos el determinante ya que nos hará falta después: 
+
+\begin{figure}[h]
+  \center
+  \includegraphics[width=0.7\textwidth]{src/vandermonde2_3.jpg}
+  \caption{Lagrange en base canónica}
+\end{figure}
+
+Ahora ya podemos sustituir la fila de los valores según queramos calcular $a_1$, $a_2$, o $a_3$. Terminamos de resolver el sistema:
+
+\begin{figure}[h]
+  \center
+  \includegraphics[width=0.7\textwidth]{src/vandermonde2_4.jpg}
+  \caption{Lagrange en base canónica}
+\end{figure}
+
+Una vez teniendo los valores, como se ha visto en la ecuacion 7, podemos usarlos para formar el polinomio interpolador en la forma canónica:
+
+
 
 
 \end{document}
