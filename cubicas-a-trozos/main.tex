@@ -1,0 +1,206 @@
+\documentclass{article}
+
+% Idioma
+\usepackage[spanish]{babel}
+
+% márgenes y formato
+\usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{parskip}
+
+% Otros paquetes importantes
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, linkcolor=black, urlcolor=blue]{hyperref}
+
+% PARA APUNTES: darkmode
+% \usepackage{darkmode}
+% \enabledarkmode
+
+% Titulo y autor
+\title{Cúbicas a Tbombarozos}
+\author{Álvaro Hernández Riquelme}
+\date{\today}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+Nuestra función será
+\begin{equation}
+f(x) = 3x^4 - x^3 - 3x + 1
+\end{equation}
+
+con los nodos $x_0 = 0$, $x_1 = 2$.
+
+\subsection{Obtener la cota de error}
+
+Se nos pide obtener la cota de error $|f(x)-H(x)|$ válida para $0<=2<=1$.
+
+Lo primero que haremos sería obtener la cuarta derivada, que, listando cada una, será:
+
+\begin{alignat*}{2}
+&f'(x) &&= 12x^3 - 3x^2 - 3 \\
+&f''(x) &&= 36x^2 - 6x \\
+&f'''(x) &&= 72x - 6 \\
+&f^{(4)}(x) &&= 72
+\end{alignat*}
+
+Para finalmente, obtener la cota de error con la formula del pdf, siendo la ecuación $16$:
+
+\begin{equation}
+|f(x) - H(x)| \leq C_4 \cdot \frac{h^4}{384}
+\end{equation}
+
+Donde $C_4$ es el máximo de la cuarta derivada en el intervalo $[0,2]$, que en este caso es $72$, y h es la distancia entre los nodos, que en este caso es $2$.
+
+Por lo tanto, sustituyendo en la ecuación, tenemos:
+
+\begin{equation}
+|f(x) - H(x)| \leq 72 \cdot \frac{2^4}{384}
+\end{equation}
+
+\begin{equation}
+|f(x) - H(x)| \leq \frac{1152}{384} = 3
+\end{equation}
+
+La cota de error es de \boxed{$3$}.
+
+\subsection{Calcular H(x) mediante la Forma de Newton}
+
+En este apartado se nos pide calcular el polinomio de Hermite $H(x)$, por lo que, usaremos las fórmulas vistas en clase, y que se encuentran en el PDF de teoría. Para ello, iremos paso por paso hasta tener todos los valores y poder sustituir en la fórmula de Newton (en el último paso).
+
+Calculamos la primera derivada, necesaria para las diferencias divididas:
+$$ f'(x) = \frac{d}{dx}(3x^4 - x^3 - 3x + 1) = 12x^3 - 3x^2 - 3 $$
+
+Evaluamos \(f(x)\) y \(f'(x)\) en los nodos \(a=0\) y \(b=2\):
+\begin{itemize}
+    \item \(f(0) = 3(0)^4 - (0)^3 - 3(0) + 1 = 1\)
+    \item \(f(2) = 3(2)^4 - (2)^3 - 3(2) + 1 = 3(16) - 8 - 6 + 1 = 48 - 8 - 6 + 1 = 35\)
+    \item \(f'(0) = 12(0)^3 - 3(0)^2 - 3 = -3\)
+    \item \(f'(2) = 12(2)^3 - 3(2)^2 - 3 = 12(8) - 3(4) - 3 = 96 - 12 - 3 = 81\)
+\end{itemize}
+
+Los coeficientes del polinomio de Hermite en la forma de Newton son las diferencias divididas \(f[0]\), \(f[0,0]\), \(f[0,0,2]\), y \(f[0,0,2,2]\). Las calculamos según la fórmula ($3$) del PDF de teoría.
+
+\begin{itemize}
+    \item \(f[0] = f(0) = 1\)
+    \item \(f[0,0] = f'(0) = -3\)
+    \item \(f[2] = f(2) = 35\)
+    \item \(f[2,2] = f'(2) = 81\)
+\end{itemize}
+
+\begin{itemize}
+    \item \(f[0,2] = \dfrac{f(2) - f(0)}{2-0} = \dfrac{35 - 1}{2} = \dfrac{34}{2} = 17\)
+\end{itemize}
+
+Seguimos con la fórmula mencionada ($3$) del PDF, para las siguientes diferencias divididas, usando valores calculados en las anteriores diferencias:
+
+\begin{itemize}
+    \item \(f[0,0,2] = \dfrac{f[0,2] - f[0,0]}{2-0} = \dfrac{17 - (-3)}{2} = \dfrac{20}{2} = 10\)
+    \item  \(f[0,2,2] = \dfrac{f[2,2] - f[0,2]}{2-0} = \dfrac{81 - 17}{2} = \dfrac{64}{2} = 32\)
+\end{itemize}
+
+Finalmente, con los valores obtenidos, calculamos la última diferencia dividida:
+
+\begin{itemize}
+    \item \(f[0,0,2,2] = \dfrac{f[0,2,2] - f[0,0,2]}{2-0} = \dfrac{32 - 10}{2} = \dfrac{22}{2} = 11\)
+\end{itemize}
+
+Usando la fórmula de Newton con los nodos \(0,0,2,2\) y los coeficientes calculados:
+
+\begin{equation}
+H(x) = f[a] + f[a,a](x-a) + f[a,a,b](x-a)^2 + f[a,a,b,b](x-a)^2(x-b)
+\end{equation}
+\begin{equation}
+H(x) = f[0] + f[0,0](x-0) + f[0,0,2](x-0)(x-0) + f[0,0,2,2](x-0)(x-0)(x-2)
+\end{equation}
+Sustituyendo los valores de los coeficientes:
+\begin{equation}
+H(x) = 1 + (-3)x + 10x^2 + 11x^2(x-2)
+\end{equation}
+
+Si lo expandimos, la solución finalmente es:
+
+$$ \boxed{H(x) = 11x^3 - 12x^2 - 3x + 1} $$
+
+\subsection{Calcula S(x) resolviendo el sistema de ecuaciones}
+
+Para un único intervalo \([x_0, x_1]\), el polinomio del spline, \(S_0(x)\), se define según la fórmula ($24$) del PDF de la teoría:
+\begin{equation}
+S_0(x) = \alpha_{0,0} + \alpha_{0,1}(x-x_0) + \alpha_{0,2}(x-x_0)^2 + \alpha_{0,3}(x-x_0)^3
+\end{equation}
+
+Necesitamos determinar los cuatro coeficientes \(\alpha_{0,0}, \alpha_{0,1}, \alpha_{0,2}, \alpha_{0,3}\). Para ello, hago sistema de cuatro ecuaciones lineales basado en las siguientes condiciones:
+
+\begin{enumerate}
+    \item El spline debe pasar por el punto \((x_0, f(x_0))\). Esto lo saco de la ecuación ($26$) del PDF, que sería:
+    $$ \alpha_{0,0} = f(x_0) $$
+
+    \item El spline debe pasar por el punto \((x_1, f(x_1))\). Esto se deriva de la segunda parte de la ecuación ($26$) :
+    $$ \alpha_{0,0} + \alpha_{0,1}(x_1-x_0) + \alpha_{0,2}(x_1-x_0)^2 + \alpha_{0,3}(x_1-x_0)^3 = f(x_1) $$
+
+    \item Para un spline natural, la segunda derivada en los extremos del intervalo global es cero. Esto semuestra en la ecuación ($28$), \(S''(x_0) = 0\). La segunda derivada de \(S_0(x)\) es \(S_0''(x) = 2\alpha_{0,2} + 6\alpha_{0,3}(x-x_0)\). Al evaluar en \(x=x_0\), obtenemos:
+    $$ S_0''(x_0) = 2\alpha_{0,2} = 0 \implies \alpha_{0,2} = 0 $$
+    Esta es la primera de las ``ecuaciones extra'' mencionadas en la ecuación ($27$).
+
+    \item la ecuación ($28$) exige que \(S''(x_1) = 0\). Al evaluar \(S_0''(x)\) en \(x=x_1\), obtenemos:
+    $$ S_0''(x_1) = 2\alpha_{0,2} + 6\alpha_{0,3}(x_1-x_0) = 0 $$
+    Esta es la segunda de las ``ecuaciones extra''.
+\end{enumerate}
+
+
+Ahora pasamos a plantear el sistema de ecuaciones.
+Primero, evaluamos la función \(f(x) = 3x^4 - x^3 - 3x + 1\) en los nodos \(x_0=0\) y \(x_1=2\):
+\begin{itemize}
+    \item \(f(0) = 3(0)^4 - (0)^3 - 3(0) + 1 = 1\)
+    \item \(f(2) = 3(2)^4 - (2)^3 - 3(2) + 1 = 3(16) - 8 - 6 + 1 = 35\)
+\end{itemize}
+
+Ahora, construimos el sistema de 4 ecuaciones con 4 incógnitas (\(\alpha_{0,0}, \alpha_{0,1}, \alpha_{0,2}, \alpha_{0,3}\)) usando las fórmulas deducidas:
+\begin{enumerate}
+    \item \(\alpha_{0,0} = f(0) = 1\)
+    \item \(\alpha_{0,0} + \alpha_{0,1}(2-0) + \alpha_{0,2}(2-0)^2 + \alpha_{0,3}(2-0)^3 = f(2)\) \\
+    \(\implies \alpha_{0,0} + 2\alpha_{0,1} + 4\alpha_{0,2} + 8\alpha_{0,3} = 35\)
+    \item \(\alpha_{0,2} = 0 \)
+    \item \(2\alpha_{0,2} + 6\alpha_{0,3}(2-0) = 0 \implies 2\alpha_{0,2} + 12\alpha_{0,3} = 0\)
+\end{enumerate}
+
+Ahora resolveremos por sustitución ya que ya tenemos \(\alpha_{0,2}\) y \(\alpha_{0,0}\):
+\begin{itemize}
+    \item Sustituimos \(\alpha_{0,2}=0\) :
+    \begin{align*}
+    2(0) + 12\alpha_{0,3} &= 0 \\
+    12\alpha_{0,3} &= 0 \\
+    \alpha_{0,3} &= 0
+    \end{align*}
+    \item Finalmente, sustituimos los valores de \(\alpha_{0,0}\), \(\alpha_{0,2}\) y \(\alpha_{0,3}\):
+    \begin{align*}
+    (1) + 2\alpha_{0,1} + 4(0) + 8(0) &= 35 \\
+    1 + 2\alpha_{0,1} &= 35 \\
+    2\alpha_{0,1} &= 34 \\
+    \alpha_{0,1} &= 17
+    \end{align*}
+\end{itemize}
+Los coeficientes son: \(\alpha_{0,0} = 1\), \(\alpha_{0,1} = 17\), \(\alpha_{0,2} = 0\), \(\alpha_{0,3} = 0\).
+
+Sustituimos los coeficientes en la fórmula:
+
+$$ S(x) = S_0(x) = \alpha_{0,0} + \alpha_{0,1}(x-x_0) + \alpha_{0,2}(x-x_0)^2 + \alpha_{0,3}(x-x_0)^3 $$
+$$ S(x) = 1 + 17(x-0) + 0(x-0)^2 + 0(x-0)^3 $$
+$$ \boxed{S(x) = 17x + 1} $$
+
+
+
+
+
+
+
+
+\end{document}
