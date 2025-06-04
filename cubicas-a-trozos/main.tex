@@ -18,7 +18,7 @@
 % \enabledarkmode
 
 % Titulo y autor
-\title{Cúbicas a Tbombarozos}
+\title{Cúbicas a Trozos}
 \author{Álvaro Hernández Riquelme}
 \date{\today}
 
@@ -146,7 +146,7 @@ Necesitamos determinar los cuatro coeficientes \(\alpha_{0,0}, \alpha_{0,1}, \al
     \item El spline debe pasar por el punto \((x_1, f(x_1))\). Esto se deriva de la segunda parte de la ecuación ($26$) :
     $$ \alpha_{0,0} + \alpha_{0,1}(x_1-x_0) + \alpha_{0,2}(x_1-x_0)^2 + \alpha_{0,3}(x_1-x_0)^3 = f(x_1) $$
 
-    \item Para un spline natural, la segunda derivada en los extremos del intervalo global es cero. Esto semuestra en la ecuación ($28$), \(S''(x_0) = 0\). La segunda derivada de \(S_0(x)\) es \(S_0''(x) = 2\alpha_{0,2} + 6\alpha_{0,3}(x-x_0)\). Al evaluar en \(x=x_0\), obtenemos:
+    \item Para un spline natural, la segunda derivada en los extremos del intervalo global es cero. Esto seencuentra en la ecuación ($28$), \(S''(x_0) = 0\). La segunda derivada de \(S_0(x)\) es \(S_0''(x) = 2\alpha_{0,2} + 6\alpha_{0,3}(x-x_0)\). Al evaluar en \(x=x_0\), obtenemos:
     $$ S_0''(x_0) = 2\alpha_{0,2} = 0 \implies \alpha_{0,2} = 0 $$
     Esta es la primera de las ``ecuaciones extra'' mencionadas en la ecuación ($27$).
 
@@ -176,16 +176,15 @@ Ahora resolveremos por sustitución ya que ya tenemos \(\alpha_{0,2}\) y \(\alph
 \begin{itemize}
     \item Sustituimos \(\alpha_{0,2}=0\) :
     \begin{align*}
-    2(0) + 12\alpha_{0,3} &= 0 \\
-    12\alpha_{0,3} &= 0 \\
-    \alpha_{0,3} &= 0
+    &2(0) + 12\alpha_{0,3} = 0 &&\\
+    &\alpha_{0,3} = 0 &&
     \end{align*}
     \item Finalmente, sustituimos los valores de \(\alpha_{0,0}\), \(\alpha_{0,2}\) y \(\alpha_{0,3}\):
     \begin{align*}
-    (1) + 2\alpha_{0,1} + 4(0) + 8(0) &= 35 \\
-    1 + 2\alpha_{0,1} &= 35 \\
-    2\alpha_{0,1} &= 34 \\
-    \alpha_{0,1} &= 17
+    &(1) + 2\alpha_{0,1} + 4(0) + 8(0) = 35 &&\\
+    &1 + 2\alpha_{0,1} = 35 &&\\
+    &2\alpha_{0,1} = 34 &&\\
+    &\alpha_{0,1} = 17 &&
     \end{align*}
 \end{itemize}
 Los coeficientes son: \(\alpha_{0,0} = 1\), \(\alpha_{0,1} = 17\), \(\alpha_{0,2} = 0\), \(\alpha_{0,3} = 0\).
@@ -196,11 +195,130 @@ $$ S(x) = S_0(x) = \alpha_{0,0} + \alpha_{0,1}(x-x_0) + \alpha_{0,2}(x-x_0)^2 + 
 $$ S(x) = 1 + 17(x-0) + 0(x-0)^2 + 0(x-0)^3 $$
 $$ \boxed{S(x) = 17x + 1} $$
 
+\subsection{Recalcular el nuevo $H(x)$}
+
+Ahora se nos pide recalcular el polinomio de Hermite $H(x)$ si añadimos un nuevo nodo \(x_2 = 3\), aunque reutilizaremos calculos hechos anteriormente.
+
+Una de las propiedades más poderosas de la forma de Newton es la \textbf{permanencia}. Los coeficientes calculados para los nodos \(0,0,2,2\) no cambian. Simplemente calcularemos los nuevos coeficientes que surgen al añadir los nodos \(3,3\).
+
+\textbf{Recapitulando los coeficientes anteriores:}
+\begin{itemize}
+    \item \(f[0] = 1\)
+    \item \(f[0,0] = -3\)
+    \item \(f[0,0,2] = 10\)
+    \item \(f[0,0,2,2] = 11\)
+\end{itemize}
+
+El polinomio anterior era \(H_{[0,2]}(x) = 1 - 3x + 10x^2 + 11x^2(x-2)\). Nuestro nuevo polinomio será una extensión de este. Los pasos serán similares a los del ejercicio 1.
+
+Primero, evaluamos la función y su derivada en  \(x=3\).
+\begin{itemize}
+    \item \(f(3) = 3(3)^4 - (3)^3 - 3(3) + 1 = 3(81) - 27 - 9 + 1 = 243 - 27 - 9 + 1 = 208\)
+    \item \(f'(3) = 12(3)^3 - 3(3)^2 - 3 = 12(27) - 3(9) - 3 = 324 - 27 - 3 = 294\)
+\end{itemize}
+
+\subsection*{3. Extensión de la Tabla de Diferencias Divididas}
+Ahora, extendemos la tabla para incluir los nuevos valores \(f[3]=208\) y \(f[3,3]=f'(3)=294\). Calculamos las nuevas diferencias divididas necesarias.
+
+\begin{itemize}
+    \item \(f[2,3] = \dfrac{f[3] - f[2]}{3-2} = \dfrac{208 - 35}{1} = 173\)
+\end{itemize}
+
+\begin{itemize}
+    \item \(f[2,2,3] = \dfrac{f[2,3] - f[2,2]}{3-2} = \dfrac{173 - 81}{1} = 92\)
+    \item \(f[2,3,3] = \dfrac{f[3,3] - f[2,3]}{3-2} = \dfrac{294 - 173}{1} = 121\)
+\end{itemize}
+
+\begin{itemize}
+    \item \(f[0,2,2,3] = \dfrac{f[2,2,3] - f[0,2,2]}{3-0} = \dfrac{92 - 32}{3} = \dfrac{60}{3} = 20\)
+    \item \(f[2,2,3,3] = \dfrac{f[2,3,3] - f[2,2,3]}{3-2} = \dfrac{121 - 92}{1} = 29\)
+\end{itemize}
+
+\begin{itemize}
+    \item \(f[0,0,2,2,3] = \dfrac{f[0,2,2,3] - f[0,0,2,2]}{3-0} = \dfrac{20 - 11}{3} = \dfrac{9}{3} = 3\)
+\end{itemize}
+
+Por lo que uno de los nuevos coeficientes que usaremos es $f[0,0,2,2,3] = 3$.
+
+Para calcular el último coeficiente, necesitamos una diferencia más de 4º orden:
+\begin{itemize}
+    \item \(f[0,2,2,3,3] = \dfrac{f[2,2,3,3] - f[0,2,2,3]}{3-0} = \dfrac{29 - 20}{3} = \dfrac{9}{3} = 3\)
+\end{itemize}
+Y finalmente:
+\begin{itemize}
+    \item \(f[0,0,2,2,3,3] = \dfrac{f[0,2,2,3,3] - f[0,0,2,2,3]}{3-0} = \dfrac{3 - 3}{3} = 0\)
+\end{itemize}
+Este es nuestro último coeficiente, que será \(f[0,0,2,2,3,3] = 0\).
 
 
+\quad
 
 
+Sustituimos aprovechando los coeficientes anteriores:
+
+$$ H(x) = \underbrace{f[0] + f[0,0]x + f[0,0,2]x^2 + f[0,0,2,2]x^2(x-2)}_{\text{Polinomio anterior}} + f[0,0,2,2,3]x^2(x-2)^2 + f[0,0,2,2,3,3]x^2(x-2)^2(x-3) $$
+$$ H(x) = (11x^3 - 12x^2 - 3x + 1) + (3)x^2(x-2)^2 + (0)x^2(x-2)^2(x-3) $$
+
+Ahora, simplificamos la expresión:
+
+\begin{align*} H(x) &= 11x^3 - 12x^2 - 3x + 1 + 3x^2(x^2 - 4x + 4) \\ &= 11x^3 - 12x^2 - 3x + 1 + 3x^4 - 12x^3 + 12x^2 \\ &= 3x^4 - x^3 - 3x + 1 \end{align*}
+
+$$ \boxed{H(x) = 3x^4 - x^3 - 3x + 1} $$
 
 
+\subsection{Verificación de la Continuidad de la Función y su Derivada}
+Ahora comprobamos si se cumplen las igualdades que se muestran en \eqref{eq:continuity}, que la primera coincidiría con la comprobación de la continuidad en $x=2$ de la función y la segunda la de la derivada.
+
+\begin{equation}
+\label{eq:continuity}
+\begin{aligned}
+H(2^-) &= H(2^+) = f(2) \\
+H'(2^-) &= H'(2^+) = f'(2)
+\end{aligned}
+\end{equation}
+
+La función \(f(x)\) y su derivada \(f'(x)\) las tenemos, y sus valores en el nodo \(x=2\) son:
+
+\begin{itemize}
+    \item \(f(2) = 3(16) - 8 - 6 + 1 = 35\)
+    \item \(f'(2) = 12(8) - 3(4) - 3 = 96 - 12 - 3 = 81\)
+\end{itemize}
+
+Ahora calculamos el polinomio a la izquierda, del primer ejercicio tenemos:
+
+$$ H_0(x) = 11x^3 - 12x^2 - 3x + 1 $$
+$$ H'_0(x) = 33x^2 - 24x - 3 $$
+
+Calculamos los coeficientes para la derecha (algunos ya los teníamos del ejercicio anterior):
+\begin{itemize}
+    \item \(f[2] = f(2) = 35\)
+    \item \(f[2,2] = f'(2) = 81\)
+    \item \(f[2,2,3] = \frac{f[2,3] - f[2,2]}{3-2} = \frac{173 - 81}{1} = 92\)
+    \item \(f[2,2,3,3] = \frac{f[2,3,3] - f[2,2,3]}{3-2} = \frac{121 - 92}{1} = 29\)
+\end{itemize}
+Por lo tanto, el polinomio es:
+$$ H_1(x) = 35 + 81(x-2) + 92(x-2)^2 + 29(x-2)^2(x-3) $$
+Y su derivada es:
+$$ H'_1(x) = 81 + 184(x-2) + 58(x-2)(x-3) + 29(x-2)^2 $$
+
+Ahora comprobamos las igualdades de continuidad y derivada en \(x=2\):
+
+$$ H(2^-) = H_0(2) = 11(2)^3 - 12(2)^2 - 3(2) + 1  = 88 - 48 - 6 + 1 = \mathbf{35} $$
+$$ H(2^+) = H_1(2) = 35 + 81(2-2) + 92(2-2)^2 + 29(2-2)^2(2-3) =  \mathbf{35} $$
+$$ f(2) = \mathbf{35} $$
+Conclusión: Se cumple que \(H(2^-) = H(2^+) = f(2) = 35\). Esto es así por construcción, ya que ambos polinomios, \(H_0(x)\) y \(H_1(x)\), están forzados a pasar por el punto \((2, f(2))\).
+
+Ahora hacemos las derivadas:
+$$ H'(2^-) = H'_0(2) = 33(2)^2 - 24(2) - 3 = 33(4) - 48 - 3 = 132 - 48 - 3 = \mathbf{81} $$
+$$ H'(2^+) = H'_1(2) = 81 + 184(2-2) + 58(2-2)(2-3) + 29(2-2)^2 = 81 + 0 + 0 + 0 = \mathbf{81} $$
+$$ f'(2) = \mathbf{81} $$
+Conclusión: Se cumple que \(H'(2^-) = H'(2^+) = f'(2) = 81\). Esto también es así por construcción. El método de Hermite impone explícitamente que la pendiente de cada polinomio en el nodo de unión sea igual a la pendiente de la función original en ese punto, garantizando una transición suave.
+
+% \vspace{1cm}
+% \begin{center}
+% \fbox{\parbox{0.8\textwidth}{
+% Ambas igualdades se han verificado. Esto demuestra que la interpolación cúbica de Hermite a trozos genera una función que no solo es continua, sino que también tiene una derivada continua en los nodos interiores, lo que resulta en una curva sin ``picos'' o ``esquinas''.
+% }}
+% \end{center}
 
 \end{document}
