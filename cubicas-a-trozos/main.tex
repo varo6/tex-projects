@@ -217,7 +217,6 @@ Primero, evaluamos la función y su derivada en  \(x=3\).
     \item \(f'(3) = 12(3)^3 - 3(3)^2 - 3 = 12(27) - 3(9) - 3 = 324 - 27 - 3 = 294\)
 \end{itemize}
 
-\subsection*{3. Extensión de la Tabla de Diferencias Divididas}
 Ahora, extendemos la tabla para incluir los nuevos valores \(f[3]=208\) y \(f[3,3]=f'(3)=294\). Calculamos las nuevas diferencias divididas necesarias.
 
 \begin{itemize}
@@ -306,13 +305,248 @@ Ahora comprobamos las igualdades de continuidad y derivada en \(x=2\):
 $$ H(2^-) = H_0(2) = 11(2)^3 - 12(2)^2 - 3(2) + 1  = 88 - 48 - 6 + 1 = \mathbf{35} $$
 $$ H(2^+) = H_1(2) = 35 + 81(2-2) + 92(2-2)^2 + 29(2-2)^2(2-3) =  \mathbf{35} $$
 $$ f(2) = \mathbf{35} $$
-Conclusión: Se cumple que \(H(2^-) = H(2^+) = f(2) = 35\). Esto es así por construcción, ya que ambos polinomios, \(H_0(x)\) y \(H_1(x)\), están forzados a pasar por el punto \((2, f(2))\).
+
+Se cumple que \(H(2^-) = H(2^+) = f(2) = 35\).
 
 Ahora hacemos las derivadas:
 $$ H'(2^-) = H'_0(2) = 33(2)^2 - 24(2) - 3 = 33(4) - 48 - 3 = 132 - 48 - 3 = \mathbf{81} $$
 $$ H'(2^+) = H'_1(2) = 81 + 184(2-2) + 58(2-2)(2-3) + 29(2-2)^2 = 81 + 0 + 0 + 0 = \mathbf{81} $$
 $$ f'(2) = \mathbf{81} $$
-Conclusión: Se cumple que \(H'(2^-) = H'(2^+) = f'(2) = 81\). Esto también es así por construcción. El método de Hermite impone explícitamente que la pendiente de cada polinomio en el nodo de unión sea igual a la pendiente de la función original en ese punto, garantizando una transición suave.
+
+De la misma forma, se cumple que \(H'(2^-) = H'(2^+) = f'(2) = 81\).
+
+\subsection{Verificación de la Continuidad de la Segunda Derivada}
+
+Verificamos ahora lo mismo que anteriormente pero en la segunda derivada.
+
+Lo primero es calcular la segunda derivada del polinomio en \([0,2]\): \(H_0(x)=11x^3-12x^2-3x+1\), como ya tenemos la primera:
+
+\[
+H_0'(x)=33x^2-24x-3,
+\]
+\[
+H_0''(x)=66x-24.
+\]
+
+\[
+H_0''(2^-) = 66\cdot2 - 24 = 132 - 24 = \mathbf{108}.
+\]
+
+Ahora por la derecha:
+
+\[
+H_1(x) = 35 + 81(x-2) + 92(x-2)^2 + 29(x-2)^2(x-3).
+\]
+
+Tras seguir expresando todo:
+
+\[
+H_1''(x) = 174x - 222,
+\]
+
+de modo que
+\[
+H_1''(2^+) = 174\cdot2 - 222 = 348 - 222 = \mathbf{126}.
+\]
+
+Para la función:
+
+\[
+f(x) = 3x^4 - x^3 - 3x + 1,
+\quad
+f'(x) = 12x^3 - 3x^2 - 3,
+\]
+se tiene
+\[
+f''(x) = 36x^2 - 6x,
+\]
+y por tanto
+\[
+f''(2) = 36\cdot4 - 6\cdot2 = 144 - 12 = \mathbf{132}.
+\]
+
+En la segunda derivada no se cumple la continuidad, ya que \(H_0''(2^-) = 108\), \(H_1''(2^+) = 126\) y \(f''(2) = 132\). Esto es debido a la concavidad de la función, que puede cambiar a cada lado del nodo.
+
+
+\section{Segunda parte: Nuevo $S(x)$ y comprobaciones con maxima }
+
+\subsection{Nuevo $S(x)$ con el nodo $x_2=3$}
+
+Calcularemos ahora de la misma forma que antes el nuevo spline \(S(x)\) con el nodo \(x_2=3\). Lo primero, será formar las ecuaciones necesarias para el nuevo spline, que serán las mismas que antes, pero añadiendo varias con el nuevo nodo.
+
+\subsection*{Recalcular el nuevo S(x)}
+
+Al añadir el nodo $x_2=3$, ahora tenemos dos intervalos, $[0, 2]$ y $[2, 3]$, y por lo tanto, el spline $S(x)$ estará compuesto por dos polinomios cúbicos:
+\begin{itemize}
+    \item $S_0(x)$ en el intervalo $[0, 2]$.
+    \item $S_1(x)$ en el intervalo $[2, 3]$.
+\end{itemize}
+
+La forma general de cada polinomio, como hemos visto antes según la ecuación (24) del PDF de teoría, es:
+$$S_i(x) = \alpha_{i,0} + \alpha_{i,1}(x-x_i) + \alpha_{i,2}(x-x_i)^2 + \alpha_{i,3}(x-x_i)^3$$
+
+Tenemos un total de $4n=8$ coeficientes que determinar, por lo que necesitamos plantear un sistema de 8 ecuaciones. Estas ecuaciones se basan en las condiciones de interpolación , continuidad  y las condiciones de frontera para un spline natural.
+
+\textbf{1. Condiciones del sistema de ecuaciones}
+
+Necesitamos los valores de la función $f(x) = 3x^4 - x^3 - 3x + 1$ en los tres nodos, los dos primeros ya los tenemos:
+\begin{itemize}
+    \item $f(x_0) = 1$
+    \item $f(x_1) = 35$
+    \item $f(x_2) = f(3) = 208$
+\end{itemize}
+
+El sistema de 8 ecuaciones se construye a partir de:
+\begin{itemize}
+    \item \textbf{Condiciones de interpolación (3 ecuaciones)}: El spline debe pasar por todos los nodos.
+    \item \textbf{Condiciones de continuidad en el nodo interior $x_1=2$ (3 ecuaciones)}: La función, su primera y su segunda derivada deben ser continuas ($S(x) \in \mathcal{C}^2$).
+    \item \textbf{Condiciones de frontera del spline natural (2 ecuaciones)}: La segunda derivada es cero en los extremos $x_0$ y $x_2$ ($S''(x_0)=S''(x_n)=0$).
+\end{itemize}
+
+\textbf{2. Resolución del sistema de ecuaciones}
+
+Sustituimos los valores de los nodos ($x_0=0, x_1=2, x_2=3$) y de la función en las condiciones generales para obtener el sistema lineal:
+\begin{enumerate}
+    \item $\alpha_{0,0} = f(0) \implies \alpha_{0,0} = 1$
+    \item $\alpha_{1,0} = f(2) \implies \alpha_{1,0} = 35$
+    \item $\alpha_{1,0} + \alpha_{1,1}(3-2) + \alpha_{1,2}(3-2)^2 + \alpha_{1,3}(3-2)^3 = f(3) \implies 35 + \alpha_{1,1} + \alpha_{1,2} + \alpha_{1,3} = 208$
+    \item $\alpha_{0,0} + \alpha_{0,1}(2-0) + \alpha_{0,2}(2-0)^2 + \alpha_{0,3}(2-0)^3 = \alpha_{1,0} \implies 1 + 2\alpha_{0,1} + 4\alpha_{0,2} + 8\alpha_{0,3} = 35$
+    \item $\alpha_{0,1} + 2\alpha_{0,2}(2-0) + 3\alpha_{0,3}(2-0)^2 = \alpha_{1,1} \implies \alpha_{0,1} + 4\alpha_{0,2} + 12\alpha_{0,3} = \alpha_{1,1}$
+    \item $2\alpha_{0,2} + 6\alpha_{0,3}(2-0) = 2\alpha_{1,2} \implies \alpha_{0,2} + 6\alpha_{0,3} = \alpha_{1,2}$
+    \item $2\alpha_{0,2} = 0 \implies \alpha_{0,2} = 0$
+    \item $2\alpha_{1,2} + 6\alpha_{1,3}(3-2) = 0 \implies \alpha_{1,2} + 3\alpha_{1,3} = 0$
+\end{enumerate}
+
+Ahora resolvemos por sustitución:
+\begin{itemize}
+    \item De (1), (2) y (7) ya conocemos: $\alpha_{0,0} = 1$, $\alpha_{1,0} = 35$, $\alpha_{0,2} = 0$.
+    \item Sustituimos $\alpha_{0,2}=0$ en (4): $1 + 2\alpha_{0,1} + 8\alpha_{0,3} = 35 \implies \boldsymbol{\alpha_{0,1} + 4\alpha_{0,3} = 17}$
+    \item Sustituimos $\alpha_{0,2}=0$ en (6): $\boldsymbol{\alpha_{1,2} = 6\alpha_{0,3}}$
+    \item Sustituimos (B) en (8): $(6\alpha_{0,3}) + 3\alpha_{1,3} = 0 \implies \boldsymbol{\alpha_{1,3} = -2\alpha_{0,3}}$
+    \item Sustituimos $\alpha_{0,2}=0$ en (5): $\boldsymbol{\alpha_{1,1} = \alpha_{0,1} + 12\alpha_{0,3}}$
+\end{itemize}
+
+Ahora sustituimos las expresiones encontradas.
+
+\begin{align*}
+    35 + (\alpha_{0,1} + 12\alpha_{0,3}) + (6\alpha_{0,3}) + (-2\alpha_{0,3}) &= 208 \\
+    35 + \alpha_{0,1} + 16\alpha_{0,3} &= 208 \\
+    \boldsymbol{\alpha_{0,1} + 16\alpha_{0,3}} &\boldsymbol{= 173} \quad \text{(E)}
+\end{align*}
+Resolvemos el sistema 2x2
+
+
+$12\alpha_{0,3} = 156 \implies \boldsymbol{\alpha_{0,3} = 13}$.
+
+Sustituyendo en  $\alpha_{0,1} + 4(13) = 17 \implies \boldsymbol{\alpha_{0,1} = -35}$.
+
+Finalmente, encontramos los coeficientes restantes:
+\begin{itemize}
+    \item $\boldsymbol{\alpha_{1,2}} = 6\alpha_{0,3} = 6(13) = \boldsymbol{78}$
+    \item $\boldsymbol{\alpha_{1,3}} = -2\alpha_{0,3} = -2(13) = \boldsymbol{-26}$
+    \item $\boldsymbol{\alpha_{1,1}} = \alpha_{0,1} + 12\alpha_{0,3} = -35 + 12(13) = \boldsymbol{121}$
+\end{itemize}
+
+
+En conclusión, los coeficientes para el intervalo $[0, 2]$ son:
+
+$$\alpha_{0,0} = 1, \quad \alpha_{0,1} = -35, \quad \alpha_{0,2} = 0, \quad \alpha_{0,3} = 13$$
+
+$$ S_0(x) = 1 - 35(x-0) + 0(x-0)^2 + 13(x-0)^3 $$
+En la base canónica:
+$$ \boxed{S_0(x) = 13x^3 - 35x + 1} $$
+
+Los coeficientes para el intervalo $[2, 3]$ son:
+
+
+$$\alpha_{1,0} = 35, \quad \alpha_{1,1} = 121, \quad \alpha_{1,2} = 78, \quad \alpha_{1,3} = -26$$
+
+$$ S_1(x) = 35 + 121(x-2) + 78(x-2)^2 - 26(x-2)^3 $$
+En la base canónica:
+\begin{align*}
+    S_1(x) &= 35 + 121x - 242 + 78(x^2 - 4x + 4) - 26(x^3 - 6x^2 + 12x - 8) \\
+    S_1(x) &= -207 + 121x + 78x^2 - 312x + 312 - 26x^3 + 156x^2 - 312x + 208 \\
+\end{align*}
+
+$$\boxed{S_1(x) = -26x^3 + 234x^2 - 503x + 313}$$
+
+
+En comparación con el escenario de solo dos nodos, donde el spline natural resultaba en una línea recta (\(S(x) = 17x + 1\)), al incluir un tercer nodo, los polinomios que salen \(S_0(x)\) y \(S_1(x)\) se transforman en funciones cúbicas. Esto sucede porque, aunque en el caso de dos nodos el spline natural reduce al máximo la curvatura y produce una recta, las exigencias de continuidad en el nodo intermedio (\(x=2\)) para de tres nodos permiten que los coeficientes cúbicos y cuadráticos tengan valores distintos de cero.
+
+
+\subsection*{Verificación de la Continuidad de S(x) en x=2}
+
+Ahora comprobamos si se cumple la condición de continuidad $S(2^-) = S(2^+) = f(2)$. Para ello, utilizamos los dos polinomios del spline que se unen en $x=2$.
+
+El polinomio a la izquierda del nodo, en el intervalo $[0,2]$, es:
+$$ S_0(x) = 13x^3 - 35x + 1 $$
+
+El polinomio a la derecha del nodo, en el intervalo $[2,3]$, es:
+$$ S_1(x) = 35 + 121(x-2) + 78(x-2)^2 - 26(x-2)^3 $$
+
+Ahora, evaluamos cada uno en $x=2$:
+
+$$ S(2^-) = S_0(2) = 13(2)^3 - 35(2) + 1 = 13(8) - 70 + 1 = 104 - 70 + 1 = \mathbf{35} $$
+
+$$ S(2^+) = S_1(2) = 35 + 121(2-2) + 78(2-2)^2 - 26(2-2)^3 = 35 + 0 + 0 + 0 = \mathbf{35} $$
+
+El valor de la función original en el nodo es:
+$$ f(2) = 3(2)^4 - (2)^3 - 3(2) + 1 = 3(16) - 8 - 6 + 1 = \mathbf{35} $$
+
+Se cumple que $S(2^-) = S(2^+) = f(2) = 35$. Esto verifica que la función del spline cúbico es continua en el nodo interior, como se requiere por su definición.
+
+\subsection*{9. Verificación de la Continuidad de las Derivadas de S(x)}
+
+Por definición, el spline cúbico $S(x)$ debe tener una primera y una segunda derivada continuas en los nodos interiores. Vamos a verificar que esto se cumple en $x=2$ para los polinomios que hemos calculado.
+
+\textbf{Continuidad de la primera derivada ($S'$) }
+
+Primero, calculamos las derivadas de $S_0(x)$ y $S_1(x)$:
+$$ S'_0(x) = \frac{d}{dx}(13x^3 - 35x + 1) = 39x^2 - 35 $$
+$$ S'_1(x) = \frac{d}{dx}\left(35 + 121(x-2) + 78(x-2)^2 - 26(x-2)^3\right) = 121 + 156(x-2) - 78(x-2)^2 $$
+
+Ahora, evaluamos en $x=2$:
+$$ S'(2^-) = S'_0(2) = 39(2)^2 - 35 = 39(4) - 35 = 156 - 35 = \mathbf{121} $$
+$$ S'(2^+) = S'_1(2) = 121 + 156(2-2) - 78(2-2)^2 = 121 + 0 - 0 = \mathbf{121} $$
+Se cumple que $S'(2^-) = S'(2^+)$, por lo que la primera derivada es continua.
+
+\vspace{1cm}
+
+\textbf{Continuidad de la segunda derivada ($S''$) }
+
+Calculamos las segundas derivadas:
+$$ S''_0(x) = \frac{d}{dx}(39x^2 - 35) = 78x $$
+$$ S''_1(x) = \frac{d}{dx}\left(121 + 156(x-2) - 78(x-2)^2\right) = 156 - 156(x-2) $$
+
+Evaluamos en $x=2$:
+$$ S''(2^-) = S''_0(2) = 78(2) = \mathbf{156} $$
+$$ S''(2^+) = S''_1(2) = 156 - 156(2-2) = 156 - 0 = \mathbf{156} $$
+También se cumple que $S''(2^-) = S''(2^+)$, confirmando que el spline es de clase $\mathcal{C}^2$ en el nodo interior.
+
+
+
+\subsection*{10. Comparación de Derivadas: S(x) vs f(x)}
+
+Ahora investigamos si los valores de las derivadas del spline en el nodo $x=2$ coinciden con los valores de las derivadas de la función original $f(x)$.
+
+Primero, calculamos las derivadas de $f(x) = 3x^4 - x^3 - 3x + 1$:
+$$ f'(x) = 12x^3 - 3x^2 - 3 $$
+$$ f''(x) = 36x^2 - 6x $$
+
+Evaluamos estas derivadas en $x=2$:
+$$ f'(2) = 12(2)^3 - 3(2)^2 - 3 = 96 - 12 - 3 = \mathbf{81} $$
+$$ f''(2) = 36(2)^2 - 6(2) = 144 - 12 = \mathbf{132} $$
+
+Ahora comparamos estos valores con los que obtuvimos para el spline en el apartado anterior:
+\begin{itemize}
+    \item Para la primera derivada: $$ S'(2) = 121 \neq f'(2) = 81 $$
+    \item Para la segunda derivada: $$ S''(2) = 156 \neq f''(2) = 132 $$
+\end{itemize}
+
+Por lo que las derivadas del spline y de la función original \textbf{no coinciden} en los nodos interiores. Esto es un resultado esperado y una diferencia con la interpolación de Hermite. El spline cúbico no utiliza la información de las derivadas de $f(x)$ para su construcción; en su lugar, garantiza la suavidad de la curva resultante asegurando que sus propias derivadas ($S', S''$) sean continuas.
+
+
+
 
 % \vspace{1cm}
 % \begin{center}
