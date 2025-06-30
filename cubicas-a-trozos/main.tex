@@ -199,9 +199,11 @@ $$ \boxed{S(x) = 17x + 1} $$
 
 Ahora se nos pide recalcular el polinomio de Hermite $H(x)$ si añadimos un nuevo nodo \(x_2 = 3\), aunque reutilizaremos calculos hechos anteriormente.
 
-Una de las propiedades más poderosas de la forma de Newton es la \textbf{permanencia}. Los coeficientes calculados para los nodos \(0,0,2,2\) no cambian. Simplemente calcularemos los nuevos coeficientes que surgen al añadir los nodos \(3,3\).
+Una de las propiedades más poderosas de la forma de Newton es la permanencia. Los coeficientes calculados para los nodos \(0,0,2,2\) no cambian. Simplemente calcularemos los nuevos coeficientes que surgen al añadir los nodos \(3,3\).
 
-\textbf{Recapitulando los coeficientes anteriores:}
+Por lo que:
+
+
 \begin{itemize}
     \item \(f[0] = 1\)
     \item \(f[0,0] = -3\)
@@ -288,12 +290,13 @@ Ahora calculamos el polinomio a la izquierda, del primer ejercicio tenemos:
 $$ H_0(x) = 11x^3 - 12x^2 - 3x + 1 $$
 $$ H'_0(x) = 33x^2 - 24x - 3 $$
 
-Calculamos los coeficientes para la derecha (algunos ya los teníamos del ejercicio anterior):
+Para los coeficientes de la derecha, como ya tenemos las diferencias calculadas:
+
 \begin{itemize}
     \item \(f[2] = f(2) = 35\)
     \item \(f[2,2] = f'(2) = 81\)
-    \item \(f[2,2,3] = \frac{f[2,3] - f[2,2]}{3-2} = \frac{173 - 81}{1} = 92\)
-    \item \(f[2,2,3,3] = \frac{f[2,3,3] - f[2,2,3]}{3-2} = \frac{121 - 92}{1} = 29\)
+    \item \(f[2,2,3]  = 92\)
+    \item \(f[2,2,3,3] = 29\)
 \end{itemize}
 Por lo tanto, el polinomio es:
 $$ H_1(x) = 35 + 81(x-2) + 92(x-2)^2 + 29(x-2)^2(x-3) $$
@@ -370,11 +373,10 @@ En la segunda derivada no se cumple la continuidad, ya que \(H_0''(2^-) = 108\),
 
 \section{Segunda parte: Nuevo $S(x)$ y comprobaciones con maxima }
 
-\subsection{Nuevo $S(x)$ con el nodo $x_2=3$}
 
 Calcularemos ahora de la misma forma que antes el nuevo spline \(S(x)\) con el nodo \(x_2=3\). Lo primero, será formar las ecuaciones necesarias para el nuevo spline, que serán las mismas que antes, pero añadiendo varias con el nuevo nodo.
 
-\subsection*{Recalcular el nuevo S(x)}
+\subsection{Recalcular el nuevo S(x)}
 
 Al añadir el nodo $x_2=3$, ahora tenemos dos intervalos, $[0, 2]$ y $[2, 3]$, y por lo tanto, el spline $S(x)$ estará compuesto por dos polinomios cúbicos:
 \begin{itemize}
@@ -387,7 +389,6 @@ $$S_i(x) = \alpha_{i,0} + \alpha_{i,1}(x-x_i) + \alpha_{i,2}(x-x_i)^2 + \alpha_{
 
 Tenemos un total de $4n=8$ coeficientes que determinar, por lo que necesitamos plantear un sistema de 8 ecuaciones. Estas ecuaciones se basan en las condiciones de interpolación , continuidad  y las condiciones de frontera para un spline natural.
 
-\textbf{1. Condiciones del sistema de ecuaciones}
 
 Necesitamos los valores de la función $f(x) = 3x^4 - x^3 - 3x + 1$ en los tres nodos, los dos primeros ya los tenemos:
 \begin{itemize}
@@ -396,64 +397,94 @@ Necesitamos los valores de la función $f(x) = 3x^4 - x^3 - 3x + 1$ en los tres 
     \item $f(x_2) = f(3) = 208$
 \end{itemize}
 
-El sistema de 8 ecuaciones se construye a partir de:
+Recordemos, con las condiciones de antes, que el sistema de 8 ecuaciones se construye a partir de:
 \begin{itemize}
     \item \textbf{Condiciones de interpolación (3 ecuaciones)}: El spline debe pasar por todos los nodos.
-    \item \textbf{Condiciones de continuidad en el nodo interior $x_1=2$ (3 ecuaciones)}: La función, su primera y su segunda derivada deben ser continuas ($S(x) \in \mathcal{C}^2$).
+    \item \textbf{Condiciones de continuidad en el nodo interior $x_1=2$ (3 ecuaciones)}: La función, su primera y su segunda derivada deben ser continuas.
     \item \textbf{Condiciones de frontera del spline natural (2 ecuaciones)}: La segunda derivada es cero en los extremos $x_0$ y $x_2$ ($S''(x_0)=S''(x_n)=0$).
 \end{itemize}
 
-\textbf{2. Resolución del sistema de ecuaciones}
-
-Sustituimos los valores de los nodos ($x_0=0, x_1=2, x_2=3$) y de la función en las condiciones generales para obtener el sistema lineal:
+Sustituimos los valores de los nodos (\(x_0=0, x_1=2, x_2=3\)) y de la función en las condiciones generales para obtener el sistema lineal:
 \begin{enumerate}
-    \item $\alpha_{0,0} = f(0) \implies \alpha_{0,0} = 1$
-    \item $\alpha_{1,0} = f(2) \implies \alpha_{1,0} = 35$
-    \item $\alpha_{1,0} + \alpha_{1,1}(3-2) + \alpha_{1,2}(3-2)^2 + \alpha_{1,3}(3-2)^3 = f(3) \implies 35 + \alpha_{1,1} + \alpha_{1,2} + \alpha_{1,3} = 208$
-    \item $\alpha_{0,0} + \alpha_{0,1}(2-0) + \alpha_{0,2}(2-0)^2 + \alpha_{0,3}(2-0)^3 = \alpha_{1,0} \implies 1 + 2\alpha_{0,1} + 4\alpha_{0,2} + 8\alpha_{0,3} = 35$
-    \item $\alpha_{0,1} + 2\alpha_{0,2}(2-0) + 3\alpha_{0,3}(2-0)^2 = \alpha_{1,1} \implies \alpha_{0,1} + 4\alpha_{0,2} + 12\alpha_{0,3} = \alpha_{1,1}$
-    \item $2\alpha_{0,2} + 6\alpha_{0,3}(2-0) = 2\alpha_{1,2} \implies \alpha_{0,2} + 6\alpha_{0,3} = \alpha_{1,2}$
-    \item $2\alpha_{0,2} = 0 \implies \alpha_{0,2} = 0$
-    \item $2\alpha_{1,2} + 6\alpha_{1,3}(3-2) = 0 \implies \alpha_{1,2} + 3\alpha_{1,3} = 0$
+    \item \(\alpha_{0,0} = f(0) \implies \alpha_{0,0} = 1\)
+    \item \(\alpha_{1,0} = f(2) \implies \alpha_{1,0} = 35\)
+    \item \(\alpha_{1,0} + \alpha_{1,1}(3-2) + \alpha_{1,2}(3-2)^2 + \alpha_{1,3}(3-2)^3 = f(3)
+          \implies 35 + \alpha_{1,1} + \alpha_{1,2} + \alpha_{1,3} = 208\)
+    \item \(\alpha_{0,0} + \alpha_{0,1}(2-0) + \alpha_{0,2}(2-0)^2 + \alpha_{0,3}(2-0)^3 = \alpha_{1,0}
+          \implies 1 + 2\alpha_{0,1} + 4\alpha_{0,2} + 8\alpha_{0,3} = 35\)
+    \item \(\alpha_{0,1} + 2\alpha_{0,2}(2-0) + 3\alpha_{0,3}(2-0)^2 = \alpha_{1,1}
+          \implies \alpha_{0,1} + 4\alpha_{0,2} + 12\alpha_{0,3} = \alpha_{1,1}\)
+    \item \(2\alpha_{0,2} + 6\alpha_{0,3}(2-0) = 2\alpha_{1,2}
+          \implies \alpha_{0,2} + 6\alpha_{0,3} = \alpha_{1,2}\)
+    \item \(2\alpha_{0,2} = 0 \implies \alpha_{0,2} = 0\)
+    \item \(2\alpha_{1,2} + 6\alpha_{1,3}(3-2) = 0 \implies \alpha_{1,2} + 3\alpha_{1,3} = 0\)
 \end{enumerate}
 
-Ahora resolvemos por sustitución:
-\begin{itemize}
-    \item De (1), (2) y (7) ya conocemos: $\alpha_{0,0} = 1$, $\alpha_{1,0} = 35$, $\alpha_{0,2} = 0$.
-    \item Sustituimos $\alpha_{0,2}=0$ en (4): $1 + 2\alpha_{0,1} + 8\alpha_{0,3} = 35 \implies \boldsymbol{\alpha_{0,1} + 4\alpha_{0,3} = 17}$
-    \item Sustituimos $\alpha_{0,2}=0$ en (6): $\boldsymbol{\alpha_{1,2} = 6\alpha_{0,3}}$
-    \item Sustituimos (B) en (8): $(6\alpha_{0,3}) + 3\alpha_{1,3} = 0 \implies \boldsymbol{\alpha_{1,3} = -2\alpha_{0,3}}$
-    \item Sustituimos $\alpha_{0,2}=0$ en (5): $\boldsymbol{\alpha_{1,1} = \alpha_{0,1} + 12\alpha_{0,3}}$
-\end{itemize}
+Ahora resolvemos por el método de Cramer:
 
-Ahora sustituimos las expresiones encontradas.
+Tras conocer \(\alpha_{0,0}=1\), \(\alpha_{1,0}=35\) y \(\alpha_{0,2}=0\), para sacar \(\alpha_{0,1}\) y \(\alpha_{0,3}\) podríamos hacerlo con un sistema de dos ecuaciones, usando la ecuacion numerada 3 de las de antes y la  4:
 
-\begin{align*}
-    35 + (\alpha_{0,1} + 12\alpha_{0,3}) + (6\alpha_{0,3}) + (-2\alpha_{0,3}) &= 208 \\
-    35 + \alpha_{0,1} + 16\alpha_{0,3} &= 208 \\
-    \boldsymbol{\alpha_{0,1} + 16\alpha_{0,3}} &\boldsymbol{= 173} \quad \text{(E)}
-\end{align*}
-Resolvemos el sistema 2x2
+$$
+\begin{cases}
+1 + 2\alpha_{0,1} + 8\alpha_{0,3} = 35,\\
+35 + \alpha_{0,1} + 16\alpha_{0,3} = 208.
+\end{cases}
+$$
 
+Y simplificando:
 
-$12\alpha_{0,3} = 156 \implies \boldsymbol{\alpha_{0,3} = 13}$.
+$$
+\begin{cases}
+\alpha_{0,1} + 4\alpha_{0,3} = 17, \\
+\alpha_{0,1} + 16\alpha_{0,3} = 173.
+\end{cases}
+$$
 
-Sustituyendo en  $\alpha_{0,1} + 4(13) = 17 \implies \boldsymbol{\alpha_{0,1} = -35}$.
+Calculamos los determinantes sustituyendo con lo que ya tenemos:
+$$
+D = \begin{vmatrix}
+1 & 4 \\
+1 & 16
+\end{vmatrix}
+= 1\cdot16 - 1\cdot4 = 12,
+$$
+$$
+D_{1} = \begin{vmatrix}
+17 & 4 \\
+173 & 16
+\end{vmatrix}
+= 17\cdot16 - 4\cdot173 = 272 - 692 = -420,
+\quad
+D_{2} = \begin{vmatrix}
+1 & 17 \\
+1 & 173
+\end{vmatrix}
+= 1\cdot173 - 17\cdot1 = 156.
+$$
+
+Por Cramer:
+$$
+\alpha_{0,1} = \frac{D_{1}}{D} = \frac{-420}{12} = -35,
+\quad
+\alpha_{0,3} = \frac{D_{2}}{D} = \frac{156}{12} = 13.
+$$
 
 Finalmente, encontramos los coeficientes restantes:
 \begin{itemize}
-    \item $\boldsymbol{\alpha_{1,2}} = 6\alpha_{0,3} = 6(13) = \boldsymbol{78}$
-    \item $\boldsymbol{\alpha_{1,3}} = -2\alpha_{0,3} = -2(13) = \boldsymbol{-26}$
-    \item $\boldsymbol{\alpha_{1,1}} = \alpha_{0,1} + 12\alpha_{0,3} = -35 + 12(13) = \boldsymbol{121}$
+    \item \(\alpha_{1,2} = 6\alpha_{0,3} = 6\cdot13 = 78\)
+    \item \(\alpha_{1,3} = -2\alpha_{0,3} = -2\cdot13 = -26\)
+    \item \(\alpha_{1,1} = \alpha_{0,1} + 12\alpha_{0,3} = -35 + 12\cdot13 = 121\)
 \end{itemize}
 
+En conclusión, los coeficientes para el intervalo \([0,2]\) son:
+$$
+\alpha_{0,0} = 1,\quad \alpha_{0,1} = -35,\quad \alpha_{0,2} = 0,\quad \alpha_{0,3} = 13,
+$$
+$$
+S_{0}(x) = 1 - 35\,(x-0) + 0\,(x-0)^{2} + 13\,(x-0)^{3}.
+$$
 
-En conclusión, los coeficientes para el intervalo $[0, 2]$ son:
-
-$$\alpha_{0,0} = 1, \quad \alpha_{0,1} = -35, \quad \alpha_{0,2} = 0, \quad \alpha_{0,3} = 13$$
-
-$$ S_0(x) = 1 - 35(x-0) + 0(x-0)^2 + 13(x-0)^3 $$
-En la base canónica:
+Que en la base canónica:
 $$ \boxed{S_0(x) = 13x^3 - 35x + 1} $$
 
 Los coeficientes para el intervalo $[2, 3]$ son:
@@ -474,7 +505,7 @@ $$\boxed{S_1(x) = -26x^3 + 234x^2 - 503x + 313}$$
 En comparación con el escenario de solo dos nodos, donde el spline natural resultaba en una línea recta (\(S(x) = 17x + 1\)), al incluir un tercer nodo, los polinomios que salen \(S_0(x)\) y \(S_1(x)\) se transforman en funciones cúbicas. Esto sucede porque, aunque en el caso de dos nodos el spline natural reduce al máximo la curvatura y produce una recta, las exigencias de continuidad en el nodo intermedio (\(x=2\)) para de tres nodos permiten que los coeficientes cúbicos y cuadráticos tengan valores distintos de cero.
 
 
-\subsection*{Verificación de la Continuidad de S(x) en x=2}
+\subsection{Verificación de la Continuidad de S(x) en x=2}
 
 Ahora comprobamos si se cumple la condición de continuidad $S(2^-) = S(2^+) = f(2)$. Para ello, utilizamos los dos polinomios del spline que se unen en $x=2$.
 
@@ -495,11 +526,10 @@ $$ f(2) = 3(2)^4 - (2)^3 - 3(2) + 1 = 3(16) - 8 - 6 + 1 = \mathbf{35} $$
 
 Se cumple que $S(2^-) = S(2^+) = f(2) = 35$. Esto verifica que la función del spline cúbico es continua en el nodo interior, como se requiere por su definición.
 
-\subsection*{9. Verificación de la Continuidad de las Derivadas de S(x)}
+\subsection{Verificación de la Continuidad de las Derivadas de S(x)}
 
 Por definición, el spline cúbico $S(x)$ debe tener una primera y una segunda derivada continuas en los nodos interiores. Vamos a verificar que esto se cumple en $x=2$ para los polinomios que hemos calculado.
 
-\textbf{Continuidad de la primera derivada ($S'$) }
 
 Primero, calculamos las derivadas de $S_0(x)$ y $S_1(x)$:
 $$ S'_0(x) = \frac{d}{dx}(13x^3 - 35x + 1) = 39x^2 - 35 $$
@@ -512,7 +542,6 @@ Se cumple que $S'(2^-) = S'(2^+)$, por lo que la primera derivada es continua.
 
 \vspace{1cm}
 
-\textbf{Continuidad de la segunda derivada ($S''$) }
 
 Calculamos las segundas derivadas:
 $$ S''_0(x) = \frac{d}{dx}(39x^2 - 35) = 78x $$
@@ -525,7 +554,7 @@ También se cumple que $S''(2^-) = S''(2^+)$, confirmando que el spline es de cl
 
 
 
-\subsection*{10. Comparación de Derivadas: S(x) vs f(x)}
+\subsection{Comparación de Derivadas: S(x) vs f(x)}
 
 Ahora investigamos si los valores de las derivadas del spline en el nodo $x=2$ coinciden con los valores de las derivadas de la función original $f(x)$.
 
@@ -538,15 +567,96 @@ $$ f'(2) = 12(2)^3 - 3(2)^2 - 3 = 96 - 12 - 3 = \mathbf{81} $$
 $$ f''(2) = 36(2)^2 - 6(2) = 144 - 12 = \mathbf{132} $$
 
 Ahora comparamos estos valores con los que obtuvimos para el spline en el apartado anterior:
+
+$$ S'(2) = 121 \neq f'(2) = 81 $$
+$$ S''(2) = 156 \neq f''(2) = 132 $$
+
+Por lo que las derivadas del spline y de la función original no coinciden en los nodos interiores. Esto es un resultado esperado y una diferencia con la interpolación de Hermite. El spline cúbico no utiliza la información de las derivadas de $f(x)$ para su construcción; en su lugar, garantiza la suavidad de la curva resultante asegurando que sus propias derivadas ($S', S''$) sean continuas.
+
+\subsection{Dibuja juntos $S(x)$ y $H(x)$ con Maxima}
+
+Usaremos la función proporcionada en el aula virtual llamada \verb|ComparaCubicas()| en Maxima, a continuación se muestra una captura con los tres nodos y otra con los cuatro nodos.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{src/comparacubicas.png}
+    \caption{Comparación de $S(x)$ y $H(x)$ con tres nodos}
+    \label{fig:tres_nodos}
+\end{figure}
+
+\newpage
+
+\begin{figure}[hb]
+    \centering
+    \includegraphics[width=0.7\textwidth]{src/comparacubicas2.png}
+    \caption{Comparación de $S(x)$ y $H(x)$ con cuatro nodos}
+    \label{fig:cuatro_nodos}
+\end{figure}
+
+\newpage
+
+\subsection{Planteamiento del nuevo H(x) con el nodo $x^*=1$}
+
+Al añadir el nodo $x^*=1$ al conjunto existente $\{0, 2, 3\}$, el nuevo conjunto de nodos ordenado es $\{0, 1, 2, 3\}$. Esto divide el problema en tres intervalos: $[0,1]$, $[1,2]$ y $[2,3]$.
+
+La interpolación cúbica a trozos de Hermite posee permanencia. Esto significa que, al añadir un nuevo nodo, únicamente se ven afectados los cálculos del intervalo que contiene dicho nodo; los polinomios en los demás intervalos permanecen inalterados.
+
+El nuevo nodo $x^*=1$ se encuentra dentro del intervalo original $[0,2]$. Según la teoría, ``Todos los cálculos realizados con anterioridad son válidos excepto justamente el de este subintervalo''.
+
+Por lo tanto, si analizamos lo que perdemos y lo que mantenemos:
 \begin{itemize}
-    \item Para la primera derivada: $$ S'(2) = 121 \neq f'(2) = 81 $$
-    \item Para la segunda derivada: $$ S''(2) = 156 \neq f''(2) = 132 $$
+    \item \textbf{Se pierde:} El polinomio $H_0(x)$ que habíamos calculado para el intervalo $[0,2]$ ya no es válido.
+    \item \textbf{Se mantiene:} El polinomio $H_1(x)$ calculado para el intervalo $[2,3]$ sigue siendo válido, ya que su intervalo de definición no ha sido alterado.
+    \item \textbf{Se debe calcular:} Debemos construir dos nuevos polinomios cúbicos de Hermite: uno para el nuevo intervalo $[0,1]$ y otro para $[1,2]$.
 \end{itemize}
 
-Por lo que las derivadas del spline y de la función original \textbf{no coinciden} en los nodos interiores. Esto es un resultado esperado y una diferencia con la interpolación de Hermite. El spline cúbico no utiliza la información de las derivadas de $f(x)$ para su construcción; en su lugar, garantiza la suavidad de la curva resultante asegurando que sus propias derivadas ($S', S''$) sean continuas.
+$H(x)$ completo quedaría definido así:
+$$ H(x) = \begin{cases} H_{nuevo,0}(x) & \text{si } x \in [0,1] \\ H_{nuevo,1}(x) & \text{si } x \in [1,2] \\ H_1(x) & \text{si } x \in [2,3] \end{cases} $$
+donde $H_1(x)$ es el polinomio para el intervalo $[2,3]$ que ya se tenía.
 
 
+\subsection{Planteamiento del sistema para el nuevo spline S(x)}
 
+A diferencia de la interpolación de Hermite, ``los splines no poseen propiedades de tipo permanencia, de manera que añadir nodos obliga a recalcular todos los coeficientes''.
+
+Con el nuevo conjunto de nodos $\{0, 1, 2, 3\}$, tenemos $n=3$ intervalos, lo que da lugar a 3 polinomios cúbicos:
+\begin{itemize}
+    \item $S_0(x)$ en $[0,1]$
+    \item $S_1(x)$ en $[1,2]$
+    \item $S_2(x)$ en $[2,3]$
+\end{itemize}
+
+Cada polinomio $S_i(x) = \alpha_{i,0} + \alpha_{i,1}(x-x_i) + \alpha_{i,2}(x-x_i)^2 + \alpha_{i,3}(x-x_i)^3$ tiene 4 coeficientes. Esto nos da un total de $3 \times 4 = 12$ incógnitas. Por tanto, necesitamos plantear un sistema con 12 ecuaciones.
+
+Planteamiento del sistema de 12 ecuaciones
+
+Las ecuaciones se derivan de las condiciones que hemos estado usando hasta ahora:
+\begin{itemize}
+    \item \textbf{4 Ecuaciones de Interpolación}: El spline debe pasar por los 4 nodos ($S(x_i)=f(x_i)$).
+    \item \textbf{6 Ecuaciones de Continuidad}: La función, la primera derivada y la segunda derivada deben ser continuas en los 2 nodos interiores ($x_1=1$ y $x_2=2$).
+    \item \textbf{2 Ecuaciones de Frontera (Spline Natural)}: La segunda derivada es nula en los extremos $x_0=0$ y $x_3=3$ ($S''(x_0)=S''(x_n)=0$).
+\end{itemize}
+
+Finalmente, el sistema completo es:
+
+\begin{enumerate}
+    % Interpolación
+    \item $S_0(0) = f(0) \implies \alpha_{0,0} = f(0)$
+    \item $S_1(1) = f(1) \implies \alpha_{1,0} = f(1)$
+    \item $S_2(2) = f(2) \implies \alpha_{2,0} = f(2)$
+    \item $S_2(3) = f(3) \implies \alpha_{2,0} + \alpha_{2,1}(3-2) + \alpha_{2,2}(3-2)^2 + \alpha_{2,3}(3-2)^3 = f(3)$
+    % Continuidad en x=1
+    \item $S_0(1) = S_1(1) \implies \alpha_{0,0} + \alpha_{0,1}(1-0) + \alpha_{0,2}(1-0)^2 + \alpha_{0,3}(1-0)^3 = \alpha_{1,0}$
+    \item $S'_0(1) = S'_1(1) \implies \alpha_{0,1} + 2\alpha_{0,2}(1-0) + 3\alpha_{0,3}(1-0)^2 = \alpha_{1,1}$
+    \item $S''_0(1) = S''_1(1) \implies 2\alpha_{0,2} + 6\alpha_{0,3}(1-0) = 2\alpha_{1,2}$
+    % Continuidad en x=2
+    \item $S_1(2) = S_2(2) \implies \alpha_{1,0} + \alpha_{1,1}(2-1) + \alpha_{1,2}(2-1)^2 + \alpha_{1,3}(2-1)^3 = \alpha_{2,0}$
+    \item $S'_1(2) = S'_2(2) \implies \alpha_{1,1} + 2\alpha_{1,2}(2-1) + 3\alpha_{1,3}(2-1)^2 = \alpha_{2,1}$
+    \item $S''_1(2) = S''_2(2) \implies 2\alpha_{1,2} + 6\alpha_{1,3}(2-1) = 2\alpha_{2,2}$
+    % Frontera
+    \item $S''_0(0) = 0 \implies 2\alpha_{0,2} = 0$
+    \item $S''_2(3) = 0 \implies 2\alpha_{2,2} + 6\alpha_{2,3}(3-2) = 0$
+\end{enumerate}
 
 % \vspace{1cm}
 % \begin{center}
