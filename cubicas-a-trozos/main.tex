@@ -195,79 +195,50 @@ $$ S(x) = S_0(x) = \alpha_{0,0} + \alpha_{0,1}(x-x_0) + \alpha_{0,2}(x-x_0)^2 + 
 $$ S(x) = 1 + 17(x-0) + 0(x-0)^2 + 0(x-0)^3 $$
 $$ \boxed{S(x) = 17x + 1} $$
 
+
 \subsection{Recalcular el nuevo $H(x)$}
 
-Ahora se nos pide recalcular el polinomio de Hermite $H(x)$ si añadimos un nuevo nodo \(x_2 = 3\), aunque reutilizaremos calculos hechos anteriormente.
+Como $x_2=3>2$, el polinomio $H_0(x)$ en $[0,2]$ permanece inalterado. Sólo hay que construir $H_1(x)$ en el nuevo subintervalo $[2,3]$.
 
-Una de las propiedades más poderosas de la forma de Newton es la permanencia. Los coeficientes calculados para los nodos \(0,0,2,2\) no cambian. Simplemente calcularemos los nuevos coeficientes que surgen al añadir los nodos \(3,3\).
+Los nodos (con repeticiones) para $[2,3]$ son: $2,2,3,3$.
 
-Por lo que:
+Calculamos los valores de la función y su derivada en los nodos:
+\begin{align*}
+f(2) &= 3\cdot2^4 - 2^3 - 3\cdot2 + 1 = 35, \\
+f'(2) &= 12\cdot2^3 - 3\cdot2^2 - 3 = 81, \\
+f(3) &= 3\cdot3^4 - 3^3 - 3\cdot3 + 1 = 208, \\
+f'(3) &= 12\cdot3^3 - 3\cdot3^2 - 3 = 294.
+\end{align*}
 
+Calculamos las diferencias divididas necesarias:
+\begin{align*}
+f[2] &= 35, \\
+f[2,2] &= 81, \\
+f[3] &= 208, \\
+f[3,3] &= 294, \\
+f[2,3] &= \frac{f(3) - f(2)}{3-2} = \frac{208 - 35}{1} = 173, \\
+f[2,2,3] &= \frac{f[2,3] - f[2,2]}{3-2} = \frac{173 - 81}{1} = 92, \\
+f[2,3,3] &= \frac{f[3,3] - f[2,3]}{3-2} = \frac{294 - 173}{1} = 121, \\
+f[2,2,3,3] &= \frac{f[2,3,3] - f[2,2,3]}{3-2} = \frac{121 - 92}{1} = 29.
+\end{align*}
 
-\begin{itemize}
-    \item \(f[0] = 1\)
-    \item \(f[0,0] = -3\)
-    \item \(f[0,0,2] = 10\)
-    \item \(f[0,0,2,2] = 11\)
-\end{itemize}
-
-El polinomio anterior era \(H_{[0,2]}(x) = 1 - 3x + 10x^2 + 11x^2(x-2)\). Nuestro nuevo polinomio será una extensión de este. Los pasos serán similares a los del ejercicio 1.
-
-Primero, evaluamos la función y su derivada en  \(x=3\).
-\begin{itemize}
-    \item \(f(3) = 3(3)^4 - (3)^3 - 3(3) + 1 = 3(81) - 27 - 9 + 1 = 243 - 27 - 9 + 1 = 208\)
-    \item \(f'(3) = 12(3)^3 - 3(3)^2 - 3 = 12(27) - 3(9) - 3 = 324 - 27 - 3 = 294\)
-\end{itemize}
-
-Ahora, extendemos la tabla para incluir los nuevos valores \(f[3]=208\) y \(f[3,3]=f'(3)=294\). Calculamos las nuevas diferencias divididas necesarias.
-
-\begin{itemize}
-    \item \(f[2,3] = \dfrac{f[3] - f[2]}{3-2} = \dfrac{208 - 35}{1} = 173\)
-\end{itemize}
-
-\begin{itemize}
-    \item \(f[2,2,3] = \dfrac{f[2,3] - f[2,2]}{3-2} = \dfrac{173 - 81}{1} = 92\)
-    \item \(f[2,3,3] = \dfrac{f[3,3] - f[2,3]}{3-2} = \dfrac{294 - 173}{1} = 121\)
-\end{itemize}
-
-\begin{itemize}
-    \item \(f[0,2,2,3] = \dfrac{f[2,2,3] - f[0,2,2]}{3-0} = \dfrac{92 - 32}{3} = \dfrac{60}{3} = 20\)
-    \item \(f[2,2,3,3] = \dfrac{f[2,3,3] - f[2,2,3]}{3-2} = \dfrac{121 - 92}{1} = 29\)
-\end{itemize}
-
-\begin{itemize}
-    \item \(f[0,0,2,2,3] = \dfrac{f[0,2,2,3] - f[0,0,2,2]}{3-0} = \dfrac{20 - 11}{3} = \dfrac{9}{3} = 3\)
-\end{itemize}
-
-Por lo que uno de los nuevos coeficientes que usaremos es $f[0,0,2,2,3] = 3$.
-
-Para calcular el último coeficiente, necesitamos una diferencia más de 4º orden:
-\begin{itemize}
-    \item \(f[0,2,2,3,3] = \dfrac{f[2,2,3,3] - f[0,2,2,3]}{3-0} = \dfrac{29 - 20}{3} = \dfrac{9}{3} = 3\)
-\end{itemize}
-Y finalmente:
-\begin{itemize}
-    \item \(f[0,0,2,2,3,3] = \dfrac{f[0,2,2,3,3] - f[0,0,2,2,3]}{3-0} = \dfrac{3 - 3}{3} = 0\)
-\end{itemize}
-Este es nuestro último coeficiente, que será \(f[0,0,2,2,3,3] = 0\).
+Por la fórmula para el polinomio de Hermite en $[2,3]$:
+\begin{equation}
+H_1(x) = f[2] + f[2,2](x-2) + f[2,2,3](x-2)^2 + f[2,2,3,3](x-2)^2(x-3)
+\end{equation}
+Sustituyendo los valores obtenidos:
+\begin{equation}
+H_1(x) = 35 + 81(x-2) + 92(x-2)^2 + 29(x-2)^2(x-3), \quad x \in [2,3].
+\end{equation}
 
 
-\quad
+Para el $H_0$ tendríamos lo calculado en el primer ejercicio, pues estaba calculado para el intervalo $[0,2]$:
 
-
-Sustituimos aprovechando los coeficientes anteriores:
-
-$$ H(x) = \underbrace{f[0] + f[0,0]x + f[0,0,2]x^2 + f[0,0,2,2]x^2(x-2)}_{\text{Polinomio anterior}} + f[0,0,2,2,3]x^2(x-2)^2 + f[0,0,2,2,3,3]x^2(x-2)^2(x-3) $$
-$$ H(x) = (11x^3 - 12x^2 - 3x + 1) + (3)x^2(x-2)^2 + (0)x^2(x-2)^2(x-3) $$
-
-Ahora, simplificamos la expresión:
-
-\begin{align*} H(x) &= 11x^3 - 12x^2 - 3x + 1 + 3x^2(x^2 - 4x + 4) \\ &= 11x^3 - 12x^2 - 3x + 1 + 3x^4 - 12x^3 + 12x^2 \\ &= 3x^4 - x^3 - 3x + 1 \end{align*}
-
-$$ \boxed{H(x) = 3x^4 - x^3 - 3x + 1} $$
+$$ H_0(x) = 11x^3 - 12x^2 - 3x + 1, \quad x \in [0,2]. $$
 
 
 \subsection{Verificación de la Continuidad de la Función y su Derivada}
+
 Ahora comprobamos si se cumplen las igualdades que se muestran en \eqref{eq:continuity}, que la primera coincidiría con la comprobación de la continuidad en $x=2$ de la función y la segunda la de la derivada.
 
 \begin{equation}
@@ -279,98 +250,101 @@ H'(2^-) &= H'(2^+) = f'(2)
 \end{equation}
 
 La función \(f(x)\) y su derivada \(f'(x)\) las tenemos, y sus valores en el nodo \(x=2\) son:
-
-\begin{itemize}
-    \item \(f(2) = 3(16) - 8 - 6 + 1 = 35\)
-    \item \(f'(2) = 12(8) - 3(4) - 3 = 96 - 12 - 3 = 81\)
-\end{itemize}
+$$
+f(2) = 3(16) - 8 - 6 + 1 = 35
+$$
+$$
+f'(2) = 12(8) - 3(4) - 3 = 96 - 12 - 3 = 81
+$$
 
 Ahora calculamos el polinomio a la izquierda, del primer ejercicio tenemos:
 
-$$ H_0(x) = 11x^3 - 12x^2 - 3x + 1 $$
-$$ H'_0(x) = 33x^2 - 24x - 3 $$
+$$
+H_0(2) = 1 - 3 \cdot 2 + 10 \cdot 2^2 + 11 \cdot 2^2 (2-2) = 1 - 6 + 40 + 0 = 35
+$$
 
-Para los coeficientes de la derecha, como ya tenemos las diferencias calculadas:
+Y para la derivada:
 
-\begin{itemize}
-    \item \(f[2] = f(2) = 35\)
-    \item \(f[2,2] = f'(2) = 81\)
-    \item \(f[2,2,3]  = 92\)
-    \item \(f[2,2,3,3] = 29\)
-\end{itemize}
-Por lo tanto, el polinomio es:
-$$ H_1(x) = 35 + 81(x-2) + 92(x-2)^2 + 29(x-2)^2(x-3) $$
-Y su derivada es:
-$$ H'_1(x) = 81 + 184(x-2) + 58(x-2)(x-3) + 29(x-2)^2 $$
+$$
+H_0'(x)=33x^2-24x-3
+$$
 
-Ahora comprobamos las igualdades de continuidad y derivada en \(x=2\):
+$$
+H_0'(2)=33\cdot4-48-3=81
+$$
 
-$$ H(2^-) = H_0(2) = 11(2)^3 - 12(2)^2 - 3(2) + 1  = 88 - 48 - 6 + 1 = \mathbf{35} $$
-$$ H(2^+) = H_1(2) = 35 + 81(2-2) + 92(2-2)^2 + 29(2-2)^2(2-3) =  \mathbf{35} $$
-$$ f(2) = \mathbf{35} $$
+Para los coeficientes de la derecha, usamos el polinomio \(H_1(x)\) que hemos calculado en el apartado anterior:
 
-Se cumple que \(H(2^-) = H(2^+) = f(2) = 35\).
+$$H_1(2) = 35+0+0+0 = 35$$
 
-Ahora hacemos las derivadas:
-$$ H'(2^-) = H'_0(2) = 33(2)^2 - 24(2) - 3 = 33(4) - 48 - 3 = 132 - 48 - 3 = \mathbf{81} $$
-$$ H'(2^+) = H'_1(2) = 81 + 184(2-2) + 58(2-2)(2-3) + 29(2-2)^2 = 81 + 0 + 0 + 0 = \mathbf{81} $$
-$$ f'(2) = \mathbf{81} $$
+Y la derivada de \(H_1(x)\) es con la regla de la cadena:
 
-De la misma forma, se cumple que \(H'(2^-) = H'(2^+) = f'(2) = 81\).
+$$
+H_1'(x)
+=81+184(x-2)
++29\Bigl(2(x-2)(x-3)+(x-2)^2\Bigr).
+$$
+
+Simplificando,
+
+$$
+H_1'(x)=87x^2-222x+177.
+$$
+
+Evaluando en \(x=2\):
+\[
+H_1'(2)=87\cdot2^2-222\cdot2+177
+=87\cdot4-444+177
+=348-444+177
+=81.
+\]
+
+Por lo que se cumplen las igualdades
+
 
 \subsection{Verificación de la Continuidad de la Segunda Derivada}
 
-Verificamos ahora lo mismo que anteriormente pero en la segunda derivada.
 
-Lo primero es calcular la segunda derivada del polinomio en \([0,2]\): \(H_0(x)=11x^3-12x^2-3x+1\), como ya tenemos la primera:
+En este apartado vamos a comprobar si la segunda derivada es continua en el nodo $x=2$.
 
-\[
-H_0'(x)=33x^2-24x-3,
-\]
-\[
-H_0''(x)=66x-24.
-\]
+Primero, calculamos la segunda derivada de $H_0(x)$:
 
-\[
-H_0''(2^-) = 66\cdot2 - 24 = 132 - 24 = \mathbf{108}.
-\]
+$$
+H_0''(x) = 66x - 24.
+$$
 
-Ahora por la derecha:
+Evaluando en $x=2$:
+$$
+H_0''(2) = 66 \cdot 2 - 24 = 108.
+$$
 
-\[
-H_1(x) = 35 + 81(x-2) + 92(x-2)^2 + 29(x-2)^2(x-3).
-\]
+Ahora, calculamos la segunda derivada de $H_1(x)$:
 
-Tras seguir expresando todo:
+$$
+H_1''(x) = 174x - 222.
+$$
 
-\[
-H_1''(x) = 174x - 222,
-\]
+Evaluando en $x=2$:
 
-de modo que
-\[
-H_1''(2^+) = 174\cdot2 - 222 = 348 - 222 = \mathbf{126}.
-\]
+$$
+H_1''(2) = 174 \cdot 2 - 222 = 126.
+$$
 
-Para la función:
-
-\[
-f(x) = 3x^4 - x^3 - 3x + 1,
-\quad
-f'(x) = 12x^3 - 3x^2 - 3,
-\]
-se tiene
-\[
+Por último, recordamos la segunda derivada de la función original:
+$$
 f''(x) = 36x^2 - 6x,
-\]
-y por tanto
-\[
-f''(2) = 36\cdot4 - 6\cdot2 = 144 - 12 = \mathbf{132}.
-\]
+$$
+y evaluamos en $x=2$:
+$$
+f''(2) = 36 \cdot 2^2 - 6 \cdot 2 = 132.
+$$
 
-En la segunda derivada no se cumple la continuidad, ya que \(H_0''(2^-) = 108\), \(H_1''(2^+) = 126\) y \(f''(2) = 132\). Esto es debido a la concavidad de la función, que puede cambiar a cada lado del nodo.
+Por lo tanto, los valores obtenidos son:
+$$
+H_0''(2) = 108, \qquad H_1''(2) = 126, \qquad f''(2) = 132.
+$$
 
-
+Como se puede observar, no se cumple la continuidad de la segunda derivada en $x=2$, ya que los valores de $H_0''(2)$ y $H_1''(2)$ son distintos. Además, ninguno de ellos coincide con la segunda derivada de la función original en ese punto. Por tanto, concluimos que $H''(x)$ no es continua en $x=2$.
 \section{Segunda parte: Nuevo $S(x)$ y comprobaciones con maxima }
 
 
